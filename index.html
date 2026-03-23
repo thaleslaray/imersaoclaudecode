@@ -28,7 +28,7 @@
   --radius: 12px;
   --radius-sm: 8px;
   --radius-pill: 100px;
-  --max-w: 720px;
+  --max-w: min(720px, 90vw);
   --safe: clamp(16px, 5vw, 40px);
 }
 
@@ -46,10 +46,12 @@ a:hover { text-decoration: underline; }
    HEADER
    ═══════════════════════════════════════════ */
 .header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); padding: 0 var(--safe); }
-.header-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-.header-brand { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-ter); }
+.header-inner { max-width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.header-brand { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-ter); transition: opacity 0.2s; }
 .header-brand span { color: var(--accent); }
+.header-breadcrumb { display: none; font-size: 12px; font-weight: 600; color: var(--text-ter); letter-spacing: 0.5px; }
 .header-day-toggle { display: flex; gap: 2px; background: var(--card); border-radius: var(--radius-pill); padding: 3px; }
+.header-brand { display: block; }
 .header-day-btn { font-family: var(--font); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: none; background: transparent; color: var(--text-ter); padding: 6px 14px; border-radius: var(--radius-pill); cursor: pointer; transition: all 0.2s; }
 .header-day-btn.active { background: var(--text-pri); color: var(--bg); }
 .header-day-btn[data-day="home"].active { background: var(--accent); color: #fff; }
@@ -58,7 +60,7 @@ a:hover { text-decoration: underline; }
    PROGRESS BAR
    ═══════════════════════════════════════════ */
 .progress-bar { position: sticky; top: 56px; z-index: 99; background: var(--bg); padding: 0 var(--safe); border-bottom: 1px solid var(--border); }
-.progress-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; gap: 8px; height: 44px; }
+.progress-inner { max-width: 100%; margin: 0 auto; display: flex; align-items: center; gap: 8px; height: 44px; }
 .progress-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-ghost); white-space: nowrap; }
 .progress-track { flex: 1; height: 4px; background: var(--card); border-radius: 2px; overflow: hidden; }
 .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
@@ -70,7 +72,7 @@ a:hover { text-decoration: underline; }
 /* ═══════════════════════════════════════════
    MAIN CONTENT
    ═══════════════════════════════════════════ */
-.main { max-width: var(--max-w); margin: 0 auto; padding: 32px var(--safe) 120px; min-height: calc(100dvh - 100px); }
+.main { max-width: 100%; margin: 0 auto; padding: 32px var(--safe) 120px; min-height: calc(100dvh - 100px); }
 .section { display: none; animation: fadeIn 0.3s ease; }
 .section.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -142,7 +144,7 @@ td strong { color: var(--text-pri); }
    FOOTER NAV
    ═══════════════════════════════════════════ */
 .footer-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: var(--bg); border-top: 1px solid var(--border); padding: 12px var(--safe); }
-.footer-nav-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.footer-nav-inner { max-width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .nav-btn { font-family: var(--font); font-size: 13px; font-weight: 700; border: none; border-radius: var(--radius-sm); padding: 12px 24px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
 .nav-btn-prev { background: var(--card); color: var(--text-sec); }
 .nav-btn-prev:hover { background: var(--border-strong); }
@@ -171,7 +173,189 @@ td strong { color: var(--text-pri); }
 .day-card-meta { display: flex; gap: 8px; flex-wrap: wrap; }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE
+   SIDEBAR — Desktop only
+   ═══════════════════════════════════════════ */
+.sidebar { display: none; }
+
+@media (min-width: 900px) {
+  :root {
+    --sidebar-w: 280px;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-w);
+    height: 100dvh;
+    background: var(--bg-alt);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 200;
+    padding: 0;
+  }
+
+  /* Scrollbar styling */
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+
+  .sidebar-brand {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--bg-alt);
+    padding: 20px 24px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-ter);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-brand span { color: var(--accent); }
+
+  .sidebar-group {
+    padding: 16px 0 4px;
+  }
+
+  .sidebar-group-title {
+    padding: 0 24px 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-ghost);
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-sec);
+    cursor: pointer;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar-item:hover {
+    background: var(--card);
+    color: var(--text-pri);
+  }
+
+  .sidebar-item.active {
+    background: rgba(255, 77, 0, 0.06);
+    color: var(--accent);
+    font-weight: 700;
+    border-left-color: var(--accent);
+  }
+
+  .sidebar-item-num {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-ghost);
+    min-width: 20px;
+  }
+
+  .sidebar-item.active .sidebar-item-num { color: var(--accent); }
+
+  .sidebar-item.locked {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .sidebar-item-badge {
+    margin-left: auto;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--text-ghost);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Desktop layout shifts ── */
+
+  /* Header becomes a thin breadcrumb bar */
+  .header {
+    left: var(--sidebar-w);
+    right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 clamp(32px, 4vw, 64px);
+  }
+  .header-inner {
+    max-width: none;
+    height: 44px;
+  }
+  .header-brand { display: none; }
+  .header-breadcrumb { display: block; }
+
+  /* Progress bar merges into header area */
+  .progress-bar {
+    left: var(--sidebar-w);
+    right: 0;
+    top: 44px;
+    border-bottom: none;
+    padding: 0 clamp(32px, 4vw, 64px) 8px;
+  }
+  .progress-inner {
+    max-width: none;
+    height: 28px;
+  }
+  .progress-track { height: 3px; }
+
+  /* Main content — fills remaining space */
+  .main {
+    margin-left: var(--sidebar-w);
+    max-width: none;
+    padding: 40px clamp(32px, 4vw, 64px) 100px;
+  }
+
+  /* Footer nav — fills remaining space */
+  .footer-nav {
+    left: var(--sidebar-w);
+    right: 0;
+    padding: 10px clamp(32px, 4vw, 64px);
+    border-top: 1px solid var(--border);
+  }
+  .footer-nav-inner {
+    max-width: none;
+  }
+
+  /* Hero adjustments for desktop */
+  .hero { padding: 56px 0 40px; }
+  .hero-title { font-size: 56px; }
+
+  /* Day cards side by side */
+  .day-cards { grid-template-columns: 1fr 1fr; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — Large desktop (sidebar grows slightly)
+   ═══════════════════════════════════════════ */
+@media (min-width: 1200px) {
+  :root { --sidebar-w: 300px; }
+  .sidebar-item { padding: 10px 28px; }
+  .sidebar-group-title { padding: 0 28px 8px; }
+  .sidebar-brand { padding: 24px 28px 18px; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — Tablet (between mobile and desktop)
+   ═══════════════════════════════════════════ */
+@media (min-width: 481px) and (max-width: 899px) {
+  .day-cards { grid-template-columns: 1fr 1fr; }
+  .hero-title { font-size: 48px; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — Mobile
    ═══════════════════════════════════════════ */
 @media (max-width: 480px) {
   .header-inner { height: 48px; }
@@ -185,14 +369,85 @@ td strong { color: var(--text-pri); }
 </head>
 <body>
 
+<!-- SIDEBAR (desktop only) -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">Imersão <span>Claude Code</span></div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-item active" data-target="home" onclick="goToSection('home')">
+      <span class="sidebar-item-num">&#9679;</span>
+      Início
+    </div>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-group-title">Dia 1 — Seu novo parceiro</div>
+    <div class="sidebar-item" data-target="d1-b1" onclick="goToSection('d1-b1')">
+      <span class="sidebar-item-num">01</span>
+      O que é o Claude?
+      <span class="sidebar-item-badge">30 min</span>
+    </div>
+    <div class="sidebar-item" data-target="d1-b2" onclick="goToSection('d1-b2')">
+      <span class="sidebar-item-num">02</span>
+      Chat: GTD por voz
+      <span class="sidebar-item-badge">45 min</span>
+    </div>
+    <div class="sidebar-item" data-target="d1-b3" onclick="goToSection('d1-b3')">
+      <span class="sidebar-item-num">03</span>
+      Cowork: análise competitiva
+      <span class="sidebar-item-badge">45 min</span>
+    </div>
+    <div class="sidebar-item" data-target="d1-b4" onclick="goToSection('d1-b4')">
+      <span class="sidebar-item-num">04</span>
+      Code: sua landing page
+      <span class="sidebar-item-badge">30 min</span>
+    </div>
+    <div class="sidebar-item" data-target="d1-b5" onclick="goToSection('d1-b5')">
+      <span class="sidebar-item-num">05</span>
+      Terminal: setup
+      <span class="sidebar-item-badge">30 min</span>
+    </div>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-group-title">Dia 2 — Skills</div>
+    <div class="sidebar-item locked" data-target="d2-b1" onclick="goToSection('d2-b1')">
+      <span class="sidebar-item-num">06</span>
+      O que são Skills?
+      <span class="sidebar-item-badge">30 min</span>
+    </div>
+    <div class="sidebar-item locked" data-target="d2-b2" onclick="goToSection('d2-b2')">
+      <span class="sidebar-item-num">07</span>
+      Crie sua skill
+      <span class="sidebar-item-badge">60 min</span>
+    </div>
+    <div class="sidebar-item locked" data-target="d2-b3" onclick="goToSection('d2-b3')">
+      <span class="sidebar-item-num">08</span>
+      Garimpando skills
+      <span class="sidebar-item-badge">45 min</span>
+    </div>
+    <div class="sidebar-item locked" data-target="d2-b4" onclick="goToSection('d2-b4')">
+      <span class="sidebar-item-num">09</span>
+      Suas 3 skills
+      <span class="sidebar-item-badge">30 min</span>
+    </div>
+    <div class="sidebar-item locked" data-target="d2-b5" onclick="goToSection('d2-b5')">
+      <span class="sidebar-item-num">10</span>
+      Próximos passos
+      <span class="sidebar-item-badge">15 min</span>
+    </div>
+  </div>
+</aside>
+
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <div class="header-brand">Imersão <span>Claude Code</span></div>
+    <div class="header-breadcrumb" id="headerBreadcrumb"></div>
     <div class="header-day-toggle">
       <button class="header-day-btn active" data-day="home" onclick="goToDay('home')">Início</button>
       <button class="header-day-btn" data-day="1" onclick="goToDay('1')">Dia 1</button>
-      <button class="header-day-btn" data-day="2" onclick="goToDay('2')">Dia 2</button>
+      <button class="header-day-btn" data-day="2" style="opacity:0.4; cursor:not-allowed;" disabled>Dia 2</button>
     </div>
   </div>
 </header>
@@ -230,24 +485,35 @@ td strong { color: var(--text-pri); }
           <span class="badge badge-outline">Desktop App</span>
         </div>
       </div>
-      <div class="day-card" onclick="goToSection('d2-b1')">
+      <div class="day-card" style="opacity:0.5; cursor:not-allowed; pointer-events:none; position:relative;">
         <div class="day-card-num">Dia 2</div>
         <div class="day-card-title">Skills: o futuro do seu negócio</div>
         <div class="day-card-desc">Crie sua primeira Skill, explore o marketplace e receba 3 Skills exclusivas.</div>
         <div class="day-card-meta">
           <span class="badge badge-outline">~3 horas</span>
           <span class="badge badge-outline">5 blocos</span>
-          <span class="badge badge-outline">Mão na massa</span>
+          <span class="badge badge-outline">Em breve</span>
         </div>
       </div>
     </div>
     <hr>
     <h2>Pré-requisitos</h2>
-    <p>Prepare tudo antes do Dia 1 para aproveitar ao máximo.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Conectores</th><th>Habilidades</th><th>Plugins</th></tr></thead>
+        <tbody>
+          <tr><td><strong>O que é</strong></td><td>Ligam o Claude a ferramentas externas</td><td>Instruções que ensinam o Claude a executar tarefas</td><td>Pacote completo: Habilidades + Conectores + comandos para uma função</td></tr>
+          <tr><td><strong>Exemplo</strong></td><td>Google Calendar, Gmail, Notion, Slack</td><td>Gerador de propostas, criador de roteiros, analisador de perfil</td><td>Marketing, Finance, Product Management</td></tr>
+          <tr><td><strong>Analogia</strong></td><td><strong>Onde</strong> o Claude age</td><td><strong>Como</strong> o Claude age</td><td><strong>Departamento</strong> com tudo pronto</td></tr>
+          <tr><td><strong>Como ativar</strong></td><td>Configurações > Conectores (1 vez)</td><td>Configurações > Personalizar</td><td>Menu + no Cowork > Plugins</td></tr>
+        </tbody>
+      </table>
+    </div>
     <ul class="checklist" id="checklistPrereqs">
       <li onclick="toggleCheck(this)">
         <span class="checklist-box">&#10003;</span>
-        <span class="checklist-text"><strong>Conta no Claude</strong> — Crie em claude.ai (plano Pro recomendado, $20/mês)</span>
+        <span class="checklist-text"><strong>Conta no Claude (Plano Pro)</strong> — Crie em claude.ai (~R$115/mês). Necessário para Cowork, Código e Claude Code</span>
       </li>
       <li onclick="toggleCheck(this)">
         <span class="checklist-box">&#10003;</span>
@@ -255,16 +521,24 @@ td strong { color: var(--text-pri); }
       </li>
       <li onclick="toggleCheck(this)">
         <span class="checklist-box">&#10003;</span>
-        <span class="checklist-text"><strong>Warp Terminal</strong> — Baixe em warp.dev (Mac, Windows ou Linux)</span>
+        <span class="checklist-text"><strong>Conta Google</strong> — Gmail, Google Calendar e Google Drive (você provavelmente já tem)</span>
       </li>
       <li onclick="toggleCheck(this)">
         <span class="checklist-box">&#10003;</span>
-        <span class="checklist-text"><strong>Plano Pro ativo</strong> — Necessário para Cowork, Code e Claude Code no terminal</span>
+        <span class="checklist-text"><strong>Conta no Airtable</strong> — Crie gratuitamente em airtable.com. Crie uma base vazia chamada "Meu GTD"</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text"><strong>Conectar Google + Airtable</strong> — No Claude Desktop, vá em Configurações > Conectores e conecte: Google Calendar, Gmail, Airtable e Google Drive (opcional)</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text"><strong>Warp Terminal</strong> — Baixe em warp.dev (Mac, Windows ou Linux)</span>
       </li>
     </ul>
     <div class="callout callout-tip">
       <strong>&#128161; Dica</strong>
-      O plano Pro ($20/mês) dá acesso a tudo: Chat, Cowork, Code no desktop e Claude Code no terminal. O Max só aumenta os limites de uso.
+      O plano Pro (~R$115/mês) dá acesso a tudo: Chat, Cowork, Código no desktop e Claude Code no terminal. O Airtable é gratuito (até 1000 registros por base). O Max do Claude só aumenta os limites de uso.
     </div>
   </div>
 
@@ -275,7 +549,75 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">E por que ele vai mudar sua forma de trabalhar</div>
     <span class="badge badge-time">30 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>Claude não é um chatbot</h2>
+    <p>O Claude é um assistente de IA criado pela Anthropic — a empresa fundada por ex-líderes da OpenAI. Diferente de chatbots comuns, o Claude foi projetado para ser um <strong>parceiro de pensamento</strong>: ele não apenas responde perguntas, mas colabora com você em tarefas complexas.</p>
+
+    <p>Pense nele como um colega de trabalho extremamente competente que está disponível 24/7 — ele escreve, analisa, pesquisa, programa e cria documentos. E o melhor: <strong>ele aprende com o contexto que você dá</strong>.</p>
+
+    <h2>Onde o Claude vive</h2>
+    <p>O Claude está disponível em vários lugares. Nesta imersão vamos explorar os principais:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Interface</th><th>O que faz</th><th>Para quem</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Claude Desktop App</strong></td><td>Chat, Cowork e Código — tudo visual, sem terminal</td><td>Todo mundo (nosso foco hoje)</td></tr>
+          <tr><td><strong>Claude Mobile</strong></td><td>Chat por voz e texto no celular — mesmos conectores do desktop</td><td>Produtividade em qualquer lugar</td></tr>
+          <tr><td><strong>Claude.ai (web)</strong></td><td>Versão completa no navegador</td><td>Acesso rápido de qualquer computador</td></tr>
+          <tr><td><strong>Claude for Chrome</strong></td><td>Extensão que adiciona o Claude como sidebar no navegador</td><td>Resumir páginas, preencher formulários, pesquisar</td></tr>
+          <tr><td><strong>Claude Code (terminal)</strong></td><td>Controle total via linha de comando</td><td>Quem quer ir além</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Os 3 modos do Desktop App</h2>
+    <p>O app desktop do Claude tem três abas, cada uma para um tipo de trabalho:</p>
+
+    <div class="card card-accent">
+      <h3>Chat</h3>
+      <p>Conversas rápidas, brainstorming, perguntas. Como falar com um colega. Inclui <strong>voice mode</strong> (falar por voz), <strong>quick entry</strong> (Option+Option no Mac) e captura de tela.</p>
+    </div>
+
+    <div class="card card-accent">
+      <h3>Cowork</h3>
+      <p>Tarefas complexas e autônomas. O Claude trabalha <strong>sozinho</strong> — pesquisa, analisa documentos, gera relatórios, organiza arquivos. Você delega e ele entrega.</p>
+    </div>
+
+    <div class="card card-accent">
+      <h3>Code</h3>
+      <p>Criação e edição de arquivos. Mesmo sem saber programar, o Claude cria sites, documentos e ferramentas pra você. Inclui o modo <strong>YOLO</strong> (bypass de permissões — o Claude executa tudo sem pedir confirmação).</p>
+    </div>
+
+    <h2>Planos e preços</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Plano</th><th>Preço</th><th>Chat</th><th>Cowork</th><th>Code</th><th>Terminal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Free</strong></td><td>Grátis</td><td>Limitado</td><td>&#10007;</td><td>&#10007;</td><td>&#10007;</td></tr>
+          <tr><td><strong>Pro</strong></td><td>~R$115/mês</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+          <tr><td><strong>Max 5x</strong></td><td>~R$575/mês</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+          <tr><td><strong>Max 20x</strong></td><td>~R$1.150/mês</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Resumo</strong>
+      O Pro (~R$115/mês) desbloqueia tudo. Os planos Max só aumentam os limites de uso — as funcionalidades são as mesmas.
+    </div>
+
+    <h2>Demo: Voice Mode</h2>
+    <p>Agora vamos ver o Claude em ação. Abra o <strong>Claude Desktop App</strong>, vá na aba <strong>Chat</strong> e ative o <strong>voice mode</strong> (ícone de microfone).</p>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo</strong>
+      Abra o Claude Desktop, ative o voice mode e fale: "Me diga 3 formas que você pode me ajudar no meu trabalho como [sua profissão]." Ouça a resposta. Impressionante, né?
+    </div>
   </div>
 
   <div class="section" data-section="d1-b2" data-day="1" data-block="2">
@@ -284,7 +626,222 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">Organize sua vida falando com o Claude</div>
     <span class="badge badge-time">45 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>Antes de tudo: conecte suas ferramentas</h2>
+    <p>O Chat fica 10x mais poderoso quando conectado às suas ferramentas reais. Vamos usar o <strong>Google + Airtable</strong> — o Google pra calendário e email, o Airtable como banco de dados de tarefas.</p>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Faça isso agora</strong>
+      Vá em <strong>Configurações > Conectores</strong> e conecte:
+      <ul style="margin-top:8px">
+        <li><strong>Google Calendar</strong> — pra Claude ver e criar eventos</li>
+        <li><strong>Gmail</strong> — pra Claude ler e rascunhar emails</li>
+        <li><strong>Airtable</strong> — pra Claude ler e escrever no seu banco de tarefas</li>
+        <li><strong>Google Drive</strong> (opcional) — pra Claude criar e acessar documentos, propostas e relatórios</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Importante</strong>
+      Conectores são da sua <strong>conta</strong>, não do modo. Uma vez conectados, funcionam no Chat, no Cowork, na web e no celular. Conecte uma vez, use em qualquer lugar.
+    </div>
+
+    <h2>O que é GTD?</h2>
+    <p><strong>Getting Things Done</strong> é um método de produtividade criado por David Allen. A ideia central: tire tudo da sua cabeça e organize num sistema confiável. O Claude + Airtable + Google é o sistema perfeito pra isso.</p>
+
+    <p>O fluxo: você <strong>fala</strong>, o Claude <strong>organiza</strong>, e <strong>salva direto nas suas ferramentas</strong> — tarefas no Airtable, eventos no Calendar, rascunhos no Gmail.</p>
+
+    <h2>Passo 1: Crie a base no Airtable</h2>
+    <p>Antes de qualquer coisa, crie uma base vazia no Airtable:</p>
+    <ol>
+      <li>Acesse <strong>airtable.com</strong> (crie conta gratuita se não tiver)</li>
+      <li>Clique em <strong>"Create a base"</strong></li>
+      <li>Nomeie como <strong>"Meu GTD"</strong></li>
+      <li>Pronto — a base vazia está criada (3 cliques)</li>
+    </ol>
+
+    <h2>Passo 2: Claude cria a estrutura</h2>
+    <p>Agora o Claude vai criar todas as tabelas dentro da sua base. Cole este prompt no Chat:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Setup GTD no Airtable (faça uma vez)</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Já criei uma base chamada "Meu GTD" no Airtable. Crie as seguintes tabelas dentro dela:
+
+TABELA 1: "📥 Inbox"
+Campos: Tarefa (texto) | Data de captura (data) | Processado (checkbox)
+
+TABELA 2: "✅ Próximas Ações"
+Campos: Tarefa (texto) | Contexto (select: @Casa, @Trabalho, @Computador, @Telefone, @Compras) | Prazo (data) | Prioridade (select: Alta, Média, Baixa) | Status (select: A fazer, Em andamento, Concluído)
+
+TABELA 3: "📁 Projetos"
+Campos: Projeto (texto) | Status (select: Ativo, Em pausa, Concluído, Cancelado) | Área (select: Trabalho, Saúde, Família, Financeiro, Pessoal) | Data limite (data) | Próxima ação (texto)
+
+TABELA 4: "⏳ Aguardando"
+Campos: O que estou esperando (texto) | De quem (texto) | Data que pedi (data) | Follow-up (data)
+
+TABELA 5: "💡 Algum Dia"
+Campos: Ideia (texto) | Categoria (select: Viagem, Curso, Negócio, Livro, Outro) | Anotações (texto longo)
+
+Pode deletar ou renomear a tabela padrão que veio com a base. Adicione 2-3 itens de exemplo em cada tabela.</code></p>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Resultado esperado</strong>
+      O Claude cria as 5 tabelas com campos tipados (selects, datas, checkboxes), popula com exemplos e está tudo pronto em menos de 1 minuto. Abra o Airtable e confira!
+    </div>
+
+    <h2>Passo 3: Crie o Projeto "Meu GTD"</h2>
+    <p>Agora vamos criar um <strong>Projeto</strong> no Claude pra que ele saiba automaticamente como organizar tudo — sem precisar repetir instruções.</p>
+
+    <ol>
+      <li>No Claude Desktop, vá em <strong>Projetos</strong> (sidebar esquerda)</li>
+      <li>Clique em <strong>"Novo projeto"</strong></li>
+      <li>Nome: <strong>"Meu GTD"</strong></li>
+      <li>Nas <strong>Instruções</strong> do projeto, cole o texto abaixo:</li>
+    </ol>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Instruções do Projeto (cole inteiro)</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Você é meu assistente de produtividade pessoal usando o método GTD (Getting Things Done).
+
+COMO FUNCIONA:
+Toda vez que eu falar ou escrever qualquer coisa neste chat, você deve processar automaticamente e distribuir nos lugares certos. Não preciso te dar instruções — só falar o que está na minha cabeça.
+
+REGRAS DE DISTRIBUIÇÃO:
+
+1. REUNIÕES e COMPROMISSOS com data/hora → Google Calendar
+   - Crie o evento com título claro, data, horário e descrição
+
+2. TAREFAS concretas (ação única) → Airtable, tabela "✅ Próximas Ações"
+   - Defina o Contexto: @Casa, @Trabalho, @Computador, @Telefone ou @Compras
+   - Defina a Prioridade: Alta, Média ou Baixa
+   - Se mencionei prazo, preencha o campo Prazo
+   - Status sempre começa como "A fazer"
+
+3. PROJETOS (resultado com vários passos) → Airtable, tabela "📁 Projetos"
+   - Status: Ativo
+   - Defina a Área: Trabalho, Saúde, Família, Financeiro ou Pessoal
+   - Sempre defina uma "Próxima ação" concreta
+
+4. ESPERANDO alguém/algo → Airtable, tabela "⏳ Aguardando"
+   - Preencha de quem estou esperando e a data de hoje
+
+5. IDEIAS vagas, sem prazo, "quero um dia" → Airtable, tabela "💡 Algum Dia"
+   - Categorize: Viagem, Curso, Negócio, Livro ou Outro
+
+6. EMAILS que preciso enviar → Gmail
+   - Crie como rascunho, nunca envie diretamente
+
+FORMATO DA RESPOSTA:
+Depois de processar, me dê um resumo rápido:
+📅 X eventos no Calendar
+✅ X tarefas no Airtable
+📁 X projetos criados
+⏳ X itens em Aguardando
+💡 X ideias salvas
+📧 X rascunhos no Gmail
+
+COMPORTAMENTO:
+- Se eu só mandar uma mensagem de voz desorganizada, processe tudo sem reclamar
+- Se algo não ficou claro, pergunte antes de criar
+- Títulos sempre começam com verbo (Ligar, Enviar, Criar, Revisar...)
+- Se eu perguntar "o que tenho pra hoje?", consulte o Airtable + Calendar e me dê um briefing
+- Se eu pedir "revisão semanal", faça a auditoria completa: atrasados, projetos parados, aguardando sem follow-up, conflitos no calendar
+
+ACESSO AO AIRTABLE:
+Base "Meu GTD": [COLE AQUI A URL DA SUA BASE NO AIRTABLE]
+Tabelas: "📥 Inbox", "✅ Próximas Ações", "📁 Projetos", "⏳ Aguardando", "💡 Algum Dia"</code></p>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Não esqueça</strong>
+      Substitua <code>[COLE AQUI A URL DA SUA BASE NO AIRTABLE]</code> pela URL real da sua base. Abra o Airtable no browser, copie a URL da barra de endereço e cole ali.
+    </div>
+
+    <h2>Pronto! Agora é só usar</h2>
+    <p>A partir de agora, todo chat aberto dentro do projeto "Meu GTD" já sabe o que fazer. Sua rotina:</p>
+
+    <h3>Manhã (2 min)</h3>
+    <p>Abra um chat no projeto "Meu GTD" e mande:</p>
+    <div class="prompt-block">
+      <span class="code-block-label">Diário</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">O que tenho pra hoje?</code></p>
+    </div>
+    <p>O Claude consulta o Airtable + Calendar e te dá: compromissos do dia, tarefas por prioridade, follow-ups pendentes.</p>
+
+    <h3>Durante o dia</h3>
+    <p>Quando surgir algo novo, fale por voz direto no chat. Não precisa de prompt — o projeto já sabe o que fazer:</p>
+    <div class="prompt-block">
+      <span class="code-block-label">Exemplo por voz</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Acabei de combinar com a Maria de entregar o relatório até sexta. E preciso comprar presente pro aniversário do Pedro dia 28.</code></p>
+    </div>
+    <p>O Claude processa automaticamente: tarefa no Airtable + evento no Calendar.</p>
+
+    <h3>Quando concluir algo</h3>
+    <div class="prompt-block">
+      <span class="code-block-label">Atualizar</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Já liguei pro contador e já comprei o café</code></p>
+    </div>
+    <p>O Claude atualiza o status no Airtable pra "Concluído".</p>
+
+    <h3>Fim do dia (1 min)</h3>
+    <div class="prompt-block">
+      <span class="code-block-label">Resumo</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Resumo do dia — o que ficou pendente?</code></p>
+    </div>
+
+    <h3>Sexta-feira (5 min) — Revisão semanal</h3>
+    <div class="prompt-block">
+      <span class="code-block-label">Semanal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Revisão semanal</code></p>
+    </div>
+    <p>O Claude audita tudo: tarefas atrasadas, projetos sem próxima ação, itens em "Aguardando" há mais de 5 dias, conflitos no Calendar e sugere as 3 prioridades da próxima semana.</p>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo</strong>
+      Agora é sua vez! Abra o projeto "Meu GTD", ative o voice mode e faça seu brain dump — fale por 1-2 minutos sobre tudo que precisa fazer esta semana. Depois confira o Airtable, o Calendar e o Gmail. Tudo organizado em menos de 1 minuto.
+    </div>
+
+    <h2>Quick Entry: Claude em cima de qualquer app</h2>
+    <p>No Mac, toque <strong>Option + Option</strong> (duas vezes rápido) para abrir o Claude por cima de qualquer aplicativo. Fale algo rápido, feche e continue trabalhando. Os conectores funcionam aqui também.</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Quick Entry</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Acabei de sair de uma reunião. Adiciona no Airtable: preciso enviar proposta pro João até sexta (prioridade alta, @Trabalho). E cria um evento no Calendar pra quinta às 14h "Preparar proposta João".</code></p>
+    </div>
+
+    <h2>Screenshot: mostre ao Claude o que você vê</h2>
+    <p>No Chat, você pode capturar sua tela e enviar ao Claude. Ele analisa o que está na imagem e responde com contexto visual.</p>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo</strong>
+      Abra algo que você está trabalhando (email, planilha, site). Use Quick Entry (Option+Option), capture a tela e pergunte: "O que você acha disso? Me dê 3 sugestões de melhoria."
+    </div>
+
+    <h2>Chat vs. Cowork — entenda a diferença</h2>
+    <p>Tudo que fizemos agora foi no <strong>Chat</strong>. É uma conversa: você pede, Claude faz, você pede mais, ele faz mais. Funciona no desktop, web e celular.</p>
+
+    <p>No próximo bloco vamos conhecer o <strong>Cowork</strong> — onde você delega uma missão inteira e o Claude trabalha sozinho por vários passos. O Cowork usa os mesmos conectores, mas é <strong>só no desktop</strong>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Chat</th><th>Cowork</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Como funciona</strong></td><td>Conversa — um pedido por vez</td><td>Delegação — missão inteira autônoma</td></tr>
+          <tr><td><strong>Conectores</strong></td><td>Sim, todos</td><td>Sim, todos + acesso a pastas locais</td></tr>
+          <tr><td><strong>Onde funciona</strong></td><td>Desktop, web, celular</td><td>Só desktop</td></tr>
+          <tr><td><strong>Exemplo</strong></td><td>"Cria um evento no Calendar"</td><td>"Analise meus concorrentes, pesquise na web, e gere um relatório em Excel"</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="section" data-section="d1-b3" data-day="1" data-block="3">
@@ -293,7 +850,125 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">Delegue tarefas complexas ao Claude</div>
     <span class="badge badge-time">45 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>O que é o Cowork?</h2>
+    <p>No bloco anterior você usou o <strong>Chat</strong> — conversa passo a passo. Agora vamos pro <strong>Cowork</strong>: você delega uma missão inteira e o Claude trabalha sozinho, por vários passos, sem precisar da sua intervenção.</p>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Importante</strong>
+      O Cowork funciona <strong>apenas no Claude Desktop App</strong> (não no web nem no celular). Ele usa os mesmos conectores que você já configurou, mais acesso direto a pastas no seu computador.
+    </div>
+
+    <p>Pense assim: no Chat você <strong>conversa</strong> com o Claude. No Cowork você <strong>contrata</strong> o Claude pra fazer um trabalho completo.</p>
+
+    <div class="card card-accent">
+      <h3>Exemplo da diferença</h3>
+      <p><strong>Chat:</strong> "Me fala sobre o concorrente X" → Claude responde. "E o Y?" → Claude responde. "Faz uma tabela?" → Claude faz. (3 passos manuais)<br><br>
+      <strong>Cowork:</strong> "Analise os concorrentes X, Y e Z. Pesquise na web, compare posicionamento, preços e pontos fracos. Gere um relatório em Excel e salve na pasta." → Claude faz tudo sozinho em 10+ passos.</p>
+    </div>
+
+    <h2>Como funciona</h2>
+    <ol>
+      <li>Abra a aba <strong>Cowork</strong> no Claude Desktop</li>
+      <li>Dê acesso a uma <strong>pasta</strong> no seu computador (o Claude lê e salva arquivos nela)</li>
+      <li>Descreva a tarefa com clareza</li>
+      <li>O Claude cria um <strong>plano</strong>, mostra pra você, e executa</li>
+      <li>Acompanhe o progresso na barra lateral</li>
+    </ol>
+
+    <h2>Habilidades vs. Plugins — entenda a diferença</h2>
+    <p>O Cowork tem dois tipos de extensões. É importante não confundir:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Habilidades</th><th>Plugins</th></tr></thead>
+        <tbody>
+          <tr><td><strong>O que é</strong></td><td>Instruções de <em>como</em> fazer uma tarefa — como um manual de procedimentos</td><td>Pacote completo que agrupa Habilidades + Conectores + comandos para uma função inteira</td></tr>
+          <tr><td><strong>Exemplos</strong></td><td>Criar roteiro de Reel, planejar campanha, analisar concorrente</td><td>Marketing, Finance, Product Management, Enterprise Search</td></tr>
+          <tr><td><strong>Onde fica</strong></td><td>Menu + (Habilidades) no Cowork, ou Configurações > Personalizar</td><td>Menu + (Plugins) no Cowork</td></tr>
+          <tr><td><strong>Analogia</strong></td><td>Um funcionário com um manual de como fazer X</td><td>Um departamento inteiro com ferramentas e processos</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Plugins embutidos no Cowork</strong>
+      O Claude já vem com plugins prontos: <strong>Marketing, Finance, Product Management, Enterprise Search</strong> e mais. Explore todos em <a href="https://claude.com/plugins" target="_blank"><strong>claude.com/plugins</strong></a>. Para infoprodutores e consultores, o <strong>Plugin de Marketing</strong> é o mais relevante.
+    </div>
+
+    <h2>Demo: Plugin de Marketing ao vivo</h2>
+    <p>Vamos usar o Plugin de Marketing pra fazer uma análise competitiva real dos maiores nomes do marketing digital brasileiro.</p>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Antes de começar</strong>
+      Confirme que estas opções estão ativas em <strong>Configurações > Capacidades</strong>:
+      <ul style="margin-top:8px">
+        <li><strong>Visualizações inline</strong> (Visuais) — para gráficos aparecerem na conversa</li>
+        <li><strong>Execução de código na nuvem e criação de arquivos</strong> — para pesquisar e processar dados</li>
+      </ul>
+    </div>
+
+    <h3>Passo 1: Ative o Plugin de Marketing</h3>
+    <p>No Cowork, clique em <strong>+</strong> → <strong>Plugins</strong> → selecione <strong>Marketing</strong>. Ele carrega as Habilidades e conectores de marketing automaticamente.</p>
+
+    <h3>Passo 2: Envie o prompt de análise</h3>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt — Análise competitiva</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Analise os seguintes experts em marketing digital brasileiro:
+1. Érico Rocha - instagram.com/rochaerico
+2. Leandro Ladeira - instagram.com/leandroladeiran
+3. Ícaro de Carvalho - instagram.com/icarode.carvalho
+
+Para cada um, pesquise e identifique:
+- Posicionamento e proposta de valor principal
+- Produto/oferta carro-chefe e faixa de preço estimada
+- Público-alvo que atende
+- Pontos fortes (o que fazem muito bem)
+- Pontos fracos / gaps / oportunidades para um novo entrante
+
+Depois, gere gráficos comparativos interativos mostrando:
+1. Comparação visual dos 3 posicionamentos
+2. Mapa de oportunidades — o que nenhum deles cobre
+3. Recomendações estratégicas para se diferenciar dos três</code></p>
+    </div>
+
+    <h3>Passo 3: Observe o Cowork em ação</h3>
+    <p>O Claude vai montar um plano, pesquisar cada nome na web e gerar os gráficos. Acompanhe na barra lateral — ele mostra cada etapa em tempo real.</p>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo</strong>
+      Ative o Plugin de Marketing, cole o prompt e assista. Ao terminar, adapte substituindo pelos seus próprios concorrentes e repita.
+    </div>
+
+    <h2>Criação de arquivos</h2>
+    <p>Além dos gráficos inline, o Cowork cria arquivos reais na pasta que você deu acesso — útil para entregar relatórios a clientes.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Arquivo</th><th>O que gera</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Excel (.xlsx)</strong></td><td>Planilhas com fórmulas e gráficos</td></tr>
+          <tr><td><strong>Word (.docx)</strong></td><td>Relatórios e documentos formatados</td></tr>
+          <tr><td><strong>PowerPoint (.pptx)</strong></td><td>Apresentações completas com slides</td></tr>
+          <tr><td><strong>PDF</strong></td><td>Documentos prontos para enviar</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Tarefas agendadas</h2>
+    <p>O Cowork também pode executar tarefas <strong>automaticamente</strong> em dias e horários que você definir. Exemplos:</p>
+    <ul>
+      <li><strong>Briefing semanal:</strong> Toda segunda às 7h, pesquisa novidades do seu mercado e salva um resumo</li>
+      <li><strong>Triagem de emails:</strong> Todo dia às 8h, organiza o que precisa da sua atenção</li>
+      <li><strong>Relatório de performance:</strong> Toda sexta, compila métricas da semana</li>
+    </ul>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Atenção</strong>
+      Tarefas agendadas só rodam quando o Claude Desktop está aberto no seu computador. Se o app estiver fechado, ele executa quando você abrir.
+    </div>
   </div>
 
   <div class="section" data-section="d1-b4" data-day="1" data-block="4">
@@ -302,7 +977,108 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">Crie um site sem escrever uma linha de código</div>
     <span class="badge badge-time">30 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>O modo Código é pra todo mundo</h2>
+    <p>A aba Code do Claude Desktop não é só para programadores. Ela permite que o Claude <strong>crie e edite arquivos</strong> no seu computador — incluindo sites completos, documentos e ferramentas.</p>
+
+    <p>Pessoas que nunca programaram na vida estão criando landing pages, apps e ferramentas inteiras usando esse modo. Você vai fazer o mesmo agora.</p>
+
+    <h2>Passo a passo: sua landing page</h2>
+
+    <h3>1. Crie a pasta do projeto</h3>
+    <p>Crie uma pasta chamada <strong>meu-site</strong> na sua Área de Trabalho.</p>
+
+    <h3>2. Abra o modo Código</h3>
+    <p>No Claude Desktop, vá na aba <strong>Código</strong> e selecione a pasta que você criou.</p>
+
+    <h3>3. Cole o prompt</h3>
+    <p>Vamos criar a landing page de uma clínica de estética. Copie e cole exatamente como está:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt — exemplo pronto</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Crie uma landing page profissional para a Clínica Bella Vita, uma clínica de estética facial e corporal em São Paulo.
+
+Objetivo: captar leads que querem agendar uma avaliação gratuita
+Público: mulheres de 30-55 anos, classe A/B, que buscam procedimentos seguros e naturais
+Tom: sofisticado, acolhedor, que transmita confiança e cuidado
+
+Seções:
+1. Hero com foto de fundo (use um placeholder cinza), headline "Sua beleza natural, realçada por especialistas", subtítulo e botão "Agendar avaliação gratuita"
+2. 3 diferenciais com ícones: "Equipe médica especializada", "Tecnologia de ponta", "Resultados naturais"
+3. Tratamentos populares: Harmonização facial, Bioestimuladores, Skincare avançado, Corporal — com cards visuais
+4. Como funciona: 3 passos (Avaliação gratuita → Plano personalizado → Transformação)
+5. 3 depoimentos de clientes (inventar nomes e textos realistas)
+6. FAQ: 4 perguntas sobre dor, recuperação, valores e primeira consulta
+7. CTA final: "Agende sua avaliação gratuita" com campo de nome, WhatsApp e botão
+
+Cores: dourado (#C5A55A), branco (#FFFFFF), preto suave (#1A1A1A), rosa antigo (#E8D5D0)
+Fonte: sans-serif elegante
+Mobile-first e responsivo
+Use apenas HTML e CSS num único arquivo
+Salve como index.html na pasta</code></p>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Adapte pro seu negócio</strong>
+      Esse exemplo é de uma clínica de estética, mas funciona pra qualquer serviço local: dentista, personal trainer, nutricionista, salão, advocacia, contabilidade. Troque o nome, as cores e os serviços.
+    </div>
+
+    <h3>4. Veja o resultado</h3>
+    <p>O Claude vai gerar o arquivo em segundos. Abra a pasta <strong>meu-site</strong> e dê dois cliques no <strong>index.html</strong> — seu site abre no navegador!</p>
+
+    <h3>5. Refine ao vivo</h3>
+    <p>O site nunca fica perfeito na primeira vez. Peça ajustes — um de cada vez:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Refinamento 1</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">O hero ficou simples demais. Adicione um gradiente sutil no fundo, aumente o tamanho da headline e faça o botão pulsar com uma animação suave.</code></p>
+    </div>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Refinamento 2</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Adicione um botão flutuante de WhatsApp no canto inferior direito que fica visível sempre, mesmo rolando a página. Use o ícone do WhatsApp em verde.</code></p>
+    </div>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Refinamento 3</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Os depoimentos precisam de mais credibilidade. Adicione foto placeholder circular ao lado de cada nome, e estrelas de avaliação (5 estrelas).</code></p>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Regra de ouro</strong>
+      Peça <strong>um ajuste por vez</strong> no início. Conforme pega confiança, pode pedir vários. Sempre recarregue o browser pra ver o resultado.
+    </div>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo</strong>
+      Adapte o prompt acima para o SEU negócio. Cole no modo Código, espere o Claude gerar, abra no browser. Peça pelo menos 2 ajustes. Compartilhe o resultado com o grupo!
+    </div>
+
+    <h2>Modo YOLO (demo)</h2>
+    <p>No modo normal, o Claude pede permissão antes de cada ação (editar arquivo, rodar comando, etc). O <strong>Modo YOLO</strong> desativa TODAS essas confirmações — o Claude executa tudo sozinho, sem parar pra perguntar.</p>
+
+    <p>Tecnicamente, é ativado com a flag <code>--dangerously-skip-permissions</code> no terminal. O nome já diz: é perigoso. O Claude pode rodar qualquer comando, deletar arquivos, instalar pacotes — tudo sem pedir.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Modo</th><th>O que faz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>default</strong></td><td>Pergunta antes de cada ação (o padrão)</td></tr>
+          <tr><td><strong>acceptEdits</strong></td><td>Aceita edições de arquivo, mas pergunta antes de rodar comandos</td></tr>
+          <tr><td><strong>plan</strong></td><td>Só analisa e planeja, não faz alterações</td></tr>
+          <tr><td><strong>YOLO (bypassPermissions)</strong></td><td>Executa TUDO sem pedir — arquivos, comandos, ferramentas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Cuidado</strong>
+      O YOLO mode é impressionante de assistir, mas <strong>nunca use na sua máquina principal sem proteção</strong>. Idealmente use em projetos isolados ou dentro de containers Docker. Vamos ver uma demo controlada agora.
+    </div>
   </div>
 
   <div class="section" data-section="d1-b5" data-day="1" data-block="5">
@@ -311,7 +1087,186 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">Warp + Claude Code no seu computador</div>
     <span class="badge badge-time">30 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>Por que o terminal?</h2>
+    <p>Tudo que você fez hoje no Desktop App também funciona no terminal. A diferença: no terminal você desbloqueia <strong>funcionalidades que não existem no app</strong>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Funcionalidade</th><th>Desktop App</th><th>Terminal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Chat, Cowork, Código</strong></td><td>&#10003;</td><td>&#10003;</td></tr>
+          <tr><td><strong>Conectores</strong> (Google, Airtable)</td><td>&#10003;</td><td>&#10003;</td></tr>
+          <tr><td><strong>Skills</strong> (criar e instalar)</td><td>Limitado</td><td>&#10003; Completo</td></tr>
+          <tr><td><strong>Hooks</strong> (automações)</td><td>&#10007;</td><td>&#10003;</td></tr>
+          <tr><td><strong>MCP Servers</strong> (extensões)</td><td>Conectores básicos</td><td>&#10003; Qualquer MCP</td></tr>
+          <tr><td><strong>CLAUDE.md</strong> (memória do projeto)</td><td>&#10007;</td><td>&#10003;</td></tr>
+          <tr><td><strong>Subagentes</strong></td><td>&#10007;</td><td>&#10003;</td></tr>
+          <tr><td><strong>Custom commands</strong> (/review, /test)</td><td>&#10007;</td><td>&#10003;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Pense no Desktop App como dirigir automático. O terminal é o câmbio manual — mais poder pra quem aprende a usar. <strong>E é no terminal que vamos criar Skills amanhã.</strong></p>
+
+    <h2>Instalando o Warp</h2>
+    <p>O Warp é um terminal moderno, bonito e com IA embutida. Muito menos intimidador que o Terminal padrão.</p>
+
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text">Acesse <strong>warp.dev/download</strong></span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text"><strong>Mac:</strong> Baixe, arraste para Aplicativos, abra</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text"><strong>Windows:</strong> Baixe o instalador, execute, siga os passos</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text">Crie uma conta no Warp (gratuita) ou pule</span>
+      </li>
+    </ul>
+
+    <h2>Instalando o Claude Code</h2>
+    <p>Com o Warp aberto, copie e cole o comando abaixo:</p>
+
+    <h3>Mac / Linux</h3>
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">curl -fsSL https://cli.anthropic.com/install.sh | sh</code>
+    </div>
+
+    <h3>Windows</h3>
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">winget install Anthropic.ClaudeCode</code>
+    </div>
+
+    <h2>Primeira execução</h2>
+
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">claude</code>
+    </div>
+
+    <p>Na primeira vez, o Claude vai pedir para autenticar. Escolha <strong>"Use Claude.ai account"</strong> — assim ele usa o mesmo plano Pro que você já tem.</p>
+
+    <ul class="checklist">
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text">Rode <strong>claude</strong> no Warp</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text">Escolha "Use Claude.ai account"</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text">Autentique no browser quando abrir</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text">Volte ao Warp — deve mostrar o prompt do Claude</span>
+      </li>
+    </ul>
+
+    <h2>Teste rápido</h2>
+    <p>Digite qualquer coisa pra testar:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Me diga uma curiosidade sobre o Brasil que quase ninguém sabe.</code></p>
+    </div>
+
+    <p>Se o Claude respondeu, está tudo funcionando!</p>
+
+    <h2>Chave de ouro: plugins no terminal</h2>
+    <p>Lembra da landing page que criamos no app desktop? Ficou ok. Agora vamos instalar um <strong>plugin profissional de design</strong> e recriar o mesmo site pelo terminal. Você vai ver a diferença.</p>
+
+    <h3>1. Instale o plugin frontend-design</h3>
+    <p>No Warp, com o Claude Code aberto, rode:</p>
+
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">/install-plugin https://claude.com/plugins/frontend-design</code>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Plugins oficiais</strong>
+      A Anthropic tem um catálogo de plugins em <a href="https://claude.com/plugins" target="_blank"><strong>claude.com/plugins</strong></a>. Frontend Design é um dos mais populares — cria interfaces bonitas, responsivas e com identidade visual forte.
+    </div>
+
+    <h3>2. Recrie a landing page</h3>
+    <p>Agora peça o mesmo site da clínica, mas pelo terminal com o plugin ativo:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Use a skill frontend-design pra criar uma landing page profissional para a Clínica Bella Vita, clínica de estética facial e corporal em São Paulo.
+
+Público: mulheres 30-55 anos, classe A/B
+Tom: sofisticado, acolhedor, transmita confiança
+Cores: dourado (#C5A55A), branco, preto suave (#1A1A1A), rosa antigo (#E8D5D0)
+
+Seções: hero, diferenciais, tratamentos, como funciona, depoimentos, FAQ, CTA com WhatsApp
+
+Quero um design que impressione — não genérico. Salve na pasta meu-site.</code></p>
+    </div>
+
+    <h3>3. Compare os resultados</h3>
+    <p>Abra os dois arquivos no navegador — o que foi criado pelo app e o que foi criado pelo terminal com plugin. A diferença é brutal.</p>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Por que isso importa</strong>
+      O app desktop cria sites genéricos. O terminal com plugins cria sites com <strong>identidade visual, animações, tipografia profissional e atenção a detalhes</strong>. Isso é só um exemplo — existem plugins pra tudo: SEO, copywriting, análise de dados, e muito mais.
+    </div>
+
+    <p>E se em vez de depender de plugins prontos, você pudesse <strong>criar os seus próprios</strong>? Isso é exatamente o que vamos fazer amanhã, no Dia 2: <strong>Skills</strong>.</p>
+
+    <h2>Verificação final</h2>
+    <p>Confirme que tudo está certo:</p>
+
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">claude --version</code>
+    </div>
+
+    <p>Deve mostrar algo como <code>claude v1.0.xxx</code>. Se mostrou, parabéns — você tem o Claude Code no seu terminal, pronto pra amanhã!</p>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Amanhã</strong>
+      No Dia 2 vamos usar o terminal pra criar e instalar Skills. Esse é o motivo de termos instalado tudo hoje.
+    </div>
+
+    <h2>Resumo do Dia 1</h2>
+    <p>Hoje você aprendeu:</p>
+    <ul>
+      <li><strong>Conectores</strong> — Google Calendar, Gmail e Airtable conectados ao Claude</li>
+      <li><strong>Chat</strong> — Voice mode, GTD completo com Airtable + Google, Quick Entry, Screenshot</li>
+      <li><strong>Cowork</strong> — Delegação autônoma, análise competitiva, Skills embutidas (Excel, Word, PPT, PDF)</li>
+      <li><strong>Código</strong> — Criação de landing page sem programar, modos de permissão (YOLO)</li>
+      <li><strong>Terminal</strong> — Warp + Claude Code instalados e prontos pro Dia 2</li>
+    </ul>
+
+    <div class="card card-accent">
+      <h3>Spoiler do Dia 2</h3>
+      <p>Sabia que você pode conectar um <strong>repositório GitHub</strong> ao modo Código e o Claude trabalha nele direto na nuvem — mesmo com o app fechado? Você começa um projeto, fecha o computador, e quando volta ele terminou. Assunto pra amanhã.</p>
+    </div>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Tarefa pra semana</strong>
+      Antes do Dia 2, use o Claude Desktop pelo menos 1x por dia. Pode ser no Chat (voice mode), no Cowork (delegar uma tarefa) ou no Código (criar algo). O importante é praticar e perder o medo.
+    </div>
   </div>
 
   <!-- DIA 2 BLOCOS -->
@@ -321,7 +1276,76 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">O futuro do seu negócio em um arquivo</div>
     <span class="badge badge-time">30 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>A tese que muda tudo</h2>
+    <p>Hoje os infoprodutores vendem <strong>cursos</strong> — 40 aulas ensinando uma metodologia. O aluno assiste, tenta aplicar, muitas vezes desiste.</p>
+
+    <p>E se, em vez de ensinar a metodologia, você pudesse <strong>entregar a metodologia funcionando</strong>? O aluno não precisa aprender cada passo — ele tem um assistente que executa seguindo exatamente o seu método.</p>
+
+    <p><strong>Isso é uma Skill.</strong></p>
+
+    <div class="card card-accent">
+      <h3>Curso vs. Skill</h3>
+      <p><strong>Curso:</strong> "Aprenda minha metodologia de copywriting em 20 aulas" → o aluno precisa estudar, praticar, errar, tentar de novo.<br><br>
+      <strong>Skill:</strong> "Instale esta Skill e o Claude escreve copy seguindo exatamente minha metodologia" → o aluno tem o resultado imediato.</p>
+    </div>
+
+    <h2>O que é uma Skill, na prática?</h2>
+    <p>Uma Skill é um <strong>conjunto de instruções</strong> que ensina o Claude a executar uma tarefa específica de forma consistente. Na prática, é uma pasta com arquivos Markdown que descrevem:</p>
+    <ul>
+      <li>O que a Skill faz</li>
+      <li>Quando o Claude deve usá-la</li>
+      <li>As regras e o passo a passo para executar</li>
+      <li>Exemplos de como o resultado deve ficar</li>
+    </ul>
+
+    <p>Você <strong>não precisa programar</strong> para criar uma Skill. É texto puro — instruções claras em linguagem natural.</p>
+
+    <h2>Exemplos reais</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Skill</th><th>O que faz</th><th>Quem criaria</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gerador de roteiros</strong></td><td>Cria roteiros de Reels seguindo um framework que já performa bem</td><td>Creator de conteúdo</td></tr>
+          <tr><td><strong>Analisador de perfil</strong></td><td>Analisa um perfil de Instagram e sugere melhorias na bio, destaques e estratégia</td><td>Social media manager</td></tr>
+          <tr><td><strong>Criador de propostas</strong></td><td>Gera propostas comerciais com escopo, preço e timeline baseado num briefing</td><td>Freelancer / consultor</td></tr>
+          <tr><td><strong>Corretor de redação</strong></td><td>Avalia redações usando critérios do ENEM e dá feedback detalhado</td><td>Professor</td></tr>
+          <tr><td><strong>Planejador de dieta</strong></td><td>Cria cardápio semanal baseado em restrições e objetivos do cliente</td><td>Nutricionista</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Demo: Skill de conteúdo</h2>
+    <p>Vamos ver uma Skill em ação. Esta Skill analisa posts que já performaram bem e clona o framework para novos temas.</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Analise estes 3 posts que performaram bem no meu Instagram:
+
+Post 1: [cole o texto do post]
+Post 2: [cole o texto do post]
+Post 3: [cole o texto do post]
+
+Identifique:
+1. O padrão de hook (como começa)
+2. A estrutura (como desenvolve)
+3. O CTA (como termina)
+4. O tom de voz
+5. Tamanho médio
+
+Depois, crie 5 novos posts usando exatamente esse framework, sobre os seguintes temas:
+- [tema 1]
+- [tema 2]
+- [tema 3]
+- [tema 4]
+- [tema 5]</code></p>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Percebeu?</strong>
+      Esse prompt <strong>já é quase uma Skill</strong>. A diferença: uma Skill salva essas instruções para que o Claude as execute automaticamente toda vez, sem você precisar copiar e colar o prompt de novo.
+    </div>
   </div>
 
   <div class="section" data-section="d2-b2" data-day="2" data-block="2">
@@ -330,7 +1354,92 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">De zero a skill funcionando em 15 minutos</div>
     <span class="badge badge-time">60 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>O Skill Creator</h2>
+    <p>A Anthropic criou uma ferramenta dentro do próprio Claude para criar Skills via conversa. Você descreve o que quer, o Claude faz perguntas de refinamento e gera a Skill pronta — sem tocar em código.</p>
+
+    <h2>Passo a passo</h2>
+
+    <h3>1. Defina sua Skill</h3>
+    <p>Antes de começar, pense:</p>
+    <ul>
+      <li><strong>Que tarefa</strong> você faz repetidamente e gostaria de automatizar?</li>
+      <li><strong>Qual seu método?</strong> Existe um passo a passo que você segue?</li>
+      <li><strong>Como é um resultado bom?</strong> Você consegue dar exemplos?</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Ideias de Skills</strong>
+      Roteiro de Reels no seu formato, análise de perfil, proposta comercial, email de follow-up, briefing criativo, plano de aula, avaliação de redação, cardápio semanal, script de vendas...
+    </div>
+
+    <h3>2. Abra o Skill Creator</h3>
+    <p>No Claude Desktop (Chat) ou no terminal, use este prompt para iniciar:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Quero criar uma Skill para o Claude. Me ajude a construí-la passo a passo.
+
+A Skill deve: [descreva em uma frase o que ela faz]
+
+Exemplo: "Criar roteiros de Reels no formato hook → problema → solução → CTA, seguindo meu tom de voz descontraído e direto."
+
+Me faça as perguntas necessárias para construir uma Skill completa e profissional.</code></p>
+    </div>
+
+    <h3>3. Responda às perguntas</h3>
+    <p>O Claude vai perguntar sobre:</p>
+    <ul>
+      <li>O que a Skill deve fazer exatamente</li>
+      <li>O formato do resultado esperado</li>
+      <li>Regras e restrições</li>
+      <li>Exemplos de resultado bom</li>
+      <li>Tom de voz e estilo</li>
+    </ul>
+
+    <p>Responda com detalhes — quanto mais contexto, melhor a Skill.</p>
+
+    <h3>4. Receba sua Skill</h3>
+    <p>O Claude gera um arquivo ZIP com a estrutura completa da Skill. Baixe o arquivo.</p>
+
+    <h3>5. Instale</h3>
+    <p>Vá em <strong>Configurações > Personalizar</strong> e clique em <strong>"Enviar habilidade"</strong>. Selecione o ZIP. Pronto — sua Skill aparece na lista.</p>
+
+    <h3>6. Teste</h3>
+    <p>Abra um novo chat e faça um pedido que ativaria sua Skill. O Claude vai detectar automaticamente que deve usá-la.</p>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo — 30 minutos</strong>
+      Crie sua própria Skill agora. Se não souber qual criar, escolha uma:
+      <ul style="margin-top:8px">
+        <li>"Skill que gera bios de Instagram profissionais"</li>
+        <li>"Skill que cria roteiros de vídeo no meu formato"</li>
+        <li>"Skill que escreve emails de follow-up para clientes"</li>
+      </ul>
+      Siga os passos acima. Ao final, teste sua Skill num chat novo.
+    </div>
+
+    <h2>Refinando sua Skill</h2>
+    <p>A primeira versão raramente é perfeita. Depois de testar, peça ajustes:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Testei minha Skill e o resultado ficou [descreva o problema].
+
+Ajuste a Skill para:
+- [correção 1]
+- [correção 2]
+- [correção 3]
+
+Gere a versão atualizada.</code></p>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Regra dos 3 testes</strong>
+      Teste sua Skill com pelo menos 3 inputs diferentes antes de considerar pronta. Se funciona bem nos 3 casos, está sólida.
+    </div>
   </div>
 
   <div class="section" data-section="d2-b3" data-day="2" data-block="3">
@@ -339,7 +1448,77 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">Marketplace, skills.sh e tesouros escondidos</div>
     <span class="badge badge-time">45 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>Onde encontrar Skills prontas</h2>
+    <p>Você não precisa criar tudo do zero. Existe um ecossistema crescente de Skills prontas — criadas pela Anthropic, pela comunidade e por empresas.</p>
+
+    <h3>1. Skills embutidas da Anthropic</h3>
+    <p>Já vêm com o Claude e funcionam automaticamente:</p>
+    <ul>
+      <li><strong>Excel</strong> — planilhas com fórmulas e gráficos</li>
+      <li><strong>Word</strong> — documentos profissionais</li>
+      <li><strong>PowerPoint</strong> — apresentações completas</li>
+      <li><strong>PDF</strong> — criação e processamento</li>
+    </ul>
+    <p>Ative em: <strong>Configurações > Capacidades > Execução de código na nuvem e criação de arquivos</strong></p>
+
+    <h3>2. skills.sh — O marketplace aberto</h3>
+    <p>O <strong>skills.sh</strong> é um projeto da Vercel que funciona como um marketplace aberto de Skills. Qualquer pessoa pode publicar e instalar.</p>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Dado importante</strong>
+      Skills é um padrão aberto adotado por Anthropic, OpenAI, Microsoft, GitHub e Cursor. Uma Skill que você cria funciona em várias ferramentas — não só no Claude.
+    </div>
+
+    <h4>Como navegar no skills.sh</h4>
+    <p>Acesse <strong>skills.sh</strong> no browser e explore por categoria. Algumas Skills populares:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Skill</th><th>O que faz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>frontend-design</strong></td><td>Cria interfaces web bonitas e responsivas</td></tr>
+          <tr><td><strong>ui-ux-pro-max</strong></td><td>Design intelligence com 50+ estilos e paletas</td></tr>
+          <tr><td><strong>seo-optimizer</strong></td><td>Otimiza conteúdo para buscas e IA</td></tr>
+          <tr><td><strong>copywriting</strong></td><td>Escreve copy persuasiva para landing pages</td></tr>
+          <tr><td><strong>social-content</strong></td><td>Cria conteúdo otimizado para cada rede social</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Como instalar via terminal</h4>
+    <p>Com o Claude Code aberto no Warp:</p>
+
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">npx skills install [nome-da-skill]</code>
+    </div>
+
+    <h3>3. Marketplace interno do Claude Code</h3>
+    <p>O Claude Code tem um browser de plugins embutido. No terminal:</p>
+
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">/plugins</code>
+    </div>
+
+    <p>Navegue pela lista, leia descrições e instale o que fizer sentido pro seu trabalho.</p>
+
+    <h2>Como avaliar se uma Skill é boa</h2>
+    <p>Antes de instalar, verifique:</p>
+    <ul>
+      <li><strong>Descrição clara</strong> — se não explica bem o que faz, provavelmente não faz bem</li>
+      <li><strong>Exemplos de uso</strong> — Skills boas mostram inputs e outputs</li>
+      <li><strong>Fonte confiável</strong> — quem criou? É mantida?</li>
+      <li><strong>Teste primeiro</strong> — instale, teste com 2-3 inputs, avalie o resultado</li>
+    </ul>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo — 20 minutos</strong>
+      Navegue no skills.sh e no marketplace do Claude Code. Encontre e instale <strong>2 Skills</strong> que sejam úteis pro seu trabalho. Teste cada uma com um input real. Compartilhe suas descobertas com o grupo.
+    </div>
   </div>
 
   <div class="section" data-section="d2-b4" data-day="2" data-block="4">
@@ -348,7 +1527,45 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">Presente de formatura da imersão</div>
     <span class="badge badge-time">30 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>3 Skills exclusivas para você</h2>
+    <p>Agora que você sabe o que são Skills, como criar e onde encontrar — é hora de receber as suas. Estas 3 Skills foram criadas especialmente para esta imersão.</p>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Em breve</strong>
+      As 3 Skills exclusivas serão reveladas e distribuídas durante a aula ao vivo. Fique atento!
+    </div>
+
+    <h2>Como instalar</h2>
+    <p>Quando receber o arquivo ZIP de cada Skill:</p>
+    <ol>
+      <li>Vá em <strong>Configurações > Personalizar</strong></li>
+      <li>Clique em <strong>"Enviar habilidade"</strong></li>
+      <li>Selecione o arquivo ZIP</li>
+      <li>A Skill aparece na sua lista</li>
+      <li>Teste num chat novo!</li>
+    </ol>
+
+    <h2>Refinando para o seu contexto</h2>
+    <p>Skills genéricas funcionam bem, mas Skills <strong>customizadas para você</strong> funcionam muito melhor. Depois de instalar, peça ao Claude para adaptar:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Acabei de instalar a Skill [nome]. Quero adaptá-la para o meu contexto:
+
+- Meu nicho: [seu nicho]
+- Meu público: [seu público]
+- Meu tom de voz: [como você se comunica]
+- Diferencial: [o que te diferencia]
+
+Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
+    </div>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo</strong>
+      Instale as 3 Skills, teste cada uma, e customize pelo menos 1 para o seu contexto específico usando o prompt acima.
+    </div>
   </div>
 
   <div class="section" data-section="d2-b5" data-day="2" data-block="5">
@@ -357,7 +1574,70 @@ td strong { color: var(--text-pri); }
     <div class="section-subtitle">MCP, hooks e o que vem depois</div>
     <span class="badge badge-time">15 minutos</span>
     <hr>
-    <p>Conteúdo em construção...</p>
+
+    <h2>O que você conquistou</h2>
+    <p>Em 2 dias você saiu do zero e agora sabe:</p>
+    <ul>
+      <li><strong>Usar o Claude Desktop</strong> nos 3 modos (Chat, Cowork, Code)</li>
+      <li><strong>Organizar sua vida</strong> com GTD por voz</li>
+      <li><strong>Delegar tarefas complexas</strong> no Cowork (análises, relatórios, documentos)</li>
+      <li><strong>Criar sites</strong> sem programar</li>
+      <li><strong>Usar o terminal</strong> com Warp + Claude Code</li>
+      <li><strong>Entender o que são Skills</strong> e por que elas mudam o jogo</li>
+      <li><strong>Criar sua própria Skill</strong> com o Skill Creator</li>
+      <li><strong>Garimpar Skills</strong> no marketplace e skills.sh</li>
+    </ul>
+
+    <h2>O que vem na próxima semana</h2>
+    <p>Se você achou Skills poderoso, espere até ver o que vem depois:</p>
+
+    <div class="card card-accent">
+      <h3>MCP — Model Context Protocol</h3>
+      <p>Conecte o Claude a <strong>qualquer ferramenta externa</strong>: banco de dados, APIs, navegador, CRM, planilhas do Google, Notion, Slack. MCP é o que transforma o Claude de assistente em <strong>automação real</strong>.</p>
+    </div>
+
+    <div class="card card-accent">
+      <h3>Hooks</h3>
+      <p>Automatize ações <strong>antes e depois</strong> de cada coisa que o Claude faz. Exemplo: toda vez que o Claude edita um arquivo, roda um verificador automaticamente. É como colocar o Claude no piloto automático com guardrails.</p>
+    </div>
+
+    <div class="card card-accent">
+      <h3>Subagentes</h3>
+      <p>O Claude cria <strong>cópias de si mesmo</strong> para trabalhar em paralelo. Delega subtarefas, coleta resultados e monta a entrega final. Um Claude virando um time inteiro.</p>
+    </div>
+
+    <h2>Recursos para continuar</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Recurso</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Anthropic Academy</strong></td><td>anthropic.skilljar.com (cursos gratuitos)</td></tr>
+          <tr><td><strong>Claude Code Docs</strong></td><td>code.claude.com/docs</td></tr>
+          <tr><td><strong>Skills.sh</strong></td><td>skills.sh (marketplace de Skills)</td></tr>
+          <tr><td><strong>Reddit r/ClaudeAI</strong></td><td>reddit.com/r/ClaudeAI (comunidade)</td></tr>
+          <tr><td><strong>Reddit r/ClaudeCode</strong></td><td>reddit.com/r/ClaudeCode (dicas de terminal)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Sua missão</strong>
+      Até a próxima semana:
+      <ol style="margin-top:8px">
+        <li>Use o Claude Desktop <strong>todo dia</strong> — pelo menos 1 tarefa real</li>
+        <li>Refine a Skill que você criou — teste com 5 inputs diferentes</li>
+        <li>Instale pelo menos <strong>1 Skill nova</strong> do marketplace</li>
+        <li>Compartilhe uma vitória no grupo — o que o Claude fez por você?</li>
+      </ol>
+    </div>
+
+    <hr>
+
+    <div style="text-align:center; padding: 32px 0;">
+      <p style="font-size: 13px; color: var(--text-ghost); letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">Imersão Claude Code</p>
+      <p style="font-size: 22px; font-weight: 800;">Obrigado por participar!</p>
+      <p style="color: var(--text-sec);">Nos vemos na próxima semana. &#128640;</p>
+    </div>
   </div>
 
 </main>
@@ -375,12 +1655,14 @@ td strong { color: var(--text-pri); }
 <script>
 const SECTIONS = ['home','d1-b1','d1-b2','d1-b3','d1-b4','d1-b5','d2-b1','d2-b2','d2-b3','d2-b4','d2-b5'];
 const DAY_SECTIONS = { '1': ['d1-b1','d1-b2','d1-b3','d1-b4','d1-b5'], '2': ['d2-b1','d2-b2','d2-b3','d2-b4','d2-b5'] };
+var LOCKED_SECTIONS = ['d2-b1','d2-b2','d2-b3','d2-b4','d2-b5'];
 let currentIdx = 0;
 
-function goToSection(id) { const i = SECTIONS.indexOf(id); if (i !== -1) { currentIdx = i; render(); } }
-function nextSection() { if (currentIdx < SECTIONS.length - 1) { currentIdx++; render(); } }
+function isLocked(id) { return LOCKED_SECTIONS.indexOf(id) !== -1; }
+function goToSection(id) { if (isLocked(id)) return; var i = SECTIONS.indexOf(id); if (i !== -1) { currentIdx = i; render(); } }
+function nextSection() { var nextId = SECTIONS[currentIdx + 1]; if (nextId && !isLocked(nextId)) { currentIdx++; render(); } }
 function prevSection() { if (currentIdx > 0) { currentIdx--; render(); } }
-function goToDay(day) { if (day === 'home') { goToSection('home'); return; } const f = DAY_SECTIONS[day]; if (f) goToSection(f[0]); }
+function goToDay(day) { if (day === 'home') { goToSection('home'); return; } if (day === '2') return; var f = DAY_SECTIONS[day]; if (f) goToSection(f[0]); }
 
 function render() {
   const sid = SECTIONS[currentIdx];
@@ -398,6 +1680,33 @@ function render() {
   prevBtn.disabled = currentIdx === 0;
   nextBtn.disabled = currentIdx === SECTIONS.length - 1;
   nextBtn.textContent = currentIdx === SECTIONS.length - 1 ? 'Fim' : 'Próximo \u2192';
+
+  // Sidebar active state + scroll into view
+  document.querySelectorAll('.sidebar-item').forEach(function(item) {
+    if (item.dataset.target === sid) {
+      item.classList.add('active');
+      item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    } else {
+      item.classList.remove('active');
+    }
+  });
+
+  // Desktop breadcrumb
+  var breadcrumb = document.getElementById('headerBreadcrumb');
+  var TITLES = {
+    'home': 'Início',
+    'd1-b1': 'Dia 1 / O que é o Claude?',
+    'd1-b2': 'Dia 1 / Chat: GTD por voz',
+    'd1-b3': 'Dia 1 / Cowork: análise competitiva',
+    'd1-b4': 'Dia 1 / Code: sua landing page',
+    'd1-b5': 'Dia 1 / Terminal: setup',
+    'd2-b1': 'Dia 2 / O que são Skills?',
+    'd2-b2': 'Dia 2 / Crie sua skill',
+    'd2-b3': 'Dia 2 / Garimpando skills',
+    'd2-b4': 'Dia 2 / Suas 3 skills',
+    'd2-b5': 'Dia 2 / Próximos passos'
+  };
+  breadcrumb.textContent = TITLES[sid] || '';
 
   updateProgress(sid, day);
   window.scrollTo({ top: 0, behavior: 'instant' });
