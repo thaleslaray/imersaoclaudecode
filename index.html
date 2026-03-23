@@ -1157,14 +1157,19 @@ Salve como index.html na pasta</code></p>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">curl -fsSL https://cli.anthropic.com/install.sh | sh</code>
+      <code class="code-text">curl -fsSL https://claude.ai/install.sh | bash</code>
     </div>
 
     <h3>Windows</h3>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">winget install Anthropic.ClaudeCode</code>
+      <code class="code-text">curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd</code>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Windows</strong>
+      Requer <a href="https://git-scm.com/downloads/win" target="_blank">Git for Windows</a> instalado. Se não tiver, instale antes.
     </div>
 
     <h2>Primeira execução</h2>
