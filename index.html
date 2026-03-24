@@ -92,6 +92,30 @@ li strong { color: var(--text-pri); }
 hr { border: none; height: 3px; background: var(--accent); width: 40px; margin: 32px 0; border-radius: 2px; }
 
 /* ═══════════════════════════════════════════
+   COMPONENTS — Toggle (details/summary)
+   ═══════════════════════════════════════════ */
+details.toggle { background: var(--card); border-radius: var(--radius); margin-bottom: 20px; overflow: hidden; }
+details.toggle summary { padding: 16px 20px; font-weight: 700; font-size: 15px; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px; color: var(--text-pri); }
+details.toggle summary::-webkit-details-marker { display: none; }
+details.toggle summary::before { content: "▸"; font-size: 14px; color: var(--accent); transition: transform 0.2s; }
+details.toggle[open] summary::before { transform: rotate(90deg); }
+details.toggle .toggle-content { padding: 0 20px 20px 20px; }
+
+/* ═══════════════════════════════════════════
+   COMPONENTS — Cards
+   ═══════════════════════════════════════════ */
+.card { background: var(--card); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
+.card h3 { margin-top: 0; }
+.card h4 { margin-top: 0; }
+.card-accent { background: var(--bg-alt); border: 1px solid var(--border); border-left: 4px solid var(--accent); }
+
+/* ═══════════════════════════════════════════
+   COMPONENTS — Inline code
+   ═══════════════════════════════════════════ */
+code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.88em; background: rgba(0,0,0,0.06); padding: 2px 6px; border-radius: 4px; }
+.code-block code, .prompt-block code { background: none; padding: 0; border-radius: 0; }
+
+/* ═══════════════════════════════════════════
    COMPONENTS — Callouts
    ═══════════════════════════════════════════ */
 .callout { border-radius: var(--radius); padding: 16px 20px; margin-bottom: 20px; font-size: 14px; line-height: 1.55; }
@@ -103,7 +127,8 @@ hr { border: none; height: 3px; background: var(--accent); width: 40px; margin: 
 /* ═══════════════════════════════════════════
    COMPONENTS — Code blocks
    ═══════════════════════════════════════════ */
-.code-block { position: relative; background: #1A1A1A; color: #E8E4DC; border-radius: var(--radius); padding: 20px; padding-top: 36px; margin-bottom: 20px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.code-block { position: relative; background: #1A1A1A; color: #E8E4DC; border-radius: var(--radius); padding: 20px; padding-top: 36px; margin-bottom: 20px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto; }
+.code-block .code-text { display: block; white-space: pre-wrap; word-break: break-word; }
 .code-block-label { position: absolute; top: 8px; left: 16px; font-family: var(--font); font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
 .code-block-copy { position: absolute; top: 8px; right: 8px; font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 4px 10px; cursor: pointer; transition: all 0.2s; }
 .code-block-copy:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
@@ -112,6 +137,19 @@ hr { border: none; height: 3px; background: var(--accent); width: 40px; margin: 
 .prompt-block p { color: var(--text-pri); font-size: 14px; font-style: italic; margin-bottom: 0; }
 .prompt-block .code-block-copy { background: rgba(0,0,0,0.05); color: var(--text-ter); border-color: var(--border); }
 .prompt-block .code-block-copy:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   COMPONENTS — Stepper (passo a passo visual)
+   ═══════════════════════════════════════════ */
+.stepper { list-style: none; padding: 0; margin: 0 0 20px 0; counter-reset: step-counter; }
+.stepper .step { position: relative; padding-left: 48px; padding-bottom: 32px; }
+.stepper .step:last-child { padding-bottom: 0; }
+.stepper .step::before { content: ""; position: absolute; top: 32px; bottom: 0; left: 15px; width: 2px; background: var(--border-strong); }
+.stepper .step:last-child::before { display: none; }
+.stepper .step::after { counter-increment: step-counter; content: counter(step-counter); position: absolute; top: 0; left: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+.stepper .step h4 { margin: 0 0 6px 0; font-size: 15px; font-weight: 700; padding-top: 4px; }
+.stepper .step p { margin: 0 0 8px 0; color: var(--text-sec); font-size: 14px; }
+.stepper .step .code-block { margin: 10px 0 0 0; }
 
 /* ═══════════════════════════════════════════
    COMPONENTS — Checklist
@@ -407,34 +445,49 @@ td strong { color: var(--text-pri); }
       Terminal: setup
       <span class="sidebar-item-badge">30 min</span>
     </div>
+    <div class="sidebar-item" data-target="d1-b6" onclick="goToSection('d1-b6')">
+      <span class="sidebar-item-num">FAQ</span>
+      Perguntas frequentes
+      <span class="sidebar-item-badge">Consulta</span>
+    </div>
   </div>
 
   <div class="sidebar-group">
     <div class="sidebar-group-title">Dia 2 — Skills</div>
-    <div class="sidebar-item locked" data-target="d2-b1" onclick="goToSection('d2-b1')">
+    <div class="sidebar-item" data-target="d2-b1" onclick="goToSection('d2-b1')">
       <span class="sidebar-item-num">06</span>
       O que são Skills?
       <span class="sidebar-item-badge">30 min</span>
     </div>
-    <div class="sidebar-item locked" data-target="d2-b2" onclick="goToSection('d2-b2')">
+    <div class="sidebar-item" data-target="d2-b2" onclick="goToSection('d2-b2')">
       <span class="sidebar-item-num">07</span>
       Crie sua skill
-      <span class="sidebar-item-badge">60 min</span>
-    </div>
-    <div class="sidebar-item locked" data-target="d2-b3" onclick="goToSection('d2-b3')">
-      <span class="sidebar-item-num">08</span>
-      Garimpando skills
-      <span class="sidebar-item-badge">45 min</span>
-    </div>
-    <div class="sidebar-item locked" data-target="d2-b4" onclick="goToSection('d2-b4')">
-      <span class="sidebar-item-num">09</span>
-      Suas 3 skills
       <span class="sidebar-item-badge">30 min</span>
     </div>
-    <div class="sidebar-item locked" data-target="d2-b5" onclick="goToSection('d2-b5')">
+    <div class="sidebar-item" data-target="d2-b3" onclick="goToSection('d2-b3')">
+      <span class="sidebar-item-num">08</span>
+      Refine e corrija
+      <span class="sidebar-item-badge">30 min</span>
+    </div>
+    <div class="sidebar-item" data-target="d2-b4" onclick="goToSection('d2-b4')">
+      <span class="sidebar-item-num">09</span>
+      Garimpando skills
+      <span class="sidebar-item-badge">30 min</span>
+    </div>
+    <div class="sidebar-item" data-target="d2-b5" onclick="goToSection('d2-b5')">
       <span class="sidebar-item-num">10</span>
+      Suas 3 skills
+      <span class="sidebar-item-badge">20 min</span>
+    </div>
+    <div class="sidebar-item" data-target="d2-b6" onclick="goToSection('d2-b6')">
+      <span class="sidebar-item-num">11</span>
       Próximos passos
       <span class="sidebar-item-badge">15 min</span>
+    </div>
+    <div class="sidebar-item" data-target="d2-b7" onclick="goToSection('d2-b7')">
+      <span class="sidebar-item-num">FAQ</span>
+      Perguntas sobre Skills
+      <span class="sidebar-item-badge">Consulta</span>
     </div>
   </div>
 </aside>
@@ -447,7 +500,7 @@ td strong { color: var(--text-pri); }
     <div class="header-day-toggle">
       <button class="header-day-btn active" data-day="home" onclick="goToDay('home')">Início</button>
       <button class="header-day-btn" data-day="1" onclick="goToDay('1')">Dia 1</button>
-      <button class="header-day-btn" data-day="2" style="opacity:0.4; cursor:not-allowed;" disabled>Dia 2</button>
+      <button class="header-day-btn" data-day="2" onclick="goToDay('2')">Dia 2</button>
     </div>
   </div>
 </header>
@@ -481,18 +534,17 @@ td strong { color: var(--text-pri); }
         <div class="day-card-desc">Voice mode, Chat, Cowork, Code — descubra tudo que o Claude pode fazer por você.</div>
         <div class="day-card-meta">
           <span class="badge badge-outline">~3 horas</span>
-          <span class="badge badge-outline">5 blocos</span>
+          <span class="badge badge-outline">6 blocos</span>
           <span class="badge badge-outline">Desktop App</span>
         </div>
       </div>
-      <div class="day-card" style="opacity:0.5; cursor:not-allowed; pointer-events:none; position:relative;">
+      <div class="day-card" onclick="goToDay('2')" style="cursor:pointer;">
         <div class="day-card-num">Dia 2</div>
         <div class="day-card-title">Skills: o futuro do seu negócio</div>
         <div class="day-card-desc">Crie sua primeira Skill, explore o marketplace e receba 3 Skills exclusivas.</div>
         <div class="day-card-meta">
           <span class="badge badge-outline">~3 horas</span>
-          <span class="badge badge-outline">5 blocos</span>
-          <span class="badge badge-outline">Em breve</span>
+          <span class="badge badge-outline">7 blocos</span>
         </div>
       </div>
     </div>
@@ -533,7 +585,7 @@ td strong { color: var(--text-pri); }
       </li>
       <li onclick="toggleCheck(this)">
         <span class="checklist-box">&#10003;</span>
-        <span class="checklist-text"><strong>Warp Terminal</strong> — Baixe em warp.dev (Mac, Windows ou Linux)</span>
+        <span class="checklist-text"><strong>Warp Terminal</strong> — Baixe em <a href="https://warp.dev" target="_blank">warp.dev</a> (Mac, Windows ou Linux)</span>
       </li>
     </ul>
     <div class="callout callout-tip">
@@ -1210,7 +1262,7 @@ Salve como index.html na pasta</code></p>
     <ul class="checklist">
       <li onclick="toggleCheck(this)">
         <span class="checklist-box">&#10003;</span>
-        <span class="checklist-text">Acesse <strong>warp.dev/download</strong></span>
+        <span class="checklist-text">Acesse <a href="https://warp.dev/download" target="_blank"><strong>warp.dev/download</strong></a></span>
       </li>
       <li onclick="toggleCheck(this)">
         <span class="checklist-box">&#10003;</span>
@@ -1266,14 +1318,14 @@ Salve como index.html na pasta</code></p>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">curl -fsSL https://claude.ai/install.sh | bash</code>
+<code class="code-text">curl -fsSL https://claude.ai/install.sh | bash</code>
     </div>
 
     <h3>Windows</h3>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd</code>
+<code class="code-text">curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd</code>
     </div>
 
     <div class="callout callout-warn">
@@ -1286,7 +1338,7 @@ Salve como index.html na pasta</code></p>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">claude</code>
+<code class="code-text">claude</code>
     </div>
 
     <p>Na primeira vez, o Claude vai pedir para autenticar. Escolha <strong>"Use Claude.ai account"</strong> — assim ele usa o mesmo plano Pro que você já tem.</p>
@@ -1360,13 +1412,13 @@ Salve como index.html na pasta</code></p>
     <div class="code-block">
       <span class="code-block-label">Mac / Linux (Zsh)</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">echo 'alias cc="claude --dangerously-skip-permissions"' >> ~/.zshrc && source ~/.zshrc</code>
+<code class="code-text">echo 'alias cc="claude --dangerously-skip-permissions"' >> ~/.zshrc && source ~/.zshrc</code>
     </div>
 
     <div class="code-block">
       <span class="code-block-label">Windows (PowerShell)</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">if (!(Test-Path $PROFILE)) { New-Item $PROFILE -Force }; Add-Content $PROFILE 'function cc { claude --dangerously-skip-permissions @args }'; . $PROFILE</code>
+<code class="code-text">if (!(Test-Path $PROFILE)) { New-Item $PROFILE -Force }; Add-Content $PROFILE 'function cc { claude --dangerously-skip-permissions @args }'; . $PROFILE</code>
     </div>
 
     <p>A partir de agora, basta digitar <code>cc</code> no terminal pra abrir o Claude em modo YOLO.</p>
@@ -1386,7 +1438,7 @@ Salve como index.html na pasta</code></p>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">/plugins</code>
+<code class="code-text">/plugins</code>
     </div>
     <p>Navegue pelo catálogo, encontre <strong>frontend-design</strong> e clique em instalar.</p>
 
@@ -1394,7 +1446,7 @@ Salve como index.html na pasta</code></p>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">/install-plugin https://claude.com/plugins/frontend-design</code>
+<code class="code-text">/install-plugin https://claude.com/plugins/frontend-design</code>
     </div>
 
     <div class="callout callout-tip">
@@ -1520,6 +1572,99 @@ Quero um design que impressione — não genérico. Salve na pasta meu-site.</co
     </div>
   </div>
 
+  <div class="section" data-section="d1-b6" data-day="1" data-block="6">
+    <div class="section-kicker">Dia 1 &middot; FAQ</div>
+    <div class="section-title">Perguntas frequentes.</div>
+    <div class="section-subtitle">12 dúvidas da aula ao vivo, respondidas</div>
+    <span class="badge badge-time">Consulta</span>
+    <hr>
+
+    <ol class="stepper">
+      <li class="step">
+        <h4>Precisa do plano pago?</h4>
+        <p>Pra aproveitar de verdade, <strong>sim</strong>. O plano Pro ($20/mês ~R$110) libera Skills, Cowork, Claude Code e ~80 mensagens a cada 5 horas. O Free é muito limitado. O Max ($100-200/mês) multiplica os limites 5x ou 20x — ideal pra uso intenso.</p>
+      </li>
+      <li class="step">
+        <h4>Pago mais alguma coisa pelos plugins?</h4>
+        <p><strong>Não.</strong> Plugins, conectores (Google, Airtable, Notion) e Skills estão todos inclusos no plano Pro. Você não paga por plugin individual.</p>
+      </li>
+      <li class="step">
+        <h4>Dá pra ver quanto estou consumindo?</h4>
+        <p><strong>Sim.</strong> No Desktop App: avatar > Configurações > Uso. No terminal: <code>claude --usage</code>. O limite reseta a cada 5 horas, não a cada 24h.</p>
+      </li>
+      <li class="step">
+        <h4>Qual a diferença entre plugin e skill?</h4>
+        <p><strong>Skill</strong> = receita que o Claude segue automaticamente. Funciona em qualquer lugar (Desktop, web, terminal).<br>
+        <strong>Plugin</strong> = pacote que pode conter skills + comandos + agentes + integrações. Funciona só no terminal e Cowork.<br><br>
+        Analogia: skill é uma receita de bolo. Plugin é um kit de confeitaria com receitas + utensílios.</p>
+      </li>
+      <li class="step">
+        <h4>Posso transformar meu curso numa Skill?</h4>
+        <p><strong>Sim — esse é o tema do Dia 2.</strong> Você extrai a metodologia do seu curso (passo a passo, regras, framework) e transforma em instruções. Limite prático: mantenha o arquivo com menos de 500 linhas. Cursos extensos viram múltiplas Skills focadas.</p>
+      </li>
+      <li class="step">
+        <h4>Chat vs Cowork vs Terminal — quando usar?</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th></th><th>Chat</th><th>Cowork</th><th>Terminal</th></tr></thead>
+            <tbody>
+              <tr><td><strong>O que é</strong></td><td>Conversa normal</td><td>Assistente autônomo</td><td>Agente de código</td></tr>
+              <tr><td><strong>Acessa arquivos</strong></td><td>Não</td><td>Sim (pasta local)</td><td>Sim (qualquer pasta)</td></tr>
+              <tr><td><strong>Trabalha sozinho</strong></td><td>Não</td><td>Sim</td><td>Sim (paralelo)</td></tr>
+              <tr><td><strong>Melhor pra</strong></td><td>Perguntas, brainstorm</td><td>Relatórios, organizar docs</td><td>Sites, automações, skills</td></tr>
+              <tr><td><strong>Dificuldade</strong></td><td>Zero</td><td>Baixa</td><td>Média</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      <li class="step">
+        <h4>É seguro dar acesso aos meus dados?</h4>
+        <p><strong>Sim, com boas práticas.</strong> O Cowork roda em sandbox — só acessa a pasta que você autorizar. O terminal pede confirmação antes de cada ação. Anthropic <strong>não usa dados de planos pagos</strong> (Pro/Max/Team) pra treinar modelos. Não cole senhas em prompts, use projetos separados por cliente.</p>
+      </li>
+      <li class="step">
+        <h4>Sonnet ou Opus? Qual modelo usar?</h4>
+        <p><strong>Sonnet 4.6 pra 90% das tarefas.</strong> É o padrão, rápido e excelente. Opus é mais inteligente mas lento e só disponível no plano Max ($100+/mês). Regra: se Sonnet resolve, fique com Sonnet.</p>
+      </li>
+      <li class="step">
+        <h4>Posso cancelar o ChatGPT?</h4>
+        <p><strong>Claude é melhor em</strong> escrita longa, análise profunda e coding agêntico. <strong>ChatGPT é melhor em</strong> geração de imagem (DALL-E), Custom GPTs e automações. Se seu foco é escrita e automação — Claude sozinho resolve. Se usa muito imagem ou GPTs customizados — mantenha os dois.</p>
+      </li>
+      <li class="step">
+        <h4>Lovable/Antigravity/OpenClaw — ainda preciso?</h4>
+        <p><strong>Lovable/Antigravity:</strong> ainda fazem sentido pra MVP rápido sem terminal. Migre pro Claude Code quando precisar de controle total.<br>
+        <strong>OpenClaw:</strong> resolve problema diferente (orquestração de agentes). Claude Code complementa, não substitui.</p>
+      </li>
+      <li class="step">
+        <h4>Skills de terceiros são confiáveis?</h4>
+        <p>Skills da Anthropic (<code>anthropics/skills</code>) são confiáveis. Skills do <a href="https://skills.sh" target="_blank">skills.sh</a> têm código aberto — você pode inspecionar. No Desktop, uma skill <strong>não pode acessar seus dados nem apagar arquivos</strong> por conta própria.</p>
+      </li>
+      <li class="step">
+        <h4>Plugins do Desktop funcionam no Terminal?</h4>
+        <p><strong>Skills sim, plugins não diretamente.</strong> Skills são compartilhadas — instale num, funcione no outro. Plugins são específicos do Claude Code/Cowork.</p>
+      </li>
+      <li class="step">
+        <h4>Funciona no VS Code?</h4>
+        <p><strong>Sim — de duas formas.</strong> Extensão oficial "Claude Code for VS Code" (painel visual, diffs inline) ou pelo terminal integrado (Cmd+` → digita <code>claude</code>). O Warp é recomendado pra iniciantes pela interface visual, mas o Claude Code roda igual em qualquer terminal. O "cérebro" é o mesmo em todos.</p>
+      </li>
+      <li class="step">
+        <h4>O Warp é pago?</h4>
+        <p><strong>O terminal Warp é gratuito.</strong> Ele cobra só pela IA própria dele (plano Build ~$20/mês), que você <strong>não precisa</strong>. O que é pago é a assinatura do Claude Pro ($20/mês). Resumo: Warp grátis + Claude Pro pago = tudo funcionando.</p>
+      </li>
+      <li class="step">
+        <h4>Meus projetos ficam no PC ou na nuvem?</h4>
+        <p><strong>100% local.</strong> Arquivos criados ficam na pasta do seu computador. O Claude não sobe nada pra nuvem da Anthropic. Histórico de conversas fica nos servidores (30 dias no Pro), mas arquivos e código são seus, na sua máquina. Planos pagos <strong>não</strong> usam seus dados pra treinar modelos.</p>
+      </li>
+      <li class="step">
+        <h4>Como falar por voz no terminal?</h4>
+        <p><strong>O Claude Code tem voice mode nativo</strong> — digite <code>/voice</code> e use a barra de espaço pra falar (push-to-talk). Gratuito. Alternativas externas: <strong>Spokenly</strong> (Mac, grátis) ou <strong>Wispr Flow</strong> (Windows, ~$15/mês). São apps que convertem voz em texto em qualquer campo — fale e o texto vai direto pro terminal.</p>
+      </li>
+      <li class="step">
+        <h4>O Claude acessa o Meta Ads?</h4>
+        <p><strong>Não diretamente.</strong> Mas com integração MCP (Windsor.ai, Adzviser, Composio), o Claude acessa dados ao vivo das campanhas — ROAS, CPA, CTR. Pode gerar relatórios, sugerir otimizações e até pausar anúncios. Pra automação 24/7 (triggers, webhooks), ainda precisa de N8N/Make em paralelo.</p>
+      </li>
+    </ol>
+  </div>
+
   <!-- DIA 2 BLOCOS -->
   <div class="section" data-section="d2-b1" data-day="2" data-block="1">
     <div class="section-kicker">Dia 2 &middot; Bloco 1</div>
@@ -1616,7 +1761,7 @@ Depois, crie 5 novos posts usando exatamente esse framework, sobre os seguintes 
     <div class="section-kicker">Dia 2 &middot; Bloco 2</div>
     <div class="section-title">Crie sua skill.</div>
     <div class="section-subtitle">De zero a skill funcionando em 15 minutos</div>
-    <span class="badge badge-time">60 minutos</span>
+    <span class="badge badge-time">30 minutos</span>
     <hr>
 
     <h2>O Skill Creator</h2>
@@ -1637,31 +1782,48 @@ Depois, crie 5 novos posts usando exatamente esse framework, sobre os seguintes 
       Roteiro de Reels no seu formato, análise de perfil, proposta comercial, email de follow-up, briefing criativo, plano de aula, avaliação de redação, cardápio semanal, script de vendas...
     </div>
 
-    <h3>2. Três formas de criar uma Skill</h3>
-    <p>No Claude Desktop, vá em <strong>Personalizar > Habilidades</strong> (sidebar esquerda) e clique no botão <strong>"+"</strong> no topo. Você verá 3 opções:</p>
+    <h3>2. Quatro formas de criar uma Skill</h3>
+    <p>No Claude Desktop, vá em <strong>Personalizar > Habilidades</strong> (sidebar esquerda) e clique no botão <strong>"+"</strong> no topo. Você verá 3 opções — e a quarta é pelo terminal:</p>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Pré-requisito (somente Desktop App)</strong>
+      Em <strong>Configurações > Capacidades</strong>, ative <strong>"Execução de código e criação de arquivos"</strong>. Sem isso, as Skills não funcionam no Desktop.
+    </div>
 
     <div class="card" style="margin-bottom:12px">
-      <h4>Opção A: "Criar com o Claude"</h4>
+      <h4>Opção A: "Criar com o Claude" (Desktop)</h4>
       <p>Abre o <strong>Skill Creator</strong> no modo Cowork. O Claude te faz perguntas, refina e gera a Skill completa. <strong>Melhor para:</strong> quem quer conversar e iterar até ficar perfeito.</p>
     </div>
 
     <div class="card" style="margin-bottom:12px">
-      <h4>Opção B: "Escreva as instruções da skill"</h4>
+      <h4>Opção B: "Escreva as instruções da skill" (Desktop)</h4>
       <p>Abre um formulário com 3 campos: <strong>Nome</strong>, <strong>Descrição</strong> e <strong>Instruções</strong>. Cole suas instruções direto. <strong>Melhor para:</strong> quem já sabe o que quer e quer rapidez.</p>
     </div>
 
     <div class="card" style="margin-bottom:12px">
-      <h4>Opção C: "Fazer upload de uma habilidade"</h4>
+      <h4>Opção C: "Fazer upload de uma habilidade" (Desktop)</h4>
       <p>Envie um arquivo <strong>.zip</strong> ou <strong>.skill</strong> com a Skill pronta. <strong>Melhor para:</strong> instalar Skills que alguém compartilhou com você.</p>
     </div>
 
-    <div class="callout callout-warn">
-      <strong>&#9888;&#65039; Pré-requisito</strong>
-      Em <strong>Configurações > Capacidades</strong>, ative <strong>"Execução de código e criação de arquivos"</strong>. Sem isso, as Skills não funcionam.
+    <div class="card" style="margin-bottom:12px">
+      <h4>Opção D: Skill Creator via Terminal (Claude Code)</h4>
+      <p>O mesmo Skill Creator, mas direto no Warp. <strong>Melhor para:</strong> quem já está trabalhando no terminal e quer criar sem sair dele.</p>
+      <p style="margin-top:8px"><strong>Primeiro, instale o Skill Creator</strong> (só precisa fazer uma vez):</p>
+      <div class="code-block" style="margin-top:8px">
+        <span class="code-block-label">Terminal — Instalação</span>
+        <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">npx skills add anthropics/skills --skill skill-creator</code>
+      </div>
+      <p style="margin-top:8px"><strong>Depois, use:</strong></p>
+      <div class="code-block" style="margin-top:8px">
+        <span class="code-block-label">Terminal — Uso</span>
+        <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">/skill skill-creator</code>
+      </div>
     </div>
 
-    <h3>3. Criando com o Skill Creator (Opção A)</h3>
-    <p>O <strong>Skill Creator</strong> é uma meta-skill oficial da Anthropic. Ao escolher "Criar com o Claude", ele inicia uma conversa guiada:</p>
+    <h3>3. Como funciona o Skill Creator (Opções A e D)</h3>
+    <p>O <strong>Skill Creator</strong> é uma meta-skill oficial da Anthropic. Tanto pela Opção A (Desktop) quanto pela D (Terminal), o fluxo é o mesmo:</p>
     <ol>
       <li>Você descreve o que a Skill deve fazer</li>
       <li>O Claude faz perguntas de refinamento (formato, regras, tom de voz, exemplos)</li>
@@ -1694,6 +1856,14 @@ Me faça as perguntas necessárias para construir uma Skill completa e profissio
       </ul>
       Siga os passos acima. Ao final, teste sua Skill num chat novo.
     </div>
+  </div>
+
+  <div class="section" data-section="d2-b3" data-day="2" data-block="3">
+    <div class="section-kicker">Dia 2 &middot; Bloco 3</div>
+    <div class="section-title">Refine e corrija.</div>
+    <div class="section-subtitle">Descrições, troubleshooting e como uma Skill funciona por dentro</div>
+    <span class="badge badge-time">30 minutos</span>
+    <hr>
 
     <h2>Refinando sua Skill</h2>
     <p>A primeira versão raramente é perfeita. Depois de testar, peça ajustes:</p>
@@ -1716,13 +1886,37 @@ Gere a versão atualizada.</code></p>
       Teste sua Skill com pelo menos 3 inputs diferentes antes de considerar pronta. Se funciona bem nos 3 casos, está sólida.
     </div>
 
+    <h2>A descrição é tudo</h2>
+    <p>O campo <code>description</code> da Skill é o mais importante. É assim que o Claude decide se deve usá-la: ele compara o que você pediu com as descrições de todas as Skills disponíveis. Se não bater, a Skill não ativa.</p>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Como escrever uma boa descrição</strong>
+      Responda duas perguntas: <strong>o que faz?</strong> e <strong>quando usar?</strong><br><br>
+      Ruim: <em>"Skill de copy"</em><br>
+      Bom: <em>"Escreve textos de copywriting para landing pages e emails. Use quando o usuário pedir copy, texto de vendas, headlines ou CTAs."</em><br><br>
+      Inclua as palavras que você realmente usaria ao pedir. Se você diria "me faz um roteiro", coloque "roteiro" na descrição.
+    </div>
+
+    <h2>Skill não funcionou? Checklist rápida</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Problema</th><th>Solução</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Skill não ativa</strong></td><td>Melhore a descrição — adicione mais palavras-chave que você usaria ao pedir</td></tr>
+          <tr><td><strong>Skill não aparece</strong></td><td>Reinicie o Claude (feche e abra de novo). Skills são carregadas na inicialização</td></tr>
+          <tr><td><strong>Skill errada é usada</strong></td><td>As descrições de duas Skills são parecidas demais. Torne-as mais distintas</td></tr>
+          <tr><td><strong>Resultado ruim</strong></td><td>Refine as instruções — adicione mais exemplos e regras ao SKILL.md</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2>Por dentro de uma Skill</h2>
     <p>Uma Skill é <strong>só texto</strong>. Na prática, é um arquivo chamado <code>SKILL.md</code> com instruções em Markdown. Veja a estrutura:</p>
 
     <div class="code-block">
       <span class="code-block-label">SKILL.md</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">name: gerador-de-roteiros
+<code class="code-text">name: gerador-de-roteiros
 description: Cria roteiros de Reels no formato hook-problema-solução-CTA. Use quando o usuário pedir roteiros de vídeo.
 ---
 
@@ -1755,11 +1949,11 @@ Você é um especialista em conteúdo para Instagram Reels.
     </div>
   </div>
 
-  <div class="section" data-section="d2-b3" data-day="2" data-block="3">
-    <div class="section-kicker">Dia 2 &middot; Bloco 3</div>
+  <div class="section" data-section="d2-b4" data-day="2" data-block="4">
+    <div class="section-kicker">Dia 2 &middot; Bloco 4</div>
     <div class="section-title">Garimpando skills.</div>
     <div class="section-subtitle">Marketplace, skills.sh e tesouros escondidos</div>
-    <span class="badge badge-time">45 minutos</span>
+    <span class="badge badge-time">30 minutos</span>
     <hr>
 
     <h2>Onde encontrar Skills prontas</h2>
@@ -1776,7 +1970,7 @@ Você é um especialista em conteúdo para Instagram Reels.
     <p>Ative em: <strong>Configurações > Capacidades > Execução de código na nuvem e criação de arquivos</strong></p>
 
     <h3>2. skills.sh — O marketplace aberto</h3>
-    <p>O <strong>skills.sh</strong> é um projeto da Vercel que funciona como um marketplace aberto de Skills. Qualquer pessoa pode publicar e instalar.</p>
+    <p>O <a href="https://skills.sh" target="_blank"><strong>skills.sh</strong></a> é um projeto da Vercel que funciona como um marketplace aberto de Skills. Qualquer pessoa pode publicar e instalar.</p>
 
     <div class="callout callout-tip">
       <strong>&#128161; Dado importante</strong>
@@ -1784,7 +1978,7 @@ Você é um especialista em conteúdo para Instagram Reels.
     </div>
 
     <h4>Como navegar no skills.sh</h4>
-    <p>Acesse <strong>skills.sh</strong> no browser e explore por categoria. Algumas Skills populares:</p>
+    <p>Acesse <a href="https://skills.sh" target="_blank"><strong>skills.sh</strong></a> no browser e explore por categoria. Algumas Skills populares:</p>
 
     <div class="table-wrap">
       <table>
@@ -1805,7 +1999,7 @@ Você é um especialista em conteúdo para Instagram Reels.
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">npx skills add &lt;nome-da-skill&gt;</code>
+<code class="code-text">npx skills add &lt;nome-da-skill&gt;</code>
     </div>
 
     <h3>3. Marketplace interno do Claude Code</h3>
@@ -1814,7 +2008,7 @@ Você é um especialista em conteúdo para Instagram Reels.
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">/plugins</code>
+<code class="code-text">/plugins</code>
     </div>
 
     <p>Navegue pela lista, leia descrições e instale o que fizer sentido pro seu trabalho.</p>
@@ -1833,7 +2027,7 @@ Você é um especialista em conteúdo para Instagram Reels.
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">npx skills find          # busca interativa por Skills
+<code class="code-text">npx skills find          # busca interativa por Skills
 npx skills list          # lista Skills instaladas
 npx skills remove &lt;nome&gt; # remove uma Skill</code>
     </div>
@@ -1851,13 +2045,26 @@ npx skills remove &lt;nome&gt; # remove uma Skill</code>
       <strong>&#127919; Exercício ao vivo — 20 minutos</strong>
       Navegue no skills.sh e no marketplace do Claude Code. Encontre e instale <strong>2 Skills</strong> que sejam úteis pro seu trabalho. Teste cada uma com um input real. Compartilhe suas descobertas com o grupo.
     </div>
+
+    <h2>Compartilhando suas Skills</h2>
+    <p>Criou uma Skill boa? Você pode compartilhar de 3 formas:</p>
+    <ul>
+      <li><strong>Enviar o ZIP</strong> — exporte a Skill e mande por WhatsApp, email ou Drive. Quem receber instala pelo botão "+" > "Fazer upload"</li>
+      <li><strong>Publicar no skills.sh</strong> — crie um repositório no GitHub com a pasta da Skill e publique no skills.sh para que qualquer pessoa no mundo possa instalar com <code>npx skills add</code></li>
+      <li><strong>Commitar no projeto</strong> — coloque a pasta da Skill em <code>.claude/skills/</code> do seu repositório. Quem clonar o repo recebe a Skill automaticamente</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Skill como produto</strong>
+      Lembra da tese do Dia 2? Uma Skill bem feita <strong>é</strong> o produto. Você pode vender, incluir como bônus de um curso, ou entregar como diferencial de uma consultoria.
+    </div>
   </div>
 
-  <div class="section" data-section="d2-b4" data-day="2" data-block="4">
-    <div class="section-kicker">Dia 2 &middot; Bloco 4</div>
+  <div class="section" data-section="d2-b5" data-day="2" data-block="5">
+    <div class="section-kicker">Dia 2 &middot; Bloco 5</div>
     <div class="section-title">Suas 3 skills.</div>
     <div class="section-subtitle">Presente de formatura da imersão</div>
-    <span class="badge badge-time">30 minutos</span>
+    <span class="badge badge-time">20 minutos</span>
     <hr>
 
     <h2>3 Skills exclusivas para você</h2>
@@ -1866,27 +2073,172 @@ npx skills remove &lt;nome&gt; # remove uma Skill</code>
     <div class="card" style="margin-bottom:12px">
       <h3>1. GPTMaker</h3>
       <p>Cria e configura agentes de IA conversacional no GPTMaker — direto do Claude. Defina o comportamento, o treinamento e as integrações do seu agente sem sair do chat.</p>
+      <p><strong>Exemplo de uso:</strong> <em>"Cria um agente de atendimento para minha loja de roupas, com tom descontraído, que responde sobre tamanhos, trocas e frete."</em></p>
     </div>
 
     <div class="card" style="margin-bottom:12px">
       <h3>2. Propostas</h3>
-      <p>Gera propostas comerciais profissionais completas — com escopo, investimento, timeline e diferenciais. Ideal para freelancers, consultores e agências.</p>
+      <p>Gera propostas comerciais profissionais completas — com escopo, investimento, timeline e diferenciais. Faz pesquisa de mercado em tempo real pra benchmarks de preço.</p>
+      <p><strong>Exemplo de uso:</strong> <em>"Gera uma proposta de automação com chatbot pra uma clínica odontológica que quer automatizar agendamentos."</em></p>
     </div>
 
     <div class="card" style="margin-bottom:12px">
-      <h3>3. N8N</h3>
-      <p>Cria automações no N8N via Claude — descreva o fluxo que quer e a Skill gera o workflow pronto para importar.</p>
+      <h3>3. N8N — Automações pelo Claude</h3>
+      <p>Conecta o Claude Code diretamente à sua instância N8N. Descreva o fluxo que quer e o Claude cria, valida e faz deploy do workflow — sem copiar JSON manualmente.</p>
+      <p><strong>Exemplo de uso:</strong> <em>"Cria um workflow que quando receber um formulário, salva no Google Sheets e me manda um email."</em></p>
     </div>
 
-    <h2>Como instalar</h2>
-    <p>Você vai receber o arquivo ZIP de cada Skill. Para instalar:</p>
-    <ol>
-      <li>Vá em <strong>Personalizar > Habilidades</strong> (sidebar esquerda)</li>
-      <li>Clique no botão <strong>"+"</strong> no topo</li>
-      <li>Escolha <strong>"Fazer upload de uma habilidade"</strong></li>
-      <li>Selecione o arquivo ZIP</li>
-      <li>A Skill aparece na sua lista — teste num chat novo!</li>
+    <h2>Como instalar: GPTMaker e Propostas</h2>
+    <p>Baixe os arquivos e peça pro Claude Code instalar:</p>
+
+    <div class="card" style="margin-bottom:12px">
+      <p><strong>Download:</strong> <a href="gptmaker.skill" download>gptmaker.skill</a> (51 KB) &nbsp;|&nbsp; <a href="proposta.skill" download>proposta.skill</a> (57 KB)</p>
+    </div>
+
+    <ol class="stepper">
+      <li class="step">
+        <h4>Baixe os arquivos</h4>
+        <p>Clique nos links acima pra baixar os dois arquivos <code>.skill</code> pro seu computador.</p>
+      </li>
+      <li class="step">
+        <h4>Abra o Claude Code no terminal</h4>
+        <p>Abra o Warp (ou qualquer terminal) e digite <code>claude</code>.</p>
+      </li>
+      <li class="step">
+        <h4>Peça pro Claude instalar</h4>
+        <p>Digite no chat do Claude Code:</p>
+        <div class="prompt-block">
+          <span class="code-block-label">Prompt</span>
+          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+          <p><code class="code-text">Instale essa skill pra mim: ~/Downloads/gptmaker.skill</code></p>
+        </div>
+        <p>Repita pro segundo arquivo:</p>
+        <div class="prompt-block">
+          <span class="code-block-label">Prompt</span>
+          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+          <p><code class="code-text">Instale essa skill pra mim: ~/Downloads/proposta.skill</code></p>
+        </div>
+      </li>
+      <li class="step">
+        <h4>Teste</h4>
+        <p>No mesmo chat, peça: <em>"Gera uma proposta de automação pra uma clínica"</em> ou <em>"Cria um agente de atendimento pra loja de roupas"</em>.</p>
+      </li>
     </ol>
+
+    <h2>Como instalar: N8N (Terminal)</h2>
+    <p>A skill N8N precisa de setup no terminal porque conecta com sua instância N8N real. <strong>Pré-requisito:</strong> ter uma instância N8N rodando (self-hosted ou cloud).</p>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Atalho</strong>
+      Cole o prompt abaixo no Claude Code e ele faz todo o setup sozinho — só vai pedir sua URL e API Key do N8N.
+    </div>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt — cole no Claude Code</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Leia o arquivo https://claudecode.escoladeautomacao.com.br/n8n-setup.md e execute a seção de instalação automática</code></p>
+    </div>
+
+    <details class="toggle">
+      <summary>Setup manual (se preferir fazer passo a passo)</summary>
+      <div class="toggle-content">
+        <ol class="stepper">
+          <li class="step">
+            <h4>Gere a API Key no N8N</h4>
+            <p>Na sua instância N8N: <strong>Settings > n8n API > Create an API key</strong>. Copie o token.</p>
+          </li>
+          <li class="step">
+            <h4>Salve as credenciais</h4>
+            <p>No terminal, rode (substitua pelos seus valores):</p>
+            <div class="code-block">
+              <span class="code-block-label">Terminal</span>
+              <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">cat >> ~/.claude/.env << 'EOF'
+export N8N_API_URL="https://sua-instancia.n8n.cloud"
+export N8N_API_KEY="SEU_TOKEN_AQUI"
+EOF</code>
+            </div>
+          </li>
+          <li class="step">
+            <h4>Registre o MCP</h4>
+            <div class="code-block">
+              <span class="code-block-label">Terminal</span>
+              <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">source ~/.claude/.env
+claude mcp add n8n-mcp \
+  -e MCP_MODE=stdio \
+  -e LOG_LEVEL=error \
+  -e N8N_API_URL="$N8N_API_URL" \
+  -e N8N_API_KEY="$N8N_API_KEY" \
+  -- npx n8n-mcp</code>
+            </div>
+          </li>
+          <li class="step">
+            <h4>Instale as Skills</h4>
+            <p>Dentro do Claude Code:</p>
+            <div class="code-block">
+              <span class="code-block-label">Claude Code</span>
+              <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">/plugin install czlonkowski/n8n-skills</code>
+            </div>
+          </li>
+          <li class="step">
+            <h4>Teste</h4>
+            <p>No Claude Code, digite: <em>"Verifique se o n8n está funcionando"</em>. Se responder com a versão do N8N, está tudo certo.</p>
+          </li>
+        </ol>
+      </div>
+    </details>
+
+    <h3>Testando o N8N — prompts pra leigos</h3>
+    <p>Depois de instalar, copie e cole no Claude Code pra testar:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Teste 1 — Ver workflows existentes</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Liste todos os workflows que tenho no n8n</code></p>
+    </div>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Teste 2 — Criar algo simples</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Cria um workflow que recebe uma mensagem no webhook e me responde "Recebi!"</code></p>
+    </div>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Teste 3 — Automação real</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Quero um workflow que todo dia às 9h me manda um e-mail com um resumo do clima</code></p>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; O que acontece por trás</strong>
+      O Claude busca a documentação dos nodes necessários, explica o que vai construir, valida o workflow e faz o deploy direto na sua instância N8N. Você não precisa tocar em JSON.
+    </div>
+
+    <h3>Troubleshooting N8N</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Problema</th><th>Solução</th></tr></thead>
+        <tbody>
+          <tr><td><strong>MCP não conecta</strong></td><td>Rode <code>source ~/.claude/.env</code> e depois <code>echo $N8N_API_URL</code>. Se vazio, as variáveis não foram salvas.</td></tr>
+          <tr><td><strong>Token bloqueado</strong></td><td>Não cole o JWT direto no terminal. Use sempre a variável <code>$N8N_API_KEY</code>.</td></tr>
+          <tr><td><strong>Demora na primeira vez</strong></td><td>Normal — o <code>npx</code> está baixando o pacote. Aguarde ~30 segundos.</td></tr>
+          <tr><td><strong>Workflow não aparece no N8N</strong></td><td>Verifique se a URL está correta (sem barra no final) e se a API Key tem permissão de escrita.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Instalação automática completa</strong>
+      Cole o prompt abaixo no Claude Code. Ele lê o guia completo, te pede URL e API Key do N8N, e faz todo o setup sozinho. Você só responde as perguntas.
+    </div>
+
+    <div class="prompt-block">
+      <span class="code-block-label">Prompt — cole no Claude Code</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">Leia o arquivo https://claudecode.escoladeautomacao.com.br/n8n-setup.md e execute a seção de instalação automática</code></p>
+    </div>
 
     <h2>Refinando para o seu contexto</h2>
     <p>Skills genéricas funcionam bem, mas Skills <strong>customizadas para você</strong> funcionam muito melhor. Depois de instalar, peça ao Claude para adaptar:</p>
@@ -1910,8 +2262,8 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
     </div>
   </div>
 
-  <div class="section" data-section="d2-b5" data-day="2" data-block="5">
-    <div class="section-kicker">Dia 2 &middot; Bloco 5</div>
+  <div class="section" data-section="d2-b6" data-day="2" data-block="6">
+    <div class="section-kicker">Dia 2 &middot; Bloco 6</div>
     <div class="section-title">Próximos passos.</div>
     <div class="section-subtitle">MCP, hooks e o que vem depois</div>
     <span class="badge badge-time">15 minutos</span>
@@ -1933,10 +2285,70 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
     <h2>O que já está disponível (e o que vem)</h2>
     <p>Se você achou Skills poderoso, tem mais:</p>
 
-    <div class="card card-accent">
-      <h3>Telegram e Discord — Controle remoto do Claude</h3>
-      <p>Disponível agora (research preview). Controle o Claude Code <strong>pelo celular</strong> via Telegram ou Discord. Mande uma tarefa, acompanhe o progresso e receba o resultado — tudo pelo chat do celular. Funciona com o Claude Code rodando no seu Mac ou num servidor.</p>
+    <h3>Dispatch — Controle o Cowork pelo celular</h3>
+    <p>Mande tarefas pelo celular, o Cowork executa no seu Mac. Pesquisas, documentos, análises — tudo pronto quando você voltar. <strong>Requisito:</strong> plano Pro ou Max.</p>
+
+    <ol class="stepper">
+      <li class="step">
+        <h4>Abra o Dispatch no Mac</h4>
+        <p>Claude Desktop > <strong>Cowork</strong> > <strong>Dispatch</strong> na sidebar esquerda</p>
+      </li>
+      <li class="step">
+        <h4>Ative as permissões</h4>
+        <p>Clique em <strong>"Get started"</strong>. Ative acesso a arquivos e "manter Mac acordado".</p>
+      </li>
+      <li class="step">
+        <h4>Escaneie o QR code</h4>
+        <p>Um QR code aparece na tela do Mac. No celular: app Claude > menu > <strong>Dispatch</strong> > <strong>"Pair with your desktop"</strong> > aponte a câmera.</p>
+      </li>
+      <li class="step">
+        <h4>Mande sua primeira tarefa</h4>
+        <p>No celular, digite: <em>"Resuma o arquivo vendas-q1.xlsx na minha área de trabalho"</em>. O Mac executa e você vê o resultado no celular.</p>
+      </li>
+    </ol>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Importante</strong>
+      O Mac precisa ficar ligado e com o Claude aberto. Use a mesma conta no celular e no Mac.
     </div>
+
+    <h3>Channels — Telegram para o Terminal</h3>
+    <p>Para quem usa o <strong>Claude Code no terminal</strong>: controle pelo Telegram. Mande tarefas pelo celular e o Claude executa no seu Mac.</p>
+
+    <ol class="stepper">
+      <li class="step">
+        <h4>Crie um bot no Telegram</h4>
+        <p>Procure <strong>@BotFather</strong>, envie <code>/newbot</code>, siga as instruções e copie o token.</p>
+      </li>
+      <li class="step">
+        <h4>Instale o plugin no Claude Code</h4>
+        <p>No terminal, abra o Claude Code e rode:</p>
+        <div class="code-block">
+          <span class="code-block-label">Terminal</span>
+          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">/plugin install telegram@claude-plugins-official
+/reload-plugins
+/telegram:configure SEU_TOKEN_DO_BOTFATHER</code>
+        </div>
+      </li>
+      <li class="step">
+        <h4>Reinicie com channels</h4>
+        <p>Saia (Ctrl+C) e rode novamente:</p>
+        <div class="code-block">
+          <span class="code-block-label">Terminal</span>
+          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">claude --channels plugin:telegram@claude-plugins-official</code>
+        </div>
+      </li>
+      <li class="step">
+        <h4>Pareie o bot</h4>
+        <p>No Telegram, abra seu bot e envie qualquer mensagem. Ele responde com um <strong>código</strong>. No terminal: <code>/telegram:access pair CODIGO</code></p>
+      </li>
+      <li class="step">
+        <h4>Mande sua primeira tarefa</h4>
+        <p>No Telegram: <em>"roda os testes e me avisa se passar"</em></p>
+      </li>
+    </ol>
 
     <div class="card card-accent">
       <h3>Remotion — Vídeos com IA</h3>
@@ -1963,11 +2375,11 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
       <table>
         <thead><tr><th>Recurso</th><th>Link</th></tr></thead>
         <tbody>
-          <tr><td><strong>Anthropic Academy</strong></td><td>anthropic.skilljar.com (cursos gratuitos)</td></tr>
-          <tr><td><strong>Claude Code Docs</strong></td><td>code.claude.com/docs</td></tr>
-          <tr><td><strong>Skills.sh</strong></td><td>skills.sh (marketplace de Skills)</td></tr>
-          <tr><td><strong>Reddit r/ClaudeAI</strong></td><td>reddit.com/r/ClaudeAI (comunidade)</td></tr>
-          <tr><td><strong>Reddit r/ClaudeCode</strong></td><td>reddit.com/r/ClaudeCode (dicas de terminal)</td></tr>
+          <tr><td><strong>Anthropic Academy</strong></td><td><a href="https://anthropic.skilljar.com" target="_blank">anthropic.skilljar.com</a> (cursos gratuitos)</td></tr>
+          <tr><td><strong>Claude Code Docs</strong></td><td><a href="https://code.claude.com/docs" target="_blank">code.claude.com/docs</a></td></tr>
+          <tr><td><strong>Skills.sh</strong></td><td><a href="https://skills.sh" target="_blank">skills.sh</a> (marketplace de Skills)</td></tr>
+          <tr><td><strong>Reddit r/ClaudeAI</strong></td><td><a href="https://reddit.com/r/ClaudeAI" target="_blank">reddit.com/r/ClaudeAI</a> (comunidade)</td></tr>
+          <tr><td><strong>Reddit r/ClaudeCode</strong></td><td><a href="https://reddit.com/r/ClaudeCode" target="_blank">reddit.com/r/ClaudeCode</a> (dicas de terminal)</td></tr>
         </tbody>
       </table>
     </div>
@@ -1992,6 +2404,55 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
     </div>
   </div>
 
+  <div class="section" data-section="d2-b7" data-day="2" data-block="7">
+    <div class="section-kicker">Dia 2 &middot; FAQ</div>
+    <div class="section-title">Perguntas sobre Skills.</div>
+    <div class="section-subtitle">9 dúvidas respondidas com pesquisa aprofundada</div>
+    <span class="badge badge-time">Consulta</span>
+    <hr>
+
+    <ol class="stepper">
+      <li class="step">
+        <h4>Qual a diferença entre Plugin e Skill?</h4>
+        <p><strong>Skill</strong> = receita de comportamento (SKILL.md). Claude ativa sozinho quando relevante. Funciona em Chat, Cowork e Terminal.<br>
+        <strong>Plugin</strong> = pacote que pode conter skills + comandos + agentes + hooks + integrações MCP. Funciona só no Terminal e Cowork.<br><br>
+        Analogia: skill é uma receita. Plugin é um kit de cozinha (receitas + utensílios + ingredientes). Podem coexistir — um plugin pode conter skills dentro dele.</p>
+      </li>
+      <li class="step">
+        <h4>Como colocar MEU conhecimento dentro de uma Skill?</h4>
+        <p><strong>Use o Skill Creator</strong> (Opção A ou D do Bloco 2). Quando ele perguntar sobre seu método, explique em detalhes: seu passo a passo, regras, tom de voz e exemplos de resultado bom. O Skill Creator organiza tudo automaticamente — cria as pastas <code>templates/</code>, <code>examples/</code> e <code>reference/</code> pra você. Quanto mais contexto você der na conversa, melhor a Skill. Dica: cole trechos do seu curso ou framework direto no chat e peça pra ele incorporar.</p>
+      </li>
+      <li class="step">
+        <h4>Skills do Desktop funcionam no Terminal e vice-versa?</h4>
+        <p><strong>Skills globais sim.</strong> Instaladas em Personalizar > Habilidades, funcionam em Chat, Cowork e Terminal. Skills dentro de plugins funcionam só onde o plugin está instalado. Se quiser a mesma skill nos dois, instale nos dois.</p>
+      </li>
+      <li class="step">
+        <h4>Skills de terceiros são seguras?</h4>
+        <p>Uma skill é <strong>só texto</strong> — instruções que o Claude segue. Ela não executa código automaticamente nem acessa dados sem permissão. No Desktop, roda em sandbox. No terminal, Claude pede confirmação antes de cada ação. Pra verificar: leia o SKILL.md antes de instalar — é texto puro, legível. Skills do <code>anthropics/skills</code> são revisadas pela Anthropic.</p>
+      </li>
+      <li class="step">
+        <h4>Posso vender Skills como produto?</h4>
+        <p><strong>Sim.</strong> O conteúdo que você escreve é seu. Distribua como ZIP por Hotmart/Gumroad, marketplace (<a href="https://skills.sh" target="_blank">skills.sh</a>, ClaudeSkills.ai), ou hospedado (cliente acessa via link sem ver o código). Já existe gente vendendo skills como infoproduto — venda única, assinatura ou implementação + retainer.</p>
+      </li>
+      <li class="step">
+        <h4>Skills instaladas consomem tokens?</h4>
+        <p><strong>Quase nada.</strong> Na inicialização, Claude lê só nome + descrição (~50-100 tokens cada). O conteúdo completo só carrega quando a skill é ativada. Ter 30 skills instaladas adiciona ~3000 tokens de overhead — irrelevante. Instale sem medo.</p>
+      </li>
+      <li class="step">
+        <h4>Uma Skill pode chamar outra?</h4>
+        <p>Não diretamente, mas <strong>Claude usa múltiplas skills na mesma conversa automaticamente</strong>. Se você pedir "crie uma proposta e depois gere os posts de divulgação", ele pode ativar a skill de propostas e a skill de conteúdo na sequência. É composição implícita — você não precisa orquestrar.</p>
+      </li>
+      <li class="step">
+        <h4>Dá pra criar Skill pelo Cowork (sem terminal)?</h4>
+        <p><strong>Sim, e é o caminho mais fácil.</strong> No Cowork, diga: <em>"Me ajude a transformar esse processo em uma skill reutilizável."</em> Claude usa o Skill Creator internamente, te faz perguntas, gera o SKILL.md e instala automaticamente. Sem terminal, sem editar arquivos. Vários criadores fazem isso em menos de 5 minutos.</p>
+      </li>
+      <li class="step">
+        <h4>Que tipo de Skill posso criar pro meu negócio?</h4>
+        <p>Exemplos reais do público desta imersão: Skill de <strong>proposta comercial</strong> (consultor), <strong>planejamento de conteúdo Instagram</strong> (social media), <strong>diagnóstico de tráfego pago</strong> (gestor), <strong>onboarding de cliente</strong> (agência), <strong>roteiro de vendas</strong> (closer), <strong>diagramação de apostilas</strong> (professor), <strong>análise SWOT</strong> (estrategista).</p>
+      </li>
+    </ol>
+  </div>
+
 </main>
 
 <!-- FOOTER NAV -->
@@ -2005,16 +2466,16 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
 
 <!-- JAVASCRIPT -->
 <script>
-const SECTIONS = ['home','d1-b1','d1-b2','d1-b3','d1-b4','d1-b5','d2-b1','d2-b2','d2-b3','d2-b4','d2-b5'];
-const DAY_SECTIONS = { '1': ['d1-b1','d1-b2','d1-b3','d1-b4','d1-b5'], '2': ['d2-b1','d2-b2','d2-b3','d2-b4','d2-b5'] };
-var LOCKED_SECTIONS = ['d2-b1','d2-b2','d2-b3','d2-b4','d2-b5'];
+const SECTIONS = ['home','d1-b1','d1-b2','d1-b3','d1-b4','d1-b5','d1-b6','d2-b1','d2-b2','d2-b3','d2-b4','d2-b5','d2-b6','d2-b7'];
+const DAY_SECTIONS = { '1': ['d1-b1','d1-b2','d1-b3','d1-b4','d1-b5','d1-b6'], '2': ['d2-b1','d2-b2','d2-b3','d2-b4','d2-b5','d2-b6','d2-b7'] };
+var LOCKED_SECTIONS = [];
 let currentIdx = 0;
 
 function isLocked(id) { return LOCKED_SECTIONS.indexOf(id) !== -1; }
 function goToSection(id) { if (isLocked(id)) return; var i = SECTIONS.indexOf(id); if (i !== -1) { currentIdx = i; render(); } }
 function nextSection() { var nextId = SECTIONS[currentIdx + 1]; if (nextId && !isLocked(nextId)) { currentIdx++; render(); } }
 function prevSection() { if (currentIdx > 0) { currentIdx--; render(); } }
-function goToDay(day) { if (day === 'home') { goToSection('home'); return; } if (day === '2') return; var f = DAY_SECTIONS[day]; if (f) goToSection(f[0]); }
+function goToDay(day) { if (day === 'home') { goToSection('home'); return; } var f = DAY_SECTIONS[day]; if (f) goToSection(f[0]); }
 
 function render() {
   const sid = SECTIONS[currentIdx];
@@ -2052,11 +2513,14 @@ function render() {
     'd1-b3': 'Dia 1 / Cowork: análise competitiva',
     'd1-b4': 'Dia 1 / Code: sua landing page',
     'd1-b5': 'Dia 1 / Terminal: setup',
+    'd1-b6': 'Dia 1 / FAQ',
     'd2-b1': 'Dia 2 / O que são Skills?',
     'd2-b2': 'Dia 2 / Crie sua skill',
-    'd2-b3': 'Dia 2 / Garimpando skills',
-    'd2-b4': 'Dia 2 / Suas 3 skills',
-    'd2-b5': 'Dia 2 / Próximos passos'
+    'd2-b3': 'Dia 2 / Refine e corrija',
+    'd2-b4': 'Dia 2 / Garimpando skills',
+    'd2-b5': 'Dia 2 / Suas 3 skills',
+    'd2-b6': 'Dia 2 / Próximos passos',
+    'd2-b7': 'Dia 2 / FAQ Skills'
   };
   breadcrumb.textContent = TITLES[sid] || '';
 
@@ -2105,7 +2569,10 @@ function copyCode(btn) {
   var text = codeEl ? codeEl.textContent : '';
   navigator.clipboard.writeText(text.trim()).then(function() {
     btn.textContent = 'Copiado!';
-    setTimeout(function() { btn.textContent = 'Copiar'; }, 2000);
+    btn.style.background = 'var(--accent)';
+    btn.style.color = '#fff';
+    btn.style.borderColor = 'var(--accent)';
+    setTimeout(function() { btn.textContent = 'Copiar'; btn.style.background = ''; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
   });
 }
 
