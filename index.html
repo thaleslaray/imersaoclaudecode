@@ -2069,63 +2069,46 @@ Você é um especialista em conteúdo para Instagram Reels.
     <h2>3 Skills exclusivas para você</h2>
     <p>Agora que você sabe o que são Skills, como criar e onde encontrar — é hora de receber as suas. Estas 3 Skills foram criadas especialmente para esta imersão.</p>
 
-    <div class="card" style="margin-bottom:12px">
-      <h3>1. GPTMaker</h3>
-      <p>Cria e configura agentes de IA conversacional no GPTMaker — direto do Claude. Defina o comportamento, o treinamento e as integrações do seu agente sem sair do chat.</p>
-      <p><strong>Exemplo de uso:</strong> <em>"Cria um agente de atendimento para minha loja de roupas, com tom descontraído, que responde sobre tamanhos, trocas e frete."</em></p>
-    </div>
-
-    <div class="card" style="margin-bottom:12px">
-      <h3>2. Propostas</h3>
-      <p>Gera propostas comerciais profissionais completas — com escopo, investimento, timeline e diferenciais. Faz pesquisa de mercado em tempo real pra benchmarks de preço.</p>
-      <p><strong>Exemplo de uso:</strong> <em>"Gera uma proposta de automação com chatbot pra uma clínica odontológica que quer automatizar agendamentos."</em></p>
-    </div>
-
-    <div class="card" style="margin-bottom:12px">
-      <h3>3. N8N — Automações pelo Claude</h3>
-      <p>Conecta o Claude Code diretamente à sua instância N8N. Descreva o fluxo que quer e o Claude cria, valida e faz deploy do workflow — sem copiar JSON manualmente.</p>
-      <p><strong>Exemplo de uso:</strong> <em>"Cria um workflow que quando receber um formulário, salva no Google Sheets e me manda um email."</em></p>
-    </div>
-
-    <h2>Como instalar: GPTMaker e Propostas</h2>
-    <p>Baixe os arquivos e peça pro Claude Code instalar:</p>
-
-    <div class="card" style="margin-bottom:12px">
-      <p><strong>Download:</strong> <a href="gptmaker.skill" download>gptmaker.skill</a> (51 KB) &nbsp;|&nbsp; <a href="proposta.skill" download>proposta.skill</a> (57 KB)</p>
-    </div>
-
-    <ol class="stepper">
-      <li class="step">
-        <h4>Baixe os arquivos</h4>
-        <p>Clique nos links acima pra baixar os dois arquivos <code>.skill</code> pro seu computador.</p>
-      </li>
-      <li class="step">
-        <h4>Abra o Claude Code no terminal</h4>
-        <p>Abra o Warp (ou qualquer terminal) e digite <code>claude</code>.</p>
-      </li>
-      <li class="step">
-        <h4>Peça pro Claude instalar</h4>
-        <p>Digite no chat do Claude Code:</p>
+    <details class="toggle" open>
+      <summary>1. GPTMaker — Agentes de IA conversacional</summary>
+      <div class="toggle-content">
+        <p>Cria e configura agentes de IA conversacional no GPTMaker — direto do Claude. Defina o comportamento, o treinamento e as integrações do seu agente sem sair do chat.</p>
+        <p><strong>Exemplo de uso:</strong> <em>"Cria um agente de atendimento para minha loja de roupas, com tom descontraído, que responde sobre tamanhos, trocas e frete."</em></p>
+        <h4>Instalação</h4>
+        <p>Baixe o arquivo e peça pro Claude Code instalar:</p>
+        <p><a href="gptmaker.skill" download><strong>gptmaker.skill</strong></a> (51 KB)</p>
         <div class="prompt-block">
-          <span class="code-block-label">Prompt</span>
+          <span class="code-block-label">Prompt — cole no Claude Code</span>
           <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
           <p><code class="code-text">Instale essa skill pra mim: ~/Downloads/gptmaker.skill</code></p>
         </div>
-        <p>Repita pro segundo arquivo:</p>
+      </div>
+    </details>
+
+    <details class="toggle">
+      <summary>2. Propostas — Propostas comerciais profissionais</summary>
+      <div class="toggle-content">
+        <p>Gera propostas comerciais profissionais completas — com escopo, investimento, timeline e diferenciais. Faz pesquisa de mercado em tempo real pra benchmarks de preço.</p>
+        <p><strong>Exemplo de uso:</strong> <em>"Gera uma proposta de automação com chatbot pra uma clínica odontológica que quer automatizar agendamentos."</em></p>
+        <h4>Instalação</h4>
+        <p>Baixe o arquivo e peça pro Claude Code instalar:</p>
+        <p><a href="proposta.skill" download><strong>proposta.skill</strong></a> (57 KB)</p>
         <div class="prompt-block">
-          <span class="code-block-label">Prompt</span>
+          <span class="code-block-label">Prompt — cole no Claude Code</span>
           <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
           <p><code class="code-text">Instale essa skill pra mim: ~/Downloads/proposta.skill</code></p>
         </div>
-      </li>
-      <li class="step">
-        <h4>Teste</h4>
-        <p>No mesmo chat, peça: <em>"Gera uma proposta de automação pra uma clínica"</em> ou <em>"Cria um agente de atendimento pra loja de roupas"</em>.</p>
-      </li>
-    </ol>
+      </div>
+    </details>
 
-    <h2>Como instalar: N8N (Terminal)</h2>
-    <p>A skill N8N precisa de setup no terminal porque conecta com sua instância N8N real. <strong>Pré-requisito:</strong> ter uma instância N8N rodando (self-hosted ou cloud).</p>
+    <details class="toggle">
+      <summary>3. N8N — Automações pelo Claude</summary>
+      <div class="toggle-content">
+        <p>Conecta o Claude Code diretamente à sua instância N8N. Descreva o fluxo que quer e o Claude cria, valida e faz deploy do workflow — sem copiar JSON manualmente.</p>
+        <p><strong>Exemplo de uso:</strong> <em>"Cria um workflow que quando receber um formulário, salva no Google Sheets e me manda um email."</em></p>
+        <p><strong>Pré-requisito:</strong> ter uma instância N8N rodando (self-hosted ou cloud).</p>
+
+        <h4>Instalação</h4>
 
     <div class="callout callout-tip">
       <strong>&#128161; Atalho</strong>
@@ -2238,6 +2221,8 @@ claude mcp add n8n-mcp \
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
       <p><code class="code-text">Leia o arquivo https://claudecode.escoladeautomacao.com.br/n8n-setup.md e execute a seção de instalação automática</code></p>
     </div>
+      </div>
+    </details>
 
     <h2>Refinando para o seu contexto</h2>
     <p>Skills genéricas funcionam bem, mas Skills <strong>customizadas para você</strong> funcionam muito melhor. Depois de instalar, peça ao Claude para adaptar:</p>
