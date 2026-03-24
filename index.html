@@ -2368,6 +2368,42 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
       </table>
     </div>
 
+    <h2>Skill Bônus</h2>
+
+    <details class="toggle">
+      <summary>Instagram Content Cloner — Clone o estilo de qualquer perfil</summary>
+      <div class="toggle-content">
+        <p>Pipeline completo que analisa um perfil do Instagram, identifica o framework de conteúdo (hooks, estrutura, CTA, tom de voz) e gera novos posts — <strong>texto + imagem final pronta pra publicar</strong>.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Fase</th><th>O que faz</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1. Análise</strong></td><td>Estuda os posts do perfil e extrai padrões (hook, estrutura, CTA, tom, tamanho)</td></tr>
+              <tr><td><strong>2. Textos</strong></td><td>Gera N posts no mesmo framework identificado, sobre qualquer tema</td></tr>
+              <tr><td><strong>3. Visual</strong></td><td>Extrai parâmetros visuais de uma imagem de referência (cores, tipografia, iluminação)</td></tr>
+              <tr><td><strong>4. Imagens</strong></td><td>Gera as imagens finais com texto renderizado via Gemini API (gratuita)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Exemplo de uso:</strong> <em>"Analisa o perfil @thaleslaray no Instagram, identifica o framework de posts e cria 5 posts sobre automação com IA no mesmo estilo."</em></p>
+
+        <h4>Instalação</h4>
+        <p><a href="instagram-content-cloner.skill" download><strong>instagram-content-cloner.skill</strong></a> (10 KB)</p>
+        <div class="prompt-block">
+          <span class="code-block-label">Prompt — cole no Claude Code</span>
+          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+          <p><code class="code-text">Instale essa skill pra mim: ~/Downloads/instagram-content-cloner.skill</code></p>
+        </div>
+
+        <div class="callout callout-tip">
+          <strong>&#128161; Dica</strong>
+          Você pode executar só as fases que quiser: só textos (fases 1-2), só visual (fase 3), ou o pipeline completo (1-4). A fase de imagens usa a API gratuita do Google Gemini.
+        </div>
+      </div>
+    </details>
+
     <div class="callout callout-exercise">
       <strong>&#127919; Sua missão</strong>
       Até a próxima semana:
