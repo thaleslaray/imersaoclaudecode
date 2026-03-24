@@ -1541,6 +1541,19 @@ Quero um design que impressione — não genérico. Salve na pasta meu-site.</co
       <strong>Skill:</strong> "Instale esta Skill e o Claude escreve copy seguindo exatamente minha metodologia" → o aluno tem o resultado imediato.</p>
     </div>
 
+    <div class="callout callout-exercise">
+      <strong>&#127919; Pense no seu produto</strong>
+      Pense no seu produto ou serviço principal. Se você tem um método, framework ou processo que ensina — isso pode virar uma Skill.<br><br>
+      <strong>Exemplos:</strong>
+      <ul style="margin-top:8px">
+        <li>Seu curso de copywriting → Skill que escreve copy no seu método</li>
+        <li>Seu processo de consultoria → Skill que faz diagnóstico seguindo seus critérios</li>
+        <li>Sua metodologia de gestão → Skill que organiza projetos do seu jeito</li>
+        <li>Seu framework de vendas → Skill que gera scripts seguindo sua abordagem</li>
+      </ul>
+      <br>A pergunta é simples: <strong>o que você ensina que poderia ser executado automaticamente?</strong>
+    </div>
+
     <h2>O que é uma Skill, na prática?</h2>
     <p>Uma Skill é um <strong>conjunto de instruções</strong> que ensina o Claude a executar uma tarefa específica de forma consistente. Na prática, é uma pasta com arquivos Markdown que descrevem:</p>
     <ul>
@@ -1624,11 +1637,40 @@ Depois, crie 5 novos posts usando exatamente esse framework, sobre os seguintes 
       Roteiro de Reels no seu formato, análise de perfil, proposta comercial, email de follow-up, briefing criativo, plano de aula, avaliação de redação, cardápio semanal, script de vendas...
     </div>
 
-    <h3>2. Abra o Skill Creator</h3>
-    <p>No Claude Desktop (Chat) ou no terminal, use este prompt para iniciar:</p>
+    <h3>2. Três formas de criar uma Skill</h3>
+    <p>No Claude Desktop, vá em <strong>Personalizar > Habilidades</strong> (sidebar esquerda) e clique no botão <strong>"+"</strong> no topo. Você verá 3 opções:</p>
+
+    <div class="card" style="margin-bottom:12px">
+      <h4>Opção A: "Criar com o Claude"</h4>
+      <p>Abre o <strong>Skill Creator</strong> no modo Cowork. O Claude te faz perguntas, refina e gera a Skill completa. <strong>Melhor para:</strong> quem quer conversar e iterar até ficar perfeito.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:12px">
+      <h4>Opção B: "Escreva as instruções da skill"</h4>
+      <p>Abre um formulário com 3 campos: <strong>Nome</strong>, <strong>Descrição</strong> e <strong>Instruções</strong>. Cole suas instruções direto. <strong>Melhor para:</strong> quem já sabe o que quer e quer rapidez.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:12px">
+      <h4>Opção C: "Fazer upload de uma habilidade"</h4>
+      <p>Envie um arquivo <strong>.zip</strong> ou <strong>.skill</strong> com a Skill pronta. <strong>Melhor para:</strong> instalar Skills que alguém compartilhou com você.</p>
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Pré-requisito</strong>
+      Em <strong>Configurações > Capacidades</strong>, ative <strong>"Execução de código e criação de arquivos"</strong>. Sem isso, as Skills não funcionam.
+    </div>
+
+    <h3>3. Criando com o Skill Creator (Opção A)</h3>
+    <p>O <strong>Skill Creator</strong> é uma meta-skill oficial da Anthropic. Ao escolher "Criar com o Claude", ele inicia uma conversa guiada:</p>
+    <ol>
+      <li>Você descreve o que a Skill deve fazer</li>
+      <li>O Claude faz perguntas de refinamento (formato, regras, tom de voz, exemplos)</li>
+      <li>Ele gera a Skill completa</li>
+      <li>A Skill é instalada automaticamente na sua lista</li>
+    </ol>
 
     <div class="prompt-block">
-      <span class="code-block-label">Prompt</span>
+      <span class="code-block-label">Prompt alternativo (Chat ou Terminal)</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
       <p><code class="code-text">Quero criar uma Skill para o Claude. Me ajude a construí-la passo a passo.
 
@@ -1639,25 +1681,7 @@ Exemplo: "Criar roteiros de Reels no formato hook → problema → solução →
 Me faça as perguntas necessárias para construir uma Skill completa e profissional.</code></p>
     </div>
 
-    <h3>3. Responda às perguntas</h3>
-    <p>O Claude vai perguntar sobre:</p>
-    <ul>
-      <li>O que a Skill deve fazer exatamente</li>
-      <li>O formato do resultado esperado</li>
-      <li>Regras e restrições</li>
-      <li>Exemplos de resultado bom</li>
-      <li>Tom de voz e estilo</li>
-    </ul>
-
-    <p>Responda com detalhes — quanto mais contexto, melhor a Skill.</p>
-
-    <h3>4. Receba sua Skill</h3>
-    <p>O Claude gera um arquivo ZIP com a estrutura completa da Skill. Baixe o arquivo.</p>
-
-    <h3>5. Instale</h3>
-    <p>Vá em <strong>Configurações > Personalizar</strong> e clique em <strong>"Enviar habilidade"</strong>. Selecione o ZIP. Pronto — sua Skill aparece na lista.</p>
-
-    <h3>6. Teste</h3>
+    <h3>4. Teste</h3>
     <p>Abra um novo chat e faça um pedido que ativaria sua Skill. O Claude vai detectar automaticamente que deve usá-la.</p>
 
     <div class="callout callout-exercise">
@@ -1690,6 +1714,44 @@ Gere a versão atualizada.</code></p>
     <div class="callout callout-tip">
       <strong>&#128161; Regra dos 3 testes</strong>
       Teste sua Skill com pelo menos 3 inputs diferentes antes de considerar pronta. Se funciona bem nos 3 casos, está sólida.
+    </div>
+
+    <h2>Por dentro de uma Skill</h2>
+    <p>Uma Skill é <strong>só texto</strong>. Na prática, é um arquivo chamado <code>SKILL.md</code> com instruções em Markdown. Veja a estrutura:</p>
+
+    <div class="code-block">
+      <span class="code-block-label">SKILL.md</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">name: gerador-de-roteiros
+description: Cria roteiros de Reels no formato hook-problema-solução-CTA. Use quando o usuário pedir roteiros de vídeo.
+---
+
+# Gerador de Roteiros
+
+Você é um especialista em conteúdo para Instagram Reels.
+
+## Formato obrigatório
+1. **Hook** (3 segundos) — frase que prende atenção
+2. **Problema** — dor que o público sente
+3. **Solução** — como resolver
+4. **CTA** — chamada para ação
+
+## Regras
+- Máximo 60 segundos de leitura
+- Tom: descontraído e direto
+- Sempre incluir emoji no hook</code>
+    </div>
+
+    <p>A estrutura de pasta completa pode incluir:</p>
+    <ul>
+      <li><code>SKILL.md</code> — as instruções (obrigatório)</li>
+      <li><code>templates/</code> — modelos de referência (opcional)</li>
+      <li><code>LICENSE.txt</code> — termos de uso (opcional)</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; É só isso</strong>
+      As Skills que você vê no Claude — como algorithmic-art, brand-guidelines, canvas-design — são exatamente isso: um arquivo de texto com instruções. Nada de código, nada de programação.
     </div>
   </div>
 
@@ -1743,7 +1805,7 @@ Gere a versão atualizada.</code></p>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">npx skills install [nome-da-skill]</code>
+      <code class="code-text">npx skills add &lt;nome-da-skill&gt;</code>
     </div>
 
     <h3>3. Marketplace interno do Claude Code</h3>
@@ -1756,6 +1818,25 @@ Gere a versão atualizada.</code></p>
     </div>
 
     <p>Navegue pela lista, leia descrições e instale o que fizer sentido pro seu trabalho.</p>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Plugins e Skills entendem português</strong>
+      Pode usar prompts, instruções e criar Skills em PT-BR sem problema. O Claude processa português tão bem quanto inglês — os nomes dos plugins são em inglês, mas o uso é 100% em português.
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Desktop e Terminal são compatíveis</strong>
+      Plugins e Skills funcionam tanto no app Desktop quanto no terminal (Claude Code). Instale num, funcione no outro — o catálogo é compartilhado. A diferença é só na interface.
+    </div>
+
+    <h4>Mais comandos úteis do skills.sh</h4>
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">npx skills find          # busca interativa por Skills
+npx skills list          # lista Skills instaladas
+npx skills remove &lt;nome&gt; # remove uma Skill</code>
+    </div>
 
     <h2>Como avaliar se uma Skill é boa</h2>
     <p>Antes de instalar, verifique:</p>
@@ -1782,19 +1863,29 @@ Gere a versão atualizada.</code></p>
     <h2>3 Skills exclusivas para você</h2>
     <p>Agora que você sabe o que são Skills, como criar e onde encontrar — é hora de receber as suas. Estas 3 Skills foram criadas especialmente para esta imersão.</p>
 
-    <div class="callout callout-warn">
-      <strong>&#9888;&#65039; Em breve</strong>
-      As 3 Skills exclusivas serão reveladas e distribuídas durante a aula ao vivo. Fique atento!
+    <div class="card" style="margin-bottom:12px">
+      <h3>1. GPTMaker</h3>
+      <p>Cria e configura agentes de IA conversacional no GPTMaker — direto do Claude. Defina o comportamento, o treinamento e as integrações do seu agente sem sair do chat.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:12px">
+      <h3>2. Propostas</h3>
+      <p>Gera propostas comerciais profissionais completas — com escopo, investimento, timeline e diferenciais. Ideal para freelancers, consultores e agências.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:12px">
+      <h3>3. N8N</h3>
+      <p>Cria automações no N8N via Claude — descreva o fluxo que quer e a Skill gera o workflow pronto para importar.</p>
     </div>
 
     <h2>Como instalar</h2>
-    <p>Quando receber o arquivo ZIP de cada Skill:</p>
+    <p>Você vai receber o arquivo ZIP de cada Skill. Para instalar:</p>
     <ol>
-      <li>Vá em <strong>Configurações > Personalizar</strong></li>
-      <li>Clique em <strong>"Enviar habilidade"</strong></li>
+      <li>Vá em <strong>Personalizar > Habilidades</strong> (sidebar esquerda)</li>
+      <li>Clique no botão <strong>"+"</strong> no topo</li>
+      <li>Escolha <strong>"Fazer upload de uma habilidade"</strong></li>
       <li>Selecione o arquivo ZIP</li>
-      <li>A Skill aparece na sua lista</li>
-      <li>Teste num chat novo!</li>
+      <li>A Skill aparece na sua lista — teste num chat novo!</li>
     </ol>
 
     <h2>Refinando para o seu contexto</h2>
@@ -1839,8 +1930,18 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
       <li><strong>Garimpar Skills</strong> no marketplace e skills.sh</li>
     </ul>
 
-    <h2>O que vem na próxima semana</h2>
-    <p>Se você achou Skills poderoso, espere até ver o que vem depois:</p>
+    <h2>O que já está disponível (e o que vem)</h2>
+    <p>Se você achou Skills poderoso, tem mais:</p>
+
+    <div class="card card-accent">
+      <h3>Telegram e Discord — Controle remoto do Claude</h3>
+      <p>Disponível agora (research preview). Controle o Claude Code <strong>pelo celular</strong> via Telegram ou Discord. Mande uma tarefa, acompanhe o progresso e receba o resultado — tudo pelo chat do celular. Funciona com o Claude Code rodando no seu Mac ou num servidor.</p>
+    </div>
+
+    <div class="card card-accent">
+      <h3>Remotion — Vídeos com IA</h3>
+      <p>Crie vídeos programaticamente. O Claude Code + Remotion gera <strong>motion graphics, promo videos e explainers</strong> a partir de prompts. Descreva o que quer ver e o Claude produz o vídeo. Instalação: <code>npx skills add remotion-dev/skills</code></p>
+    </div>
 
     <div class="card card-accent">
       <h3>MCP — Model Context Protocol</h3>
