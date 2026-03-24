@@ -489,6 +489,11 @@ td strong { color: var(--text-pri); }
       Perguntas sobre Skills
       <span class="sidebar-item-badge">Consulta</span>
     </div>
+    <div class="sidebar-item" data-target="d2-b8" onclick="goToSection('d2-b8')">
+      <span class="sidebar-item-num">+</span>
+      Bônus
+      <span class="sidebar-item-badge">Extra</span>
+    </div>
   </div>
 </aside>
 
@@ -544,7 +549,7 @@ td strong { color: var(--text-pri); }
         <div class="day-card-desc">Crie sua primeira Skill, explore o marketplace e receba 3 Skills exclusivas.</div>
         <div class="day-card-meta">
           <span class="badge badge-outline">~3 horas</span>
-          <span class="badge badge-outline">7 blocos</span>
+          <span class="badge badge-outline">8 blocos</span>
         </div>
       </div>
     </div>
@@ -2368,42 +2373,6 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
       </table>
     </div>
 
-    <h2>Skill Bônus</h2>
-
-    <details class="toggle">
-      <summary>Instagram Content Cloner — Clone o estilo de qualquer perfil</summary>
-      <div class="toggle-content">
-        <p>Pipeline completo que analisa um perfil do Instagram, identifica o framework de conteúdo (hooks, estrutura, CTA, tom de voz) e gera novos posts — <strong>texto + imagem final pronta pra publicar</strong>.</p>
-
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Fase</th><th>O que faz</th></tr></thead>
-            <tbody>
-              <tr><td><strong>1. Análise</strong></td><td>Estuda os posts do perfil e extrai padrões (hook, estrutura, CTA, tom, tamanho)</td></tr>
-              <tr><td><strong>2. Textos</strong></td><td>Gera N posts no mesmo framework identificado, sobre qualquer tema</td></tr>
-              <tr><td><strong>3. Visual</strong></td><td>Extrai parâmetros visuais de uma imagem de referência (cores, tipografia, iluminação)</td></tr>
-              <tr><td><strong>4. Imagens</strong></td><td>Gera as imagens finais com texto renderizado via Gemini API (gratuita)</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p><strong>Exemplo de uso:</strong> <em>"Analisa o perfil @thaleslaray no Instagram, identifica o framework de posts e cria 5 posts sobre automação com IA no mesmo estilo."</em></p>
-
-        <h4>Instalação</h4>
-        <p><a href="instagram-content-cloner.skill" download><strong>instagram-content-cloner.skill</strong></a> (10 KB)</p>
-        <div class="prompt-block">
-          <span class="code-block-label">Prompt — cole no Claude Code</span>
-          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-          <p><code class="code-text">Instale essa skill pra mim: ~/Downloads/instagram-content-cloner.skill</code></p>
-        </div>
-
-        <div class="callout callout-tip">
-          <strong>&#128161; Dica</strong>
-          Você pode executar só as fases que quiser: só textos (fases 1-2), só visual (fase 3), ou o pipeline completo (1-4). A fase de imagens usa a API gratuita do Google Gemini.
-        </div>
-      </div>
-    </details>
-
     <div class="callout callout-exercise">
       <strong>&#127919; Sua missão</strong>
       Até a próxima semana:
@@ -2473,6 +2442,48 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
     </ol>
   </div>
 
+  <div class="section" data-section="d2-b8" data-day="2" data-block="8">
+    <div class="section-kicker">Dia 2 &middot; Bônus</div>
+    <div class="section-title">Skills extras.</div>
+    <div class="section-subtitle">Presentes exclusivos da imersão</div>
+    <span class="badge badge-time">Bônus</span>
+    <hr>
+
+    <details class="toggle" open>
+      <summary>Instagram Content Cloner — Clone o estilo de qualquer perfil</summary>
+      <div class="toggle-content">
+        <p>Pipeline completo que analisa um perfil do Instagram, identifica o framework de conteúdo (hooks, estrutura, CTA, tom de voz) e gera novos posts — <strong>texto + imagem final pronta pra publicar</strong>.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Fase</th><th>O que faz</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1. Análise</strong></td><td>Estuda os posts do perfil e extrai padrões (hook, estrutura, CTA, tom, tamanho)</td></tr>
+              <tr><td><strong>2. Textos</strong></td><td>Gera N posts no mesmo framework identificado, sobre qualquer tema</td></tr>
+              <tr><td><strong>3. Visual</strong></td><td>Extrai parâmetros visuais de uma imagem de referência (cores, tipografia, iluminação)</td></tr>
+              <tr><td><strong>4. Imagens</strong></td><td>Gera as imagens finais com texto renderizado via Gemini API (gratuita)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Exemplo de uso:</strong> <em>"Analisa o perfil @thaleslaray no Instagram, identifica o framework de posts e cria 5 posts sobre automação com IA no mesmo estilo."</em></p>
+
+        <h4>Instalação</h4>
+        <p><a href="instagram-content-cloner.skill" download><strong>instagram-content-cloner.skill</strong></a> (10 KB)</p>
+        <div class="prompt-block">
+          <span class="code-block-label">Prompt — cole no Claude Code</span>
+          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+          <p><code class="code-text">Instale essa skill pra mim: ~/Downloads/instagram-content-cloner.skill</code></p>
+        </div>
+
+        <div class="callout callout-tip">
+          <strong>&#128161; Dica</strong>
+          Você pode executar só as fases que quiser: só textos (fases 1-2), só visual (fase 3), ou o pipeline completo (1-4). A fase de imagens usa a API gratuita do Google Gemini.
+        </div>
+      </div>
+    </details>
+  </div>
+
 </main>
 
 <!-- FOOTER NAV -->
@@ -2486,8 +2497,8 @@ Ajuste a Skill para refletir isso e gere a versão atualizada.</code></p>
 
 <!-- JAVASCRIPT -->
 <script>
-const SECTIONS = ['home','d1-b1','d1-b2','d1-b3','d1-b4','d1-b5','d1-b6','d2-b1','d2-b2','d2-b3','d2-b4','d2-b5','d2-b6','d2-b7'];
-const DAY_SECTIONS = { '1': ['d1-b1','d1-b2','d1-b3','d1-b4','d1-b5','d1-b6'], '2': ['d2-b1','d2-b2','d2-b3','d2-b4','d2-b5','d2-b6','d2-b7'] };
+const SECTIONS = ['home','d1-b1','d1-b2','d1-b3','d1-b4','d1-b5','d1-b6','d2-b1','d2-b2','d2-b3','d2-b4','d2-b5','d2-b6','d2-b7','d2-b8'];
+const DAY_SECTIONS = { '1': ['d1-b1','d1-b2','d1-b3','d1-b4','d1-b5','d1-b6'], '2': ['d2-b1','d2-b2','d2-b3','d2-b4','d2-b5','d2-b6','d2-b7','d2-b8'] };
 var LOCKED_SECTIONS = [];
 let currentIdx = 0;
 
@@ -2540,7 +2551,8 @@ function render() {
     'd2-b4': 'Dia 2 / Garimpando skills',
     'd2-b5': 'Dia 2 / Suas 3 skills',
     'd2-b6': 'Dia 2 / Próximos passos',
-    'd2-b7': 'Dia 2 / FAQ Skills'
+    'd2-b7': 'Dia 2 / FAQ Skills',
+    'd2-b8': 'Dia 2 / Bônus'
   };
   breadcrumb.textContent = TITLES[sid] || '';
 
