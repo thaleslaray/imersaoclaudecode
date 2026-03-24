@@ -98,7 +98,7 @@ hr { border: none; height: 3px; background: var(--accent); width: 40px; margin: 
 .callout-tip { background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2); }
 .callout-warn { background: rgba(255, 77, 0, 0.08); border: 1px solid rgba(255, 77, 0, 0.2); }
 .callout-exercise { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.2); }
-.callout strong { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.callout > strong:first-child { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
 /* ═══════════════════════════════════════════
    COMPONENTS — Code blocks
@@ -588,7 +588,7 @@ td strong { color: var(--text-pri); }
 
     <div class="card card-accent">
       <h3>Code</h3>
-      <p>Criação e edição de arquivos. Mesmo sem saber programar, o Claude cria sites, documentos e ferramentas pra você. Inclui o modo <strong>YOLO</strong> (bypass de permissões — o Claude executa tudo sem pedir confirmação).</p>
+      <p>Criação e edição de arquivos. Mesmo sem saber programar, o Claude cria sites, documentos e ferramentas pra você.</p>
     </div>
 
     <h2>Planos e preços</h2>
@@ -608,7 +608,12 @@ td strong { color: var(--text-pri); }
 
     <div class="callout callout-tip">
       <strong>&#128161; Resumo</strong>
-      O Pro (~R$115/mês) desbloqueia tudo. Os planos Max só aumentam os limites de uso — as funcionalidades são as mesmas.
+      O Pro (~R$115/mês) desbloqueia tudo. Os planos Max só aumentam os limites de uso — as funcionalidades são as mesmas. Dica: use o modelo <strong>Sonnet</strong> para tarefas do dia a dia (mais rápido e econômico). Guarde o <strong>Opus</strong> para tarefas que precisam de raciocínio complexo.
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Claude vs ChatGPT — qual a diferença?</strong>
+      O ChatGPT também conversa, cria texto e código. A diferença: o Claude tem <strong>plugins oficiais verificados</strong> que transformam ele num especialista real — marketing, dados, jurídico, vendas, produtividade. Pense no ChatGPT como um generalista e no Claude com plugins como uma <strong>equipe de especialistas</strong>. Além disso, o Claude está incorporando funcionalidades que fizeram ferramentas como Lovable e Bolt viralizar (criação de apps sem código), mas com a segurança de plugins verificados pela Anthropic.
     </div>
 
     <h2>Demo: Voice Mode</h2>
@@ -617,6 +622,11 @@ td strong { color: var(--text-pri); }
     <div class="callout callout-exercise">
       <strong>&#127919; Exercício ao vivo</strong>
       Abra o Claude Desktop, ative o voice mode e fale: "Me diga 3 formas que você pode me ajudar no meu trabalho como [sua profissão]." Ouça a resposta. Impressionante, né?
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128241; Claude no celular</strong>
+      O Claude tem app para <strong>iPhone</strong> e <strong>Android</strong> — com voice mode incluso. Ideal pra capturar ideias no trânsito, gravar lembretes por voz, ou conversar com o Claude quando não estiver no computador. Mesmo plano Pro, mesma conta.
     </div>
   </div>
 
@@ -646,6 +656,11 @@ td strong { color: var(--text-pri); }
       Conectores são da sua <strong>conta</strong>, não do modo. Uma vez conectados, funcionam no Chat, no Cowork, na web e no celular. Conecte uma vez, use em qualquer lugar.
     </div>
 
+    <div class="callout callout-tip">
+      <strong>&#128161; Muito além de Google e Airtable</strong>
+      Google e Airtable são só o começo. O Claude conecta com dezenas de ferramentas: <strong>Notion, Canva, Figma, Stripe, HubSpot, Slack, GitHub</strong> e mais. Vá em <strong>Configurações > Conectores</strong> para ver tudo disponível. A cada mês a Anthropic adiciona novos conectores.
+    </div>
+
     <h2>O que é GTD?</h2>
     <p><strong>Getting Things Done</strong> é um método de produtividade criado por David Allen. A ideia central: tire tudo da sua cabeça e organize num sistema confiável. O Claude + Airtable + Google é o sistema perfeito pra isso.</p>
 
@@ -659,6 +674,11 @@ td strong { color: var(--text-pri); }
       <li>Nomeie como <strong>"Meu GTD"</strong></li>
       <li>Pronto — a base vazia está criada (3 cliques)</li>
     </ol>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Não quer usar Airtable?</strong>
+      O Claude também conecta com <strong>Google Sheets</strong>, <strong>Notion</strong> e outras ferramentas. O fluxo é o mesmo — peça ao Claude pra montar o GTD na ferramenta que você já usa. O Airtable é só a nossa escolha pra esta aula.
+    </div>
 
     <h2>Passo 2: Claude cria a estrutura</h2>
     <p>Agora o Claude vai criar todas as tabelas dentro da sua base. Cole este prompt no Chat:</p>
@@ -891,10 +911,41 @@ Tabelas: "📥 Inbox", "✅ Próximas Ações", "📁 Projetos", "⏳ Aguardando
       </table>
     </div>
 
-    <div class="callout callout-tip">
-      <strong>&#128161; Plugins embutidos no Cowork</strong>
-      O Claude já vem com plugins prontos: <strong>Marketing, Finance, Product Management, Enterprise Search</strong> e mais. Explore todos em <a href="https://claude.com/plugins" target="_blank"><strong>claude.com/plugins</strong></a>. Para infoprodutores e consultores, o <strong>Plugin de Marketing</strong> é o mais relevante.
+    <h3>O catálogo de plugins oficiais</h3>
+    <p>A Anthropic mantém um catálogo com <strong>117+ plugins verificados</strong> — cada um é um departamento inteiro de especialistas. Acesse em <a href="https://claude.com/plugins" target="_blank"><strong>claude.com/plugins</strong></a>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Plugin</th><th>O que faz</th><th>Pra quem serve</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marketing</strong></td><td>Brand voice, criação de conteúdo, análise competitiva, planejamento de campanha</td><td>Infoprodutores, social media, copywriters</td></tr>
+          <tr><td><strong>Data</strong></td><td>Conecta em fontes de dados reais (CSV, Excel, BigQuery) e faz análise de verdade</td><td>Consultores, analistas, gestores</td></tr>
+          <tr><td><strong>Legal</strong></td><td>Análise de cláusulas, contratos, compliance jurídico</td><td>Advogados, empresários, consultores</td></tr>
+          <tr><td><strong>Produtividade</strong></td><td>GTD, gestão de tarefas, organização pessoal e profissional</td><td>Todo mundo</td></tr>
+          <tr><td><strong>Design</strong></td><td>Design systems, acessibilidade, componentes visuais</td><td>Designers, devs, criadores de conteúdo</td></tr>
+          <tr><td><strong>Sales</strong></td><td>Pipeline, prospecção, follow-up, scripts de vendas</td><td>Vendedores, SDRs, consultores comerciais</td></tr>
+          <tr><td><strong>Enterprise Search</strong></td><td>Busca inteligente em documentos e bases de conhecimento da empresa</td><td>Times corporativos</td></tr>
+        </tbody>
+      </table>
     </div>
+
+    <p>Cada plugin tem <strong>várias habilidades dentro</strong>. Por exemplo, o Plugin de Marketing inclui: brand voice, criação de conteúdo, análise competitiva, planejamento de campanha e mais. É como contratar um departamento inteiro com um clique.</p>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Explore o catálogo</strong>
+      Abra <a href="https://claude.com/plugins" target="_blank"><strong>claude.com/plugins</strong></a>, ative pelo menos <strong>2 plugins</strong> que façam sentido pro seu trabalho, e teste uma habilidade de cada um. Você vai se surpreender com o que já existe pronto.
+    </div>
+
+    <h3>Como instalar plugins no Desktop App</h3>
+    <ol>
+      <li>Na aba <strong>Cowork</strong>, clique no botão <strong>+</strong></li>
+      <li>Selecione <strong>Plugins</strong></li>
+      <li>Role até o final da lista e clique em <strong>Gerenciar plugins</strong></li>
+      <li>Clique em <strong>Navegar por plugins</strong> — o marketplace abre com todos os plugins da Anthropic e parceiros</li>
+      <li>Escolha o plugin desejado e clique em <strong>Instalar</strong></li>
+    </ol>
+
+    <p>Depois de instalado, o plugin aparece no menu <strong>+</strong> do Cowork. Cada plugin traz várias <strong>habilidades</strong> (comandos com <code>/</code>) que você pode usar diretamente na conversa.</p>
 
     <h2>Demo: Plugin de Marketing ao vivo</h2>
     <p>Vamos usar o Plugin de Marketing pra fazer uma análise competitiva real dos maiores nomes do marketing digital brasileiro.</p>
@@ -909,7 +960,7 @@ Tabelas: "📥 Inbox", "✅ Próximas Ações", "📁 Projetos", "⏳ Aguardando
     </div>
 
     <h3>Passo 1: Ative o Plugin de Marketing</h3>
-    <p>No Cowork, clique em <strong>+</strong> → <strong>Plugins</strong> → selecione <strong>Marketing</strong>. Ele carrega as Habilidades e conectores de marketing automaticamente.</p>
+    <p>No Cowork, clique em <strong>+</strong> → <strong>Plugins</strong> → selecione <strong>Marketing</strong>. Se ele não aparecer na lista, instale primeiro (veja "Como instalar plugins" acima). Ele carrega as Habilidades e conectores de marketing automaticamente.</p>
 
     <h3>Passo 2: Demo 1 — Brief competitivo</h3>
     <p>Use o comando <code>/competitive-brief</code> com o seguinte prompt:</p>
@@ -959,6 +1010,43 @@ Tom: direto, sem enrolação, para empreendedores brasileiros.</code></p>
     <div class="callout callout-exercise">
       <strong>&#127919; Exercício ao vivo</strong>
       Agora substitua pelos seus próprios concorrentes e repita o <code>/competitive-brief</code>. Depois rode o <code>/email-sequence</code> para o seu nicho.
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Outros plugins que valem a pena</strong>
+      <ul style="margin-top:8px">
+        <li><strong>Data</strong> — sem o plugin, o Claude faz o melhor que pode com dados. Com o plugin, ele conecta direto nas suas fontes de dados reais e faz análise de verdade.</li>
+        <li><strong>Produtividade</strong> — GTD, gestão de tarefas, organização. Funciona com ou sem conectores externos.</li>
+        <li><strong>Legal</strong> — análise de cláusulas, contratos, burocracia jurídica. Ideal pra quem lida com termos de uso, propostas ou compliance.</li>
+        <li><strong>Design</strong> — design systems, acessibilidade, componentes. Útil pra quem cria conteúdo visual ou precisa de consistência de marca.</li>
+      </ul>
+    </div>
+
+    <h2>Demo: Plugin de Design — extraindo um Design System</h2>
+    <p>Quer ver o poder real dos plugins? O Plugin de Design da Anthropic tem 7 habilidades, incluindo <code>/design-system</code> — que extrai o design system completo de qualquer site. Cores, tipografia, espaçamentos, componentes... tudo documentado automaticamente.</p>
+
+    <h3>Passo 1: Instale o Plugin de Design</h3>
+    <p>No Cowork, clique em <strong>+</strong> → <strong>Plugins</strong> → <strong>Gerenciar plugins</strong> → <strong>Navegar por plugins</strong> → encontre <strong>Design</strong> (por Anthropic) → <strong>Instalar</strong>.</p>
+
+    <h3>Passo 2: Use a habilidade /design-system</h3>
+    <p>Com o plugin ativo, clique em <strong>+</strong> → <strong>Plugins</strong> → <strong>Design</strong> → selecione <strong>design-system</strong>. Ou simplesmente digite <code>/design-system</code> na conversa. O Claude vai perguntar o que você quer fazer. Digite:</p>
+
+    <div class="prompt-block">
+      <span class="code-block-label">/design-system</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <p><code class="code-text">/design-system extraia o design system do site escoladeautomacao.com.br</code></p>
+    </div>
+
+    <p>O Claude vai acessar o site, analisar visualmente e entregar um design system documentado: paleta de cores, tipografia, espaçamentos, componentes e padrões visuais. Tudo extraído automaticamente.</p>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Por que isso importa?</strong>
+      Imagine pegar o site de um concorrente (ou o seu próprio) e ter o design system documentado em minutos. Você pode usar isso pra criar novos materiais com a mesma identidade visual, ou pra analisar o posicionamento visual de qualquer marca. Na aula, fizemos exatamente isso — e o resultado surpreendeu todo mundo.
+    </div>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício ao vivo</strong>
+      Instale o Plugin de Design e use <code>/design-system</code> no site do <strong>seu próprio negócio</strong> (ou de um concorrente). Veja o que o Claude extrai. Depois tente com <code>/design-critique</code> para receber uma crítica profissional do design.
     </div>
 
     <h2>Criação de arquivos</h2>
@@ -1080,19 +1168,7 @@ Salve como index.html na pasta</code></p>
     <h2>Modo YOLO (demo)</h2>
     <p>No modo normal, o Claude pede permissão antes de cada ação (editar arquivo, rodar comando, etc). O <strong>Modo YOLO</strong> desativa TODAS essas confirmações — o Claude executa tudo sozinho, sem parar pra perguntar.</p>
 
-    <p>Tecnicamente, é ativado com a flag <code>--dangerously-skip-permissions</code> no terminal. O nome já diz: é perigoso. O Claude pode rodar qualquer comando, deletar arquivos, instalar pacotes — tudo sem pedir.</p>
-
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Modo</th><th>O que faz</th></tr></thead>
-        <tbody>
-          <tr><td><strong>default</strong></td><td>Pergunta antes de cada ação (o padrão)</td></tr>
-          <tr><td><strong>acceptEdits</strong></td><td>Aceita edições de arquivo, mas pergunta antes de rodar comandos</td></tr>
-          <tr><td><strong>plan</strong></td><td>Só analisa e planeja, não faz alterações</td></tr>
-          <tr><td><strong>YOLO (bypassPermissions)</strong></td><td>Executa TUDO sem pedir — arquivos, comandos, ferramentas</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p>No Desktop App, ative em: <strong>Configurações > Claude Code > "Permitir modo de bypass de permissões"</strong> (toggle on/off). No terminal, é ativado com uma flag especial — veremos no Bloco 5.</p>
 
     <div class="callout callout-warn">
       <strong>&#9888;&#65039; Cuidado</strong>
@@ -1116,10 +1192,10 @@ Salve como index.html na pasta</code></p>
         <tbody>
           <tr><td><strong>Chat, Cowork, Código</strong></td><td>&#10003;</td><td>&#10003;</td></tr>
           <tr><td><strong>Conectores</strong> (Google, Airtable)</td><td>&#10003;</td><td>&#10003;</td></tr>
-          <tr><td><strong>Skills</strong> (criar e instalar)</td><td>Limitado</td><td>&#10003; Completo</td></tr>
+          <tr><td><strong>Skills</strong></td><td>&#10003; Instalar e usar</td><td>&#10003; Criar e instalar</td></tr>
           <tr><td><strong>Hooks</strong> (automações)</td><td>&#10007;</td><td>&#10003;</td></tr>
-          <tr><td><strong>MCP Servers</strong> (extensões)</td><td>Conectores básicos</td><td>&#10003; Qualquer MCP</td></tr>
-          <tr><td><strong>CLAUDE.md</strong> (memória do projeto)</td><td>&#10007;</td><td>&#10003;</td></tr>
+          <tr><td><strong>MCP Servers</strong> (extensões)</td><td>Conectores oficiais</td><td>&#10003; Qualquer MCP</td></tr>
+          <tr><td><strong>CLAUDE.md</strong> (memória do projeto)</td><td>&#10003; Via Projects</td><td>&#10003;</td></tr>
           <tr><td><strong>Subagentes</strong></td><td>&#10007;</td><td>&#10003;</td></tr>
           <tr><td><strong>Custom commands</strong> (/review, /test)</td><td>&#10007;</td><td>&#10003;</td></tr>
         </tbody>
@@ -1129,7 +1205,7 @@ Salve como index.html na pasta</code></p>
     <p>Pense no Desktop App como dirigir automático. O terminal é o câmbio manual — mais poder pra quem aprende a usar. <strong>E é no terminal que vamos criar Skills amanhã.</strong></p>
 
     <h2>Instalando o Warp</h2>
-    <p>O Warp é um terminal moderno, bonito e com IA embutida. Muito menos intimidador que o Terminal padrão.</p>
+    <p>O Warp é um terminal moderno e bonito. Muito menos intimidador que o Terminal padrão.</p>
 
     <ul class="checklist">
       <li onclick="toggleCheck(this)">
@@ -1146,9 +1222,42 @@ Salve como index.html na pasta</code></p>
       </li>
       <li onclick="toggleCheck(this)">
         <span class="checklist-box">&#10003;</span>
-        <span class="checklist-text">Crie uma conta no Warp (gratuita) ou pule</span>
+        <span class="checklist-text">Conta é <strong>opcional</strong> — pode pular tranquilamente</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text">Quando perguntar o modo, escolha <strong>"Classic Terminal"</strong> (não "Agent Driven Development")</span>
+      </li>
+      <li onclick="toggleCheck(this)">
+        <span class="checklist-box">&#10003;</span>
+        <span class="checklist-text">Desabilite a IA do Warp: <strong>Settings → AI → desmarque tudo</strong></span>
       </li>
     </ul>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Por que desativar a IA do Warp?</strong>
+      O Warp tem uma IA embutida, mas ela atrapalha o Claude Code. São duas IAs competindo pelo mesmo espaço. Desative a do Warp e deixe só o Claude Code trabalhar.
+    </div>
+
+    <h2>Atalhos do Warp</h2>
+    <p>Esses atalhos vão economizar muito tempo no dia a dia:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Atalho</th><th>O que faz</th></tr></thead>
+        <tbody>
+          <tr><td><code>Cmd+D</code></td><td>Dividir painel (split) — trabalhe em dois terminais lado a lado</td></tr>
+          <tr><td><code>Cmd+T</code></td><td>Nova aba</td></tr>
+          <tr><td><code>Cmd+W</code></td><td>Fechar aba</td></tr>
+          <tr><td><code>Cmd+1/2/3</code></td><td>Navegar entre abas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Dica: organize suas abas</strong>
+      Clique com o botão direito numa aba pra <strong>renomear e colorir</strong>. Ex: uma aba "Claude Code" (verde) e outra "Arquivos" (azul). O painel lateral (Tool Panel) do Warp também permite navegar pastas visualmente — sem precisar digitar comandos.
+    </div>
 
     <h2>Instalando o Claude Code</h2>
     <p>Com o Warp aberto, copie e cole o comando abaixo:</p>
@@ -1212,12 +1321,76 @@ Salve como index.html na pasta</code></p>
 
     <p>Se o Claude respondeu, está tudo funcionando!</p>
 
+    <h2>Atalhos do Claude Code</h2>
+    <p>Comandos e atalhos que você vai usar o tempo todo:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Comando / Atalho</th><th>O que faz</th></tr></thead>
+        <tbody>
+          <tr><td><code>Ctrl+O</code></td><td>Ver o raciocínio do Claude enquanto ele trabalha</td></tr>
+          <tr><td><code>/init</code></td><td>Criar CLAUDE.md — arquivo de memória/contexto do projeto</td></tr>
+          <tr><td><code>/plugins</code></td><td>Abrir marketplace de plugins (117+ disponíveis)</td></tr>
+          <tr><td><code>/reload-plugins</code></td><td>Recarregar plugins sem reiniciar o Claude</td></tr>
+          <tr><td><code>/usage</code></td><td>Ver quanto do seu plano já consumiu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Modos de permissão no terminal</h2>
+    <p>No Desktop App, o YOLO é um toggle nas Configurações. No terminal, você tem <strong>4 modos</strong> de permissão — e pode alternar entre eles a qualquer momento com <code>Shift+Tab</code>:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Modo</th><th>O que faz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>default</strong></td><td>Pergunta antes de cada ação (o padrão)</td></tr>
+          <tr><td><strong>acceptEdits</strong></td><td>Aceita edições de arquivo, mas pergunta antes de rodar comandos</td></tr>
+          <tr><td><strong>plan</strong></td><td>Só analisa e planeja, não faz alterações</td></tr>
+          <tr><td><strong>YOLO (bypassPermissions)</strong></td><td>Executa TUDO sem pedir — arquivos, comandos, ferramentas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Para iniciar o Claude Code direto no modo YOLO, use a flag <code>--dangerously-skip-permissions</code>. O nome já diz: é perigoso. O Claude pode rodar qualquer comando, deletar arquivos, instalar pacotes — tudo sem pedir.</p>
+
+    <h3>Atalho: alias "cc" para modo YOLO</h3>
+    <p>Pra não digitar esse comando enorme toda vez, crie um alias:</p>
+
+    <div class="code-block">
+      <span class="code-block-label">Mac / Linux (Zsh)</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">echo 'alias cc="claude --dangerously-skip-permissions"' >> ~/.zshrc && source ~/.zshrc</code>
+    </div>
+
+    <div class="code-block">
+      <span class="code-block-label">Windows (PowerShell)</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">if (!(Test-Path $PROFILE)) { New-Item $PROFILE -Force }; Add-Content $PROFILE 'function cc { claude --dangerously-skip-permissions @args }'; . $PROFILE</code>
+    </div>
+
+    <p>A partir de agora, basta digitar <code>cc</code> no terminal pra abrir o Claude em modo YOLO.</p>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Modo YOLO = sem freio</strong>
+      O Claude vai executar tudo sem perguntar — criar arquivos, instalar coisas, rodar comandos. Use com consciência. Pra tarefas delicadas, abra com <code>claude</code> normal.
+    </div>
+
     <h2>Chave de ouro: plugins no terminal</h2>
     <p>Lembra da landing page que criamos no app desktop? Ficou ok. Agora vamos instalar um <strong>plugin profissional de design</strong> e recriar o mesmo site pelo terminal. Você vai ver a diferença.</p>
 
     <h3>1. Instale o plugin frontend-design</h3>
-    <p>No Warp, com o Claude Code aberto, rode:</p>
+    <p>No Warp, com o Claude Code aberto, há duas formas de instalar plugins:</p>
 
+    <p><strong>Opção A — Via marketplace (recomendado):</strong></p>
+    <div class="code-block">
+      <span class="code-block-label">Terminal</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+      <code class="code-text">/plugins</code>
+    </div>
+    <p>Navegue pelo catálogo, encontre <strong>frontend-design</strong> e clique em instalar.</p>
+
+    <p><strong>Opção B — Via URL direto:</strong></p>
     <div class="code-block">
       <span class="code-block-label">Terminal</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
@@ -1226,7 +1399,7 @@ Salve como index.html na pasta</code></p>
 
     <div class="callout callout-tip">
       <strong>&#128161; Plugins oficiais</strong>
-      A Anthropic tem um catálogo de plugins em <a href="https://claude.com/plugins" target="_blank"><strong>claude.com/plugins</strong></a>. Frontend Design é um dos mais populares — cria interfaces bonitas, responsivas e com identidade visual forte.
+      A Anthropic tem um catálogo de plugins em <a href="https://claude.com/plugins" target="_blank"><strong>claude.com/plugins</strong></a>. Você também pode acessar direto pelo terminal com <code>/plugins</code>. Frontend Design é um dos mais populares — cria interfaces bonitas, responsivas e com identidade visual forte.
     </div>
 
     <h3>2. Recrie a landing page</h3>
@@ -1256,20 +1429,74 @@ Quero um design que impressione — não genérico. Salve na pasta meu-site.</co
 
     <p>E se em vez de depender de plugins prontos, você pudesse <strong>criar os seus próprios</strong>? Isso é exatamente o que vamos fazer amanhã, no Dia 2: <strong>Skills</strong>.</p>
 
-    <h2>Verificação final</h2>
-    <p>Confirme que tudo está certo:</p>
-
-    <div class="code-block">
-      <span class="code-block-label">Terminal</span>
-      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <code class="code-text">claude --version</code>
-    </div>
-
-    <p>Deve mostrar algo como <code>claude v1.0.xxx</code>. Se mostrou, parabéns — você tem o Claude Code no seu terminal, pronto pra amanhã!</p>
-
     <div class="callout callout-tip">
       <strong>&#128161; Amanhã</strong>
       No Dia 2 vamos usar o terminal pra criar e instalar Skills. Esse é o motivo de termos instalado tudo hoje.
+    </div>
+
+    <h2>Problemas comuns</h2>
+    <p>Perguntas que surgiram na aula — provavelmente você vai ter as mesmas dúvidas:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Problema</th><th>Solução</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>"Cowork não aparece no meu app"</strong></td>
+            <td>Cowork exige o <strong>plano Pro</strong> (US$20/mês) e só funciona no <strong>Desktop App</strong>. Não aparece no chat web.</td>
+          </tr>
+          <tr>
+            <td><strong>"Não tem pra Linux"</strong></td>
+            <td>O Desktop App só tem pra Mac e Windows. Mas o <strong>Claude Code (terminal)</strong> funciona em Linux normalmente.</td>
+          </tr>
+          <tr>
+            <td><strong>"Mac aquecendo muito"</strong></td>
+            <td>Normal com modelos grandes. Feche apps desnecessários, especialmente Chrome com muitas abas. O ventilador pode ligar — não se preocupe.</td>
+          </tr>
+          <tr>
+            <td><strong>"Agent Driven vs Classic no Warp?"</strong></td>
+            <td>Escolha <strong>Classic Terminal</strong>. O modo Agent Driven usa a IA do Warp, que conflita com o Claude Code.</td>
+          </tr>
+          <tr>
+            <td><strong>"Sonnet ou Opus?"</strong></td>
+            <td><strong>Sonnet</strong> pro dia a dia (rápido, barato). <strong>Opus</strong> pra tarefas complexas que precisam de mais raciocínio. No plano Pro, você tem os dois.</td>
+          </tr>
+          <tr>
+            <td><strong>"Posso cancelar o ChatGPT?"</strong></td>
+            <td>Depende do seu uso. Claude é melhor pra código, análise e tarefas longas. ChatGPT ainda tem vantagem em geração de imagem e busca na web. Teste os dois por um mês antes de decidir.</td>
+          </tr>
+          <tr>
+            <td><strong>"Como ver meu consumo?"</strong></td>
+            <td>No terminal: <code>/usage</code>. No app: menu do perfil → Usage. O plano Pro tem limite generoso mas não é ilimitado.</td>
+          </tr>
+          <tr>
+            <td><strong>"Plugin instalado mas não apareceu"</strong></td>
+            <td>Use <code>/reload-plugins</code> no Cowork. Se persistir, feche e reabra o Claude Desktop.</td>
+          </tr>
+          <tr>
+            <td><strong>"Claude parou de responder"</strong></td>
+            <td>No Desktop, aguarde ou recarregue a conversa. No terminal: <strong>Ctrl+C</strong> para cancelar a ação atual e tente novamente.</td>
+          </tr>
+          <tr>
+            <td><strong>"Limite de uso atingido"</strong></td>
+            <td>Normal no plano Pro — o limite reseta em ~3 horas. Enquanto espera, use o modelo <strong>Haiku</strong> (mais leve) ou considere o plano Max se precisar de mais volume.</td>
+          </tr>
+          <tr>
+            <td><strong>"Terminal não reconhece o comando"</strong></td>
+            <td>Feche e reabra o terminal após a instalação. No Mac, rode <code>source ~/.zshrc</code>. No Windows, abra um novo PowerShell.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128274; Segurança e Privacidade</strong>
+      <ul>
+        <li><strong>Seus dados não treinam o modelo</strong> — política oficial da Anthropic. Suas conversas não são usadas para melhorar o Claude.</li>
+        <li><strong>Conversas são privadas</strong> — ficam na sua conta, não são compartilhadas com terceiros.</li>
+        <li><strong>No terminal, você controla tudo</strong> — o Claude Code só lê ou edita arquivos com sua permissão explícita (a menos que você ative o modo YOLO).</li>
+        <li><strong>Dica:</strong> nunca cole senhas, tokens ou chaves de API diretamente no chat. Use variáveis de ambiente.</li>
+      </ul>
     </div>
 
     <h2>Resumo do Dia 1</h2>
@@ -1278,8 +1505,8 @@ Quero um design que impressione — não genérico. Salve na pasta meu-site.</co
       <li><strong>Conectores</strong> — Google Calendar, Gmail e Airtable conectados ao Claude</li>
       <li><strong>Chat</strong> — Voice mode, GTD completo com Airtable + Google, Quick Entry, Screenshot</li>
       <li><strong>Cowork</strong> — Delegação autônoma, análise competitiva, Skills embutidas (Excel, Word, PPT, PDF)</li>
-      <li><strong>Código</strong> — Criação de landing page sem programar, modos de permissão (YOLO)</li>
-      <li><strong>Terminal</strong> — Warp + Claude Code instalados e prontos pro Dia 2</li>
+      <li><strong>Código</strong> — Criação de landing page sem programar, modo YOLO no Desktop App</li>
+      <li><strong>Terminal</strong> — Warp + Claude Code instalados, modos de permissão, alias YOLO, plugins no terminal</li>
     </ul>
 
     <div class="card card-accent">
