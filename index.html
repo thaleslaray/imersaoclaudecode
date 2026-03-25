@@ -691,6 +691,15 @@ td strong { color: var(--text-pri); }
       <strong>&#128241; Claude no celular</strong>
       O Claude tem app para <strong>iPhone</strong> e <strong>Android</strong> — com voice mode incluso. Ideal pra capturar ideias no trânsito, gravar lembretes por voz, ou conversar com o Claude quando não estiver no computador. Mesmo plano Pro, mesma conta.
     </div>
+
+    <div class="card card-accent">
+      <h3>&#9876;&#65039; Por que o Claude diz não — mesmo pra $200 milhões</h3>
+      <p>Em fevereiro de 2026, o Pentágono (Departamento de Defesa dos EUA) tinha um contrato de <strong>$200 milhões</strong> com a Anthropic. A exigência: remover as salvaguardas de segurança do Claude para uso em <strong>operações militares letais autônomas</strong> e vigilância em massa.</p>
+      <p>O CEO Dario Amodei respondeu publicamente: <em>"Não posso, em sã consciência, concordar com isso."</em> A Anthropic rescindiu o contrato.</p>
+      <p>Trump ordenou ao governo parar de usar ferramentas da Anthropic. Horas depois, o CENTCOM <strong>continuou usando Claude</strong> nos ataques ao Irã mesmo assim. E a busca pelo Claude triplicou após a notícia viralizar.</p>
+      <p style="margin-bottom:0"><strong>Isso é o que diferencia o Claude:</strong> a empresa tem uma Constituição de IA — regras que nenhum cliente, nem governos, podem mudar. O Claude não pode ser comprado pra fazer o mal.</p>
+    </div>
+
   </div>
 
   <div class="section" data-section="d1-b2" data-day="1" data-block="2">
@@ -721,7 +730,14 @@ td strong { color: var(--text-pri); }
 
     <div class="callout callout-tip">
       <strong>&#128161; Muito além de Google e Airtable</strong>
-      Google e Airtable são só o começo. O Claude conecta com dezenas de ferramentas: <strong>Notion, Canva, Figma, Stripe, HubSpot, Slack, GitHub</strong> e mais. Vá em <strong>Configurações > Conectores</strong> para ver tudo disponível. A cada mês a Anthropic adiciona novos conectores.
+      Google e Airtable são só o começo. O Claude já conecta com <strong>centenas de ferramentas</strong> — Notion, Canva, Figma, Stripe, HubSpot, Slack, GitHub, Asana, Ahrefs, Apollo.io, Amplitude e muito mais. E a Anthropic adiciona novos toda semana. Explore o catálogo completo em <a href="https://claude.com/connectors" target="_blank"><strong>claude.com/connectors</strong></a>.
+    </div>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Meta Ads: cuidado antes de conectar</strong>
+      Contas de anúncios estão sendo <strong>banidas permanentemente</strong> por conectar Claude ao Meta via integrações genéricas. O Meta tem limite de 200 chamadas de API por hora — um agente autônomo queima isso em minutos, o que aciona o sistema de detecção de abuso.<br><br>
+      <strong>Alternativa segura:</strong> use o <strong>Windsor.ai</strong> (disponível em claude.com/connectors → buscar "windsor"). Ele conecta seus dados do Meta para análise sem permitir ações autônomas.<br><br>
+      <strong>Regra de ouro:</strong> Claude analisa seus dados do Meta. Você decide e clica.
     </div>
 
     <h2>O que é GTD?</h2>
@@ -938,8 +954,14 @@ Tabelas: "📥 Inbox", "✅ Próximas Ações", "📁 Projetos", "⏳ Aguardando
     <p>No bloco anterior você usou o <strong>Chat</strong> — conversa passo a passo. Agora vamos pro <strong>Cowork</strong>: você delega uma missão inteira e o Claude trabalha sozinho, por vários passos, sem precisar da sua intervenção.</p>
 
     <div class="callout callout-warn">
-      <strong>&#9888;&#65039; Importante</strong>
-      O Cowork funciona <strong>apenas no Claude Desktop App</strong> (não no web nem no celular). Ele usa os mesmos conectores que você já configurou, mais acesso direto a pastas no seu computador.
+      <strong>&#9888;&#65039; Importante — verifique a compatibilidade antes</strong>
+      O Cowork funciona <strong>apenas no Claude Desktop App</strong> (não no web nem no celular). Ele usa os mesmos conectores que você já configurou, mais acesso direto a pastas no seu computador.<br><br>
+      <strong>Requisitos mínimos:</strong>
+      <ul style="margin-top:6px">
+        <li><strong>macOS 11 (Big Sur)</strong> ou superior — versões anteriores não são suportadas</li>
+        <li><strong>Windows 10</strong> ou superior — apenas processadores x64 (ARM não funciona)</li>
+        <li><strong>Mac com chip Intel:</strong> pode apresentar lentidão severa — problema conhecido da Anthropic, ainda sem solução definitiva</li>
+      </ul>
     </div>
 
     <p>Pense assim: no Chat você <strong>conversa</strong> com o Claude. No Cowork você <strong>contrata</strong> o Claude pra fazer um trabalho completo.</p>
@@ -1559,8 +1581,27 @@ Quero um design que impressione — não genérico. Salve na pasta meu-site.</co
             <td><strong>"Terminal não reconhece o comando"</strong></td>
             <td>Feche e reabra o terminal após a instalação. No Mac, rode <code>source ~/.zshrc</code>. No Windows, abra um novo PowerShell.</td>
           </tr>
+          <tr>
+            <td><strong>"Warp ficou 100% transparente"</strong></td>
+            <td>Vá em <strong>Warp → Settings → Appearance → Opacity</strong> e ajuste o slider. Se o slider não responder, vá em <strong>Preferências do Sistema do macOS → Acessibilidade → Exibição → desmarque "Reduzir transparência"</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>"Toda aba nova pergunta 'você confia nesta pasta?'"</strong></td>
+            <td>Bug conhecido do Claude Code (#21283). Ao aparecer o popup, clique <strong>"Sim, confio"</strong> e aguarde a janela fechar completamente antes de abrir outra aba. A Anthropic está trabalhando na correção.</td>
+          </tr>
+          <tr>
+            <td><strong>"Warp demora muito pra abrir (Mac Intel)"</strong></td>
+            <td>Mac com chip Intel tem problemas de performance desde a introdução do Cowork. Enquanto a Anthropic não lança correção: feche apps pesados (Chrome, Zoom) antes de abrir o Warp, ou considere usar o Terminal padrão do macOS com Claude Code.</td>
+          </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Bônus: dê olhos pro Claude Code com o Perplexity</strong>
+      O Claude Code por padrão não acessa a internet. Mas você pode conectar o <strong>Perplexity</strong> via MCP — aí ele passa a buscar informações em tempo real enquanto trabalha. Rode no terminal:<br><br>
+      <code style="background:rgba(0,0,0,0.08);padding:4px 8px;border-radius:4px;font-size:13px">claude mcp add perplexity -e PERPLEXITY_API_KEY=sua-chave -- npx @perplexity-ai/mcp-server</code><br><br>
+      Precisa de uma API key gratuita em <a href="https://www.perplexity.ai/settings/api" target="_blank">perplexity.ai/settings/api</a>. Após instalar, o Claude Code usa automaticamente o Perplexity quando precisar pesquisar na web.
     </div>
 
     <div class="callout callout-tip">
@@ -2034,7 +2075,7 @@ Você é um especialista em conteúdo para Instagram Reels.
     <p>Acesse em: <a href="https://claude.com/plugins" target="_blank"><strong>claude.com/plugins</strong></a></p>
 
     <h3>2. skills.sh — O marketplace aberto</h3>
-    <p>O <a href="https://skills.sh" target="_blank"><strong>skills.sh</strong></a> é um projeto da Vercel que funciona como um marketplace aberto de Skills. Qualquer pessoa pode publicar e instalar.</p>
+    <p>O <a href="https://skills.sh" target="_blank"><strong>skills.sh</strong></a> é um projeto da Vercel que funciona como um marketplace aberto de Skills. Qualquer pessoa pode publicar e instalar. Pensa nele como o <strong>Superdownloads dos anos 2000</strong> — era lá que todo mundo baixava software gratuito. Só que agora, em vez de programas, você baixa <em>inteligência</em>.</p>
 
     <h3>3. ClawHub — Repositório da comunidade</h3>
     <p>O <a href="https://clawhub.ai/" target="_blank"><strong>ClawHub</strong></a> é um repositório comunitário de skills, plugins e agentes. Boa fonte pra descobrir o que outros criadores estão construindo e se inspirar.</p>
