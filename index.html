@@ -2144,7 +2144,17 @@ Você é um especialista em conteúdo para Instagram Reels.
       <div class="toggle-content">
         <p>Cria e configura agentes de IA conversacional no GPTMaker — direto do Claude. Defina o comportamento, o treinamento e as integrações do seu agente sem sair do chat.</p>
         <p><strong>Exemplo de uso:</strong> <em>"Cria um agente de atendimento para minha loja de roupas, com tom descontraído, que responde sobre tamanhos, trocas e frete."</em></p>
-        <h4>Instalação</h4>
+        <div class="callout callout-warn">
+          <strong>&#9888;&#65039; Pré-requisito: conectar o MCP do GPTMaker</strong>
+          Antes de instalar a skill, rode este comando no terminal para conectar o Claude Code ao GPTMaker. Substitua <code>SUA_CHAVE_DE_API_AQUI</code> pela sua API Key do GPTMaker:
+        </div>
+        <div class="code-block">
+          <span class="code-block-label">Terminal</span>
+          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">claude mcp add gptmaker -e 'GPTMAKER_API_TOKEN=SUA_CHAVE_DE_API_AQUI' -- uvx gptmaker-mcp</code>
+        </div>
+
+        <h4>Instalação da Skill</h4>
         <p>Baixe o arquivo e peça pro Claude Code instalar:</p>
         <p><a href="gptmaker.skill" download><strong>gptmaker.skill</strong></a> (51 KB)</p>
         <div class="prompt-block">
