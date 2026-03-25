@@ -152,6 +152,12 @@ code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.88em; backgr
 .stepper .step .code-block { margin: 10px 0 0 0; }
 
 /* ═══════════════════════════════════════════
+   COMPONENTS — Skills Ecosystem Grid
+   ═══════════════════════════════════════════ */
+.skills-ecosystem { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.skills-ecosystem-tag { background: var(--card); border: 1px solid var(--border-strong); border-radius: 6px; padding: 6px 12px; font-size: 0.82rem; font-weight: 600; color: var(--text); }
+
+/* ═══════════════════════════════════════════
    COMPONENTS — Checklist
    ═══════════════════════════════════════════ */
 .checklist { list-style: none; padding: 0; margin-bottom: 20px; }
@@ -1726,6 +1732,43 @@ Quero um design que impressione — não genérico. Salve na pasta meu-site.</co
 
     <p>Você <strong>não precisa programar</strong> para criar uma Skill. É texto puro — instruções claras em linguagem natural.</p>
 
+    <h2>Skills vai além do Claude</h2>
+    <p>A Anthropic criou o formato de Skills e <strong>liberou como padrão aberto</strong>. Isso significa que outras ferramentas de IA podem — e estão — adotando o mesmo formato.</p>
+
+    <div class="card card-accent">
+      <h3>Uma Skill. Várias ferramentas.</h3>
+      <p>O mesmo arquivo que você cria para o Claude funciona no Cursor, no VS Code com GitHub Copilot, no OpenAI Codex, no Gemini CLI da Google...</p>
+      <p style="margin-top:12px"><strong>Você não está aprendendo uma ferramenta. Está aprendendo um padrão.</strong></p>
+    </div>
+
+    <p>Hoje, mais de 30 ferramentas já suportam Skills:</p>
+
+    <div class="skills-ecosystem">
+      <span class="skills-ecosystem-tag">Claude</span>
+      <span class="skills-ecosystem-tag">Claude Code</span>
+      <span class="skills-ecosystem-tag">Cursor</span>
+      <span class="skills-ecosystem-tag">VS Code</span>
+      <span class="skills-ecosystem-tag">GitHub Copilot</span>
+      <span class="skills-ecosystem-tag">OpenAI Codex</span>
+      <span class="skills-ecosystem-tag">Gemini CLI</span>
+      <span class="skills-ecosystem-tag">JetBrains Junie</span>
+      <span class="skills-ecosystem-tag">Roo Code</span>
+      <span class="skills-ecosystem-tag">Databricks</span>
+      <span class="skills-ecosystem-tag">Spring AI</span>
+      <span class="skills-ecosystem-tag">Laravel Boost</span>
+      <span class="skills-ecosystem-tag">OpenHands</span>
+      <span class="skills-ecosystem-tag">Goose</span>
+      <span class="skills-ecosystem-tag">Snowflake Cortex</span>
+      <span class="skills-ecosystem-tag">+ mais 15</span>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; O que isso significa pra você</strong>
+      Se um cliente seu usa Cursor, se sua empresa usa GitHub Copilot, se alguém da sua equipe prefere Gemini — a sua Skill funciona em todos. <strong>Cria uma vez, funciona em qualquer lugar.</strong>
+    </div>
+
+    <p>Site oficial do padrão: <a href="https://agentskills.io" target="_blank"><strong>agentskills.io</strong></a></p>
+
     <h2>Exemplos reais</h2>
     <div class="table-wrap">
       <table>
@@ -1997,8 +2040,8 @@ Você é um especialista em conteúdo para Instagram Reels.
     <p>O <a href="https://clawhub.ai/" target="_blank"><strong>ClawHub</strong></a> é um repositório comunitário de skills, plugins e agentes. Boa fonte pra descobrir o que outros criadores estão construindo e se inspirar.</p>
 
     <div class="callout callout-tip">
-      <strong>&#128161; Dado importante</strong>
-      Skills é um padrão aberto adotado por Anthropic, OpenAI, Microsoft, GitHub e Cursor. Uma Skill que você cria funciona em várias ferramentas — não só no Claude.
+      <strong>&#128161; Skills é um padrão aberto</strong>
+      Criado pela Anthropic e liberado pro ecossistema — hoje adotado por 30+ ferramentas incluindo Cursor, VS Code, GitHub Copilot, OpenAI Codex e Gemini CLI. A Skill que você cria serve em todas. Veja em <a href="https://agentskills.io" target="_blank">agentskills.io</a>.
     </div>
 
     <h4>Como navegar no skills.sh</h4>
