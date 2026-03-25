@@ -1338,6 +1338,36 @@ Salve como index.html na pasta</code></p>
       Requer <a href="https://git-scm.com/downloads/win" target="_blank">Git for Windows</a> instalado. Se não tiver, instale antes.
     </div>
 
+    <h2>Instalar Node.js (obrigatório pra Skills)</h2>
+    <p>O Node.js é necessário pra instalar Skills e plugins via terminal. Sem ele, o comando <code>npx</code> não funciona.</p>
+
+    <ol class="stepper">
+      <li class="step">
+        <h4>Baixe o Node.js</h4>
+        <p>Acesse <a href="https://nodejs.org" target="_blank"><strong>nodejs.org</strong></a> e clique no botão <strong>LTS</strong> (versão recomendada). Baixa um arquivo <code>.pkg</code> (Mac) ou <code>.msi</code> (Windows).</p>
+      </li>
+      <li class="step">
+        <h4>Instale</h4>
+        <p>Abra o arquivo baixado e siga o wizard: <strong>Continue > Continue > Agree > Install</strong>. Digite sua senha se pedir.</p>
+      </li>
+      <li class="step">
+        <h4>Feche e reabra o terminal</h4>
+        <p>Feche o Warp (ou terminal) completamente e abra de novo. Depois teste:</p>
+        <div class="code-block">
+          <span class="code-block-label">Terminal — Verificação</span>
+          <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">node -v
+npx -v</code>
+        </div>
+        <p>Se aparecer números (ex: <code>v20.11.1</code>), está instalado. Se der erro, reinicie o Mac e tente de novo.</p>
+      </li>
+    </ol>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Sem Node = sem npx</strong>
+      Se você pular este passo, comandos como <code>npx skills add</code> vão dar erro "command not found". Instale agora pra não travar no Dia 2.
+    </div>
+
     <h2>Primeira execução</h2>
 
     <div class="code-block">
