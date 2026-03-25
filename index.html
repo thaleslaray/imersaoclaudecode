@@ -1373,8 +1373,23 @@ Salve como index.html na pasta</code></p>
     </div>
 
     <div class="callout callout-warn">
-      <strong>&#9888;&#65039; Windows</strong>
-      Requer <a href="https://git-scm.com/downloads/win" target="_blank">Git for Windows</a> instalado. Se não tiver, instale antes.
+      <strong>&#9888;&#65039; Windows — leia antes de instalar</strong>
+      <ol style="margin:8px 0 0 16px">
+        <li>Instale o <a href="https://git-scm.com/downloads/win" target="_blank"><strong>Git for Windows</strong></a> antes de qualquer coisa.</li>
+        <li>Use o <strong>PowerShell</strong> (não o Prompt de Comando). Clique com botão direito → "Executar como administrador".</li>
+        <li>Após instalar o Claude Code, <strong>feche e reabra o Warp</strong>. O terminal precisa reiniciar para reconhecer o comando <code>claude</code>.</li>
+        <li>Se <code>claude</code> ainda não for reconhecido: <strong>Settings do Windows → Sistema → Sobre → Configurações avançadas de sistema → Variáveis de Ambiente</strong> → adicione o caminho do Claude ao <code>PATH</code>. Ou peça ao próprio Claude Code para resolver: <em>"o comando claude não está sendo reconhecido no Windows, corrija o PATH pra mim"</em>.</li>
+      </ol>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Alternativa mais simples no Windows</strong>
+      Se o comando <code>curl</code> não funcionar, use o <strong>Winget</strong> (já vem no Windows 10/11):
+    </div>
+    <div class="code-block">
+      <span class="code-block-label">PowerShell — alternativa winget</span>
+      <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
+<code class="code-text">winget install Anthropic.ClaudeCode</code>
     </div>
 
     <h2>Primeira execução</h2>
@@ -1855,6 +1870,27 @@ Depois, crie 5 novos posts usando exatamente esse framework, sobre os seguintes 
       <strong>&#128161; Percebeu?</strong>
       Esse prompt <strong>já é quase uma Skill</strong>. A diferença: uma Skill salva essas instruções para que o Claude as execute automaticamente toda vez, sem você precisar copiar e colar o prompt de novo.
     </div>
+
+    <h2>Desktop App vs Terminal — o que muda para Skills?</h2>
+    <p>Uma dúvida comum: <em>"preciso instalar a mesma Skill nos dois lugares?"</em> A resposta curta é não — mas existem diferenças importantes:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Situação</th><th>Desktop App</th><th>Terminal (Claude Code)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Instalar uma Skill</strong></td><td>Personalizar > Habilidades > "+" > Upload do .skill ou .zip</td><td><code>npx skills add nome-da-skill</code></td></tr>
+          <tr><td><strong>Criar uma Skill</strong></td><td>Skill Creator no Cowork (sem terminal)</td><td>Skill Creator via terminal + mais controle</td></tr>
+          <tr><td><strong>Usar uma Skill instalada</strong></td><td>&#10003; Funciona nos 3 modos (Chat, Cowork, Código)</td><td>&#10003; Funciona automaticamente</td></tr>
+          <tr><td><strong>Skills do Desktop funcionam no Terminal?</strong></td><td colspan="2">&#10003; <strong>Sim</strong> — Skills globais funcionam nos dois. Instale uma vez, use nos dois.</td></tr>
+          <tr><td><strong>Única diferença</strong></td><td>Não cria Skills do zero diretamente</td><td>Criação + instalação + mais poder (Git, pipeline, scripts)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Regra simples</strong>
+      Para <strong>usar</strong> Skills no dia a dia, o Desktop App é suficiente. Para <strong>criar</strong> Skills avançadas, o terminal dá mais poder. Você não precisa escolher — use os dois.
+    </div>
   </div>
 
   <div class="section" data-section="d2-b2" data-day="2" data-block="2">
@@ -1906,14 +1942,22 @@ Depois, crie 5 novos posts usando exatamente esse framework, sobre os seguintes 
     </div>
 
     <div class="callout callout-warn">
-      <strong>&#9888;&#65039; npx dando erro "command not found"?</strong>
-      Cole isso no Claude Code e ele resolve:
+      <strong>&#9888;&#65039; Opção D requer Node.js instalado</strong>
+      O comando <code>npx</code> (usado para instalar Skills via terminal) faz parte do <strong>Node.js</strong>. Antes de tentar, verifique se você tem:
+      <br><br>
+      <strong>1. Teste se já tem:</strong> no Warp, fora do Claude Code, rode <code>node --version</code>. Se aparecer um número (ex: <code>v22.0.0</code>), está ok.<br><br>
+      <strong>2. Se não tiver</strong> — cole este prompt no Claude Code que ele instala:
     </div>
 
     <div class="prompt-block">
       <span class="code-block-label">Prompt — cole no Claude Code</span>
       <button class="code-block-copy" onclick="copyCode(this)">Copiar</button>
-      <p><code class="code-text">Verifica se tenho Node.js instalado. Se não tiver, instala pra mim.</code></p>
+      <p><code class="code-text">Verifica se tenho Node.js instalado. Se não tiver, instala pra mim e confirma que o comando npx está funcionando.</code></p>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Instalação manual do Node.js</strong>
+      Prefere instalar você mesmo? Acesse <a href="https://nodejs.org" target="_blank"><strong>nodejs.org</strong></a> e baixe a versão LTS. Após instalar, <strong>feche e reabra o Warp</strong>.
     </div>
 
     <div class="card" style="margin-bottom:12px">
@@ -2058,6 +2102,41 @@ Você é um especialista em conteúdo para Instagram Reels.
       <strong>&#128161; É só isso</strong>
       As Skills que você vê no Claude — como algorithmic-art, brand-guidelines, canvas-design — são exatamente isso: um arquivo de texto com instruções. Nada de código, nada de programação.
     </div>
+
+    <h2>Atalhos que salvam sua vida no terminal</h2>
+    <p>Dois comandos simples que o Thales usa o tempo todo e que não estão em nenhum tutorial:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Atalho</th><th>O que faz</th><th>Quando usar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Esc Esc</strong> (dois Escapes)</td>
+            <td>Cancela a ação atual e volta ao último checkpoint — como o botão "desfazer" do Super Mário</td>
+            <td>Claude tomou um caminho errado, está fazendo algo que não era pra fazer, ou você mudou de ideia no meio da execução</td>
+          </tr>
+          <tr>
+            <td><code>Btw,</code> (no início da frase)</td>
+            <td>Faz uma pergunta ou comentário paralelo <strong>sem interromper</strong> o que o Claude está executando</td>
+            <td>Você quer dar uma instrução adicional enquanto ele trabalha, sem cancelar a tarefa atual</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128161; Git = checkpoint infinito</strong>
+      Antes de criar ou modificar Skills importantes, inicialize um repositório Git na pasta:
+      <code style="display:block;background:rgba(0,0,0,0.06);padding:6px 10px;border-radius:6px;margin-top:8px;font-size:13px">git init</code>
+      O Claude Code passa a fazer commits automáticos com mensagens descritivas. Se algo der errado, você tem rollback ilimitado — basta pedir: <em>"volta para o estado anterior"</em>.
+    </div>
+
+    <div class="callout callout-exercise">
+      <strong>&#127919; Exercício — refine sua Skill do bloco anterior</strong>
+      Abra um novo chat e teste a Skill que você criou no Bloco 2 com <strong>3 inputs diferentes</strong>.<br><br>
+      Para cada resultado ruim, anote o problema e ajuste com o prompt de refinamento acima.<br><br>
+      Depois, tente o <strong>Esc Esc</strong>: inicie uma tarefa qualquer, veja o Claude trabalhar, e aperte Esc duas vezes para cancelar. Familiarize-se com o controle.
+    </div>
   </div>
 
   <div class="section" data-section="d2-b4" data-day="2" data-block="4">
@@ -2142,7 +2221,7 @@ Você é um especialista em conteúdo para Instagram Reels.
 
     <p>Depois de instalar, use <code>/find-skills</code> no Claude Code ou simplesmente pergunte <em>"tem uma skill pra isso?"</em> — o Claude busca automaticamente.</p>
 
-    <h2>Como avaliar se uma Skill é boa</h2>
+    <h2>Como avaliar se uma Skill é boa — e se é segura</h2>
     <p>Antes de instalar, verifique:</p>
     <ul>
       <li><strong>Descrição clara</strong> — se não explica bem o que faz, provavelmente não faz bem</li>
@@ -2150,6 +2229,27 @@ Você é um especialista em conteúdo para Instagram Reels.
       <li><strong>Fonte confiável</strong> — quem criou? É mantida?</li>
       <li><strong>Teste primeiro</strong> — instale, teste com 2-3 inputs, avalie o resultado</li>
     </ul>
+
+    <h3>Segurança: o que o aviso "High Risk" significa</h3>
+    <p>Ao instalar Skills do <strong>Claude Hub</strong>, você pode ver um aviso como este:</p>
+
+    <div class="callout callout-warn">
+      <strong>&#9888;&#65039; Aviso que pode aparecer:</strong>
+      <em>"A análise do Gen classificou esta skill como High Risk. Isso não significa que é maliciosa, mas que o conteúdo do prompt pode ser agressivo (sobrescreve comportamentos padrão do agente, instrui a ignorar guidelines, etc.)"</em><br><br>
+      <strong>O que isso significa na prática:</strong><br>
+      <ul style="margin-top:8px">
+        <li><strong>High Risk ≠ vírus.</strong> Significa que a Skill tem instruções fortes que alteram como o Claude se comporta — algo comum em Skills profissionais de design, copywriting agressivo ou análise crítica.</li>
+        <li><strong>Skills do <code>anthropics/skills</code></strong> são revisadas pela própria Anthropic. São as mais seguras.</li>
+        <li><strong>Skills do skills.sh</strong> têm curadoria da Vercel. Segunda opção mais confiável.</li>
+        <li><strong>Skills do Claude Hub</strong> têm verificação VirusTotal (botão "View Report" na página da Skill). Verifique antes de instalar.</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>&#128274; Como verificar uma Skill antes de instalar</strong>
+      Uma Skill é <strong>só texto</strong> — você pode ler as instruções antes de instalar. No skills.sh e Claude Hub, clique no nome da Skill e leia o conteúdo do <code>SKILL.md</code>. Se as instruções parecerem razoáveis para o que a Skill promete fazer, é seguro instalar.<br><br>
+      Nunca instale uma Skill que peça para ignorar as políticas da Anthropic ou que prometa "desbloquear" funcionalidades bloqueadas.
+    </div>
 
     <div class="callout callout-exercise">
       <strong>&#127919; Exercício ao vivo — 20 minutos</strong>
@@ -2164,9 +2264,45 @@ Você é um especialista em conteúdo para Instagram Reels.
       <li><strong>Commitar no projeto</strong> — coloque a pasta da Skill em <code>.claude/skills/</code> do seu repositório. Quem clonar o repo recebe a Skill automaticamente</li>
     </ul>
 
+    <h2>Skills como produto: modelos de distribuição</h2>
+    <p>Uma Skill bem feita <strong>é</strong> o produto. Você cria uma vez e pode distribuir de várias formas:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Modelo</th><th>Como funciona</th><th>Exemplo prático</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Venda única</strong></td>
+            <td>Cliente compra o arquivo <code>.skill</code> e instala sozinho</td>
+            <td>Skill de proposta comercial por R$197 na Hotmart ou Gumroad</td>
+          </tr>
+          <tr>
+            <td><strong>Bônus de curso</strong></td>
+            <td>Inclui a Skill como entregável no seu produto existente</td>
+            <td>"Compre meu curso de copywriting + receba a Skill que escreve no meu método"</td>
+          </tr>
+          <tr>
+            <td><strong>Assinatura / retainer</strong></td>
+            <td>Atualiza a Skill regularmente e cobra mensalidade</td>
+            <td>Skill de gestão de tráfego com atualizações mensais por R$89/mês</td>
+          </tr>
+          <tr>
+            <td><strong>Implementação + suporte</strong></td>
+            <td>Instala e customiza a Skill para o cliente, cobra pelo serviço</td>
+            <td>Setup R$500 + R$150/mês de suporte e manutenção</td>
+          </tr>
+          <tr>
+            <td><strong>Diferencial de consultoria</strong></td>
+            <td>Entrega a Skill como parte do escopo da consultoria</td>
+            <td>Ao final do projeto, cliente recebe a Skill da metodologia que você aplicou</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="callout callout-tip">
-      <strong>&#128161; Skill como produto</strong>
-      Lembra da tese do Dia 2? Uma Skill bem feita <strong>é</strong> o produto. Você pode vender, incluir como bônus de um curso, ou entregar como diferencial de uma consultoria.
+      <strong>&#128161; A pergunta que muda tudo</strong>
+      Seu cliente quer <em>aprender seu método</em> ou quer <em>os resultados que seu método entrega</em>? Se for resultados, uma Skill entrega mais rápido e com menos esforço do que um curso. Isso é o upsell natural: "além do curso, você pode ter a metodologia funcionando automaticamente por +R$X".
     </div>
   </div>
 
@@ -2228,6 +2364,17 @@ Você é um especialista em conteúdo para Instagram Reels.
         <p>Conecta o Claude Code diretamente à sua instância N8N. Descreva o fluxo que quer e o Claude cria, valida e faz deploy do workflow — sem copiar JSON manualmente.</p>
         <p><strong>Exemplo de uso:</strong> <em>"Cria um workflow que quando receber um formulário, salva no Google Sheets e me manda um email."</em></p>
         <p><strong>Pré-requisito:</strong> ter uma instância N8N rodando (self-hosted ou cloud).</p>
+
+        <div class="callout callout-tip">
+          <strong>&#128161; N8N ainda faz sentido? Sim — para isso:</strong>
+          <ul style="margin-top:8px">
+            <li><strong>Automações que precisam ficar rodando 24/7 na nuvem</strong> — agentes de atendimento, webhooks sempre ativos, notificações em tempo real. O Claude Code roda no seu computador; se você fechar, para. O N8N roda no servidor.</li>
+            <li><strong>Integrações com WhatsApp (Z-API, Evolution)</strong> — ainda é a solução mais madura para bots de WhatsApp em produção para clientes.</li>
+            <li><strong>Workflows que você já tem rodando</strong> — não precisa migrar o que funciona.</li>
+          </ul>
+          <br>
+          <strong>O que o Claude Code substituiu:</strong> a parte chata — escrever o JSON do N8N na mão, debugar nodes, pesquisar documentação. Agora você descreve o que quer e o Claude cria. Você ainda usa N8N, mas sem o sofrimento.
+        </div>
 
         <h4>Instalação</h4>
 
